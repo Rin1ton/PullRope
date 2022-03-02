@@ -96,7 +96,7 @@ public class HeroMovementBehavior : MonoBehaviour
 		//put a value in our input vector
 		moveInput = (transform.right * xMovement + transform.forward * zMovement).normalized;
 
-		//call accelerate
+		//call our friction function
 		MoveOnGround(myRB.velocity, moveInput);
 	}
 
@@ -111,7 +111,16 @@ public class HeroMovementBehavior : MonoBehaviour
 			float control = speed;
 
 			drop += control * friction * Time.fixedDeltaTime;
+
+			//scale the velocity
+			float newSpeed = speed - drop < 0 ? 0 : speed - drop;
+			newSpeed = speed != 0 ? newSpeed / speed : 0;
+
+			prevVelocity *= newSpeed;
 		}
+
+		//call accelerate
+		Accelerate(prevVelocity, groundAcceleration, moveDir);
 	}
 
 	void Accelerate(Vector3 prevVelocity, float accel, Vector3 wishDir)   //Kasokudo, 加速度
