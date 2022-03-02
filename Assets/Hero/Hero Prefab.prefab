@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 3343145375735961473}
   - component: {fileID: 3054132139042273839}
   - component: {fileID: 4304690884127590948}
+  - component: {fileID: 5916392581871812159}
   m_Layer: 0
   m_Name: Hero Prefab
   m_TagString: Untagged
@@ -197,3 +198,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5916392581871812159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9059571477339505127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d410f118dacda4b8da80f0cb726c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
