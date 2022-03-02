@@ -49,6 +49,7 @@ public class HeroMovementBehavior : MonoBehaviour
 	void Update()
 	{
 		MouseLook();
+		Jump();
 	}
 
 	private void FixedUpdate()
@@ -152,6 +153,14 @@ public class HeroMovementBehavior : MonoBehaviour
 
 		//now apply our witchcraft to my velocity to accelerate
 		myRB.velocity = newVelocity;
+	}
+
+	void Jump()
+	{
+		if (Input.GetKey(KeyCode.Space))
+		{
+			myRB.AddForce(Vector3.up * 10, ForceMode.VelocityChange);
+		}
 	}
 
 }
