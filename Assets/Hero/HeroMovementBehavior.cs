@@ -28,8 +28,9 @@ public class HeroMovementBehavior : MonoBehaviour
 	readonly bool invertY = false;
 
 	//jump Stats
-	float jumpVelocity = 1;
-	int jumps = 0;
+	float jumpVelocity = 20;
+	float timeSinceLastJump = 60;
+	int jumps = 0;									//debug stat
 
 	//
 	Rigidbody myRB;
@@ -71,7 +72,7 @@ public class HeroMovementBehavior : MonoBehaviour
 
 	void Timers()
 	{
-
+		timeSinceLastJump += Time.deltaTime;
 	}
 
 	void MouseLook()
@@ -177,8 +178,9 @@ public class HeroMovementBehavior : MonoBehaviour
 
 	void Jump()
 	{
-		if (Input.GetKey(KeyCode.Space) && myGroundChecker.IsGrounded)
+		if (Input.GetKey(KeyCode.Space) && myGroundChecker.IsGrounded && timeSinceLastJump > 0.1)
 		{
+			timeSinceLastJump = 0;
 			myRB.AddForce(Vector3.up * jumpVelocity, ForceMode.VelocityChange);
 			Debug.Log(++jumps);
 		}
