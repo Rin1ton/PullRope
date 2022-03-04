@@ -27,15 +27,26 @@ public class HeroMovementBehavior : MonoBehaviour
 	readonly float ySens = 1;
 	readonly bool invertY = false;
 
+	//jump Stats
+	float jumpVelocity = 1;
+	int jumps = 0;
+
 	//
 	Rigidbody myRB;
+	GroundCheckingBehavior myGroundChecker;
 
-	// Start is called before the first frame update
-	void Start()
+	private void Awake()
 	{
 		//get a reference to my rigidbody before the first frame
 		myRB = GetComponent<Rigidbody>();
 
+		//get a reference to my ground checker
+		myGroundChecker = GetComponent<GroundCheckingBehavior>();
+	}
+
+	// Start is called before the first frame update
+	void Start()
+	{
 		//lock the mouse and make it disappear
 		UnityEngine.Cursor.lockState = CursorLockMode.Locked;
 		UnityEngine.Cursor.visible = false;
@@ -48,6 +59,7 @@ public class HeroMovementBehavior : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		Timers();
 		MouseLook();
 		Jump();
 	}
@@ -55,6 +67,11 @@ public class HeroMovementBehavior : MonoBehaviour
 	private void FixedUpdate()
 	{
 		MovementInput();
+	}
+
+	void Timers()
+	{
+
 	}
 
 	void MouseLook()
@@ -97,8 +114,11 @@ public class HeroMovementBehavior : MonoBehaviour
 		//put a value in our input vector
 		moveInput = (transform.right * xMovement + transform.forward * zMovement).normalized;
 
-		//call our friction function
-		MoveOnGround(myRB.velocity, moveInput);
+		//call our friction function if we're on the ground
+		if (myGroundChecker.IsGrounded)
+			MoveOnGround(myRB.velocity, moveInput);
+		else
+			Accelerate(myRB.velocity, airAcceleration, moveInput);
 	}
 
 	void MoveOnGround(Vector3 prevVelocity, Vector3 moveDir)
@@ -157,9 +177,10 @@ public class HeroMovementBehavior : MonoBehaviour
 
 	void Jump()
 	{
-		if (Input.GetKey(KeyCode.Space))
+		if (Input.GetKey(KeyCode.Space) && myGroundChecker.IsGrounded)
 		{
-			myRB.AddForce(Vector3.up * 10, ForceMode.VelocityChange);
+			myRB.AddForce(Vector3.up * jumpVelocity, ForceMode.VelocityChange);
+			Debug.Log(++jumps);
 		}
 	}
 
