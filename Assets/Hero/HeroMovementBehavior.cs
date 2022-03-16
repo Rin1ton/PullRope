@@ -63,11 +63,11 @@ public class HeroMovementBehavior : MonoBehaviour
 		Timers();
 		MouseLook();
 		Jump();
+		MovementInput();
 	}
 
 	private void FixedUpdate()
 	{
-		MovementInput();
 	}
 
 	void Timers()
@@ -83,7 +83,6 @@ public class HeroMovementBehavior : MonoBehaviour
 			rotationY += Input.GetAxisRaw("Mouse Y") * ySens;
 		else
 			rotationY -= Input.GetAxisRaw("Mouse Y") * ySens;
-   
 
 		//clamp rotation and apply floats to quaternions
 		rotationY = Mathf.Clamp(rotationY, -maxVerticalRotaion, maxVerticalRotaion);
@@ -132,7 +131,7 @@ public class HeroMovementBehavior : MonoBehaviour
 		{
 			float control = speed;
 
-			drop += control * friction * Time.fixedDeltaTime;
+			drop += control * friction * Time.deltaTime;
 
 			//scale the velocity
 			float newSpeed = speed - drop < 0 ? 0 : speed - drop;
@@ -182,7 +181,6 @@ public class HeroMovementBehavior : MonoBehaviour
 		{
 			timeSinceLastJump = 0;
 			myRB.AddForce(Vector3.up * jumpVelocity, ForceMode.VelocityChange);
-			Debug.Log(++jumps);
 		}
 	}
 
