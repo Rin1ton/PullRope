@@ -11,11 +11,17 @@ public class GroundCheckingBehavior : MonoBehaviour
 
 	//local vars
 	readonly float maxGroundAngle = 46;
+	Rigidbody myRB;
 	Vector3 currentGround = Vector3.zero;
 	float currentGroundAngle = 0;
 
-    // Start is called before the first frame update
-    void Start()
+	private void Awake()
+	{
+		myRB = GetComponent<Rigidbody>();
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
         
     }
@@ -28,13 +34,31 @@ public class GroundCheckingBehavior : MonoBehaviour
 
 	private void LateUpdate()
 	{
+
 	}
 
 	private void FixedUpdate()
 	{
-		Debug.Log(Ground);
+		CounterSlope();
+
+		//reset our ground
 		currentGround = Vector3.zero;
 		currentGroundAngle = 0;
+	}
+
+	void CounterSlope()
+	{
+		if (currentGroundAngle != 0 && currentGround != Vector3.zero)
+		{
+			//set the direction of the vector to counter the force of gravity
+			Vector3 counterForce = Vector3.ProjectOnPlane(Vector3.up, currentGround).normalized;
+
+			//set the magnitude of the vector based on the angle of the ground
+			counterForce *= Mathf.Sin(Mathf.Deg2Rad * currentGroundAngle) * Physics.gravity.magnitude * myRB.mass * 0.5f;
+			myRB.AddForce(counterForce);
+
+			Debug.Log(myRB.velocity);
+		}
 	}
 
 	private void OnCollisionStay(Collision collision)
