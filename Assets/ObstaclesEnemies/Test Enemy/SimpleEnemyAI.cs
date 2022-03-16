@@ -27,13 +27,13 @@ public class SimpleEnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (distance <= 5)
+        if (distance <= 1f)
         {
             attackState = true;
             //if the enemy is 5 meters or closer, the enemy will enter attack state.
         }
 
-        if (distance > 5f)
+        if (distance > 1f)
         {
             attackState = false;
         }
