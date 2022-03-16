@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2475957099530570878}
   - component: {fileID: 2475957099530570879}
   - component: {fileID: 2475957099530570876}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4304690884127590948}
   - component: {fileID: 5916392581871812159}
   - component: {fileID: 7707664387869451042}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hero Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

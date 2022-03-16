@@ -56,8 +56,6 @@ public class GroundCheckingBehavior : MonoBehaviour
 			//set the magnitude of the vector based on the angle of the ground
 			counterForce *= Mathf.Sin(Mathf.Deg2Rad * currentGroundAngle) * Physics.gravity.magnitude * myRB.mass * 0.5f;
 			myRB.AddForce(counterForce);
-
-			Debug.Log(myRB.velocity);
 		}
 	}
 

@@ -30,9 +30,9 @@ public class HeroMovementBehavior : MonoBehaviour
 	//jump Stats
 	float jumpVelocity = 20;
 	float timeSinceLastJump = 60;
-	int jumps = 0;									//debug stat
 
-	//
+	//physics stuff
+	readonly int playerPhysicsIndex = 3;
 	Rigidbody myRB;
 	GroundCheckingBehavior myGroundChecker;
 
@@ -64,10 +64,12 @@ public class HeroMovementBehavior : MonoBehaviour
 		MouseLook();
 		Jump();
 		MovementInput();
+		Grapple();
 	}
 
 	private void FixedUpdate()
 	{
+
 	}
 
 	void Timers()
@@ -173,6 +175,28 @@ public class HeroMovementBehavior : MonoBehaviour
 
 		//now apply our witchcraft to my velocity to accelerate
 		myRB.velocity = newVelocity;
+	}
+
+	void Grapple()
+	{
+		//create a layer mask that includes just the "player" physics layer
+		int layerMask = 1 << playerPhysicsIndex;
+
+		//invert that layer mask;
+		layerMask = ~layerMask;
+
+		RaycastHit hit;
+		// Does the ray intersect any objects excluding the player layer
+		if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+		{
+			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+			Debug.Log("Did Hit");
+		}
+		else
+		{
+			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+			Debug.Log("Did not Hit");
+		}
 	}
 
 	void Jump()
