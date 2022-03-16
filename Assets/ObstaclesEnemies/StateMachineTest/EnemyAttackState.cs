@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackState : State
+public class EnemyAttackState : State
 {
     public override State RunCurrentState()
     {

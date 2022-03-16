@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaseState : State
+public class EnemyChaseState : State
 {
-    public AttackState attackState;
+    public EnemyAttackState attackState;
     public bool isInAttackRange;
     public override State RunCurrentState()
     {

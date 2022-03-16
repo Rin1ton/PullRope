@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateManager : MonoBehaviour
+public class EnemyStateManager : MonoBehaviour
 {
     public State currentState;
 
@@ -10,7 +10,7 @@ public class StateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RunStateMachine()
+        RunStateMachine();
     }
 
     private void RunStateMachine() 

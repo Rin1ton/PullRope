@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NeutralState : State
+public class EnemyNeutralState : State
 {
-    public ChaseState chaseState;
+    public EnemyChaseState chaseState;
     public bool canSeePlayer;
     public override State RunCurrentState()
     {
