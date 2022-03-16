@@ -28,15 +28,16 @@ public class GroundCheckingBehavior : MonoBehaviour
 
 	private void LateUpdate()
 	{
-		
 	}
 
 	private void FixedUpdate()
 	{
 		Debug.Log(Ground);
+		currentGround = Vector3.zero;
+		currentGroundAngle = 0;
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void OnCollisionStay(Collision collision)
 	{
 		GroundAndWallNormal(collision);
 	}
@@ -47,10 +48,6 @@ public class GroundCheckingBehavior : MonoBehaviour
 	}
 	void GroundAndWallNormal(Collision other)
 	{
-		//start clean
-		currentGround = Vector3.zero;
-		currentGroundAngle = 0;
-
 		//see if any of the contacts of this collision are shallow enough to be the ground
 		float lowestNormalAngle = 180;
 		Vector3 lowestNormal = Vector3.zero;
