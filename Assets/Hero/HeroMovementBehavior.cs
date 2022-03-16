@@ -179,23 +179,29 @@ public class HeroMovementBehavior : MonoBehaviour
 
 	void Grapple()
 	{
-		//create a layer mask that includes just the "player" physics layer
-		int layerMask = 1 << playerPhysicsIndex;
-
-		//invert that layer mask;
-		layerMask = ~layerMask;
-
-		RaycastHit hit;
-		// Does the ray intersect any objects excluding the player layer
-		if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
-			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-			Debug.Log("Did Hit");
-		}
-		else
-		{
-			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-			Debug.Log("Did not Hit");
+			//create a layer mask that includes just the "player" physics layer
+			int layerMask = 1 << playerPhysicsIndex;
+
+			//invert that layer mask;
+			layerMask = ~layerMask;
+
+			RaycastHit hit;
+			// Does the ray intersect any objects excluding the player layer
+			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+			{
+				
+				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+				Gizmos.color = Color.yellow;
+				Gizmos.DrawSphere(hit.point, .5f);
+				Debug.Log("Did Hit");
+			}
+			else
+			{
+				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+				Debug.Log("Did not Hit");
+			}
 		}
 	}
 
