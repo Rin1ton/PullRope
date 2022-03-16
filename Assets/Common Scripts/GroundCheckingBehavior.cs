@@ -31,6 +31,11 @@ public class GroundCheckingBehavior : MonoBehaviour
 		
 	}
 
+	private void FixedUpdate()
+	{
+		Debug.Log(Ground);
+	}
+
 	private void OnCollisionEnter(Collision collision)
 	{
 		GroundAndWallNormal(collision);
