@@ -37,6 +37,4 @@ public class GroundCheckingBehavior : MonoBehaviour
 		currentGround = Vector3.zero;
 	}
 
-
-
 }
