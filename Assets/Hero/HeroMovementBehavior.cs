@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class HeroMovementBehavior : MonoBehaviour
 {
-	//movement stats
-	readonly float friction = 7.5f;
-	readonly float topSpeed = 10;
-	readonly float airAcceleration = 1.22f;
-	readonly float groundAcceleration = 12;
+	//controls
 	readonly KeyCode forwardButton = KeyCode.W;
 	readonly KeyCode backwardButton = KeyCode.S;
 	readonly KeyCode leftButton = KeyCode.A;
 	readonly KeyCode rightButton = KeyCode.D;
-	readonly float maxGroundAngle = 45;
-	Vector3 moveInput = new Vector3();
+	readonly KeyCode grappleButton = KeyCode.Mouse0;
 
 	//mouselook stats
 	readonly float maxVerticalRotaion = 90;
@@ -27,17 +22,27 @@ public class HeroMovementBehavior : MonoBehaviour
 	readonly float ySens = 1;
 	readonly bool invertY = false;
 
+	//movement stats
+	readonly float friction = 7.5f;
+	readonly float topSpeed = 10;
+	readonly float airAcceleration = 1.22f;
+	readonly float groundAcceleration = 12;
+	Vector3 moveInput = new Vector3();
+
 	//jump Stats
 	float jumpVelocity = 20;
 	float timeSinceLastJump = 60;
+
+	//grapple
+	bool isGrappled = false;
+	Vector3 grapplePoint;
+	Rigidbody myGrappleObjectRB;
+	ConfigurableJoint grapple;
 
 	//physics stuff
 	readonly int playerPhysicsIndex = 3;
 	Rigidbody myRB;
 	GroundCheckingBehavior myGroundChecker;
-
-	//debug
-	Vector3 hitPoint;
 
 	private void Awake()
 	{
@@ -194,26 +199,42 @@ public class HeroMovementBehavior : MonoBehaviour
 			// Does the ray intersect any objects excluding the player layer
 			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
 			{
-				
-				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+				//get a reference to the object I grappled
+				GameObject myGrappleObject = hit.collider.gameObject;
+				myGrappleObjectRB = myGrappleObject.GetComponent<Rigidbody>();
+				if (myGrappleObjectRB != null)
+				{
+					Rigidbody grappleRB = new Rigidbody();
+					grappleRB = myGrappleObjectRB;
+				}
+
+				//don't want multiple grapples at the same time
+				if (grapple != null)
+					Destroy(grapple);
+
+				//create our hingejoint and configure it
+				grapple = gameObject.AddComponent<ConfigurableJoint>();
+				grapple.anchor = hit.point;
+
+
+				grapplePoint = hit.point;
 				Debug.Log("Did Hit");
-				hitPoint = hit.point;
 			}
 			else
 			{
-				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+				Destroy(grapple);
 				Debug.Log("Did not Hit");
-				hitPoint = Vector3.zero;
+				grapplePoint = Vector3.zero;
 			}
 		}
 	}
 
 	private void OnDrawGizmos()
 	{
-		if (hitPoint != Vector3.zero)
+		if (grapplePoint != Vector3.zero)
 		{
 			Gizmos.color = Color.yellow;
-			Gizmos.DrawSphere(hitPoint, .5f);
+			Gizmos.DrawSphere(grapplePoint, .5f);
 		}
 	}
 
