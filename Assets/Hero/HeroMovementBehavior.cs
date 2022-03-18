@@ -36,6 +36,9 @@ public class HeroMovementBehavior : MonoBehaviour
 	Rigidbody myRB;
 	GroundCheckingBehavior myGroundChecker;
 
+	//debug
+	Vector3 hitPoint;
+
 	private void Awake()
 	{
 		//get a reference to my rigidbody before the first frame
@@ -179,23 +182,38 @@ public class HeroMovementBehavior : MonoBehaviour
 
 	void Grapple()
 	{
-		//create a layer mask that includes just the "player" physics layer
-		int layerMask = 1 << playerPhysicsIndex;
-
-		//invert that layer mask;
-		layerMask = ~layerMask;
-
-		RaycastHit hit;
-		// Does the ray intersect any objects excluding the player layer
-		if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
-			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-			Debug.Log("Did Hit");
+			//create a layer mask that includes just the "player" physics layer
+			int layerMask = 1 << playerPhysicsIndex;
+
+			//invert that layer mask;
+			layerMask = ~layerMask;
+
+			RaycastHit hit;
+			// Does the ray intersect any objects excluding the player layer
+			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+			{
+				
+				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+				Debug.Log("Did Hit");
+				hitPoint = hit.point;
+			}
+			else
+			{
+				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+				Debug.Log("Did not Hit");
+				hitPoint = Vector3.zero;
+			}
 		}
-		else
+	}
+
+	private void OnDrawGizmos()
+	{
+		if (hitPoint != Vector3.zero)
 		{
-			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-			Debug.Log("Did not Hit");
+			Gizmos.color = Color.yellow;
+			Gizmos.DrawSphere(hitPoint, .5f);
 		}
 	}
 
