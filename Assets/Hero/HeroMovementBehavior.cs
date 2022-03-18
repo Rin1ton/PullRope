@@ -36,6 +36,9 @@ public class HeroMovementBehavior : MonoBehaviour
 	Rigidbody myRB;
 	GroundCheckingBehavior myGroundChecker;
 
+	//debug
+	Vector3 hitPoint;
+
 	private void Awake()
 	{
 		//get a reference to my rigidbody before the first frame
@@ -193,15 +196,24 @@ public class HeroMovementBehavior : MonoBehaviour
 			{
 				
 				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-				Gizmos.color = Color.yellow;
-				Gizmos.DrawSphere(hit.point, .5f);
 				Debug.Log("Did Hit");
+				hitPoint = hit.point;
 			}
 			else
 			{
 				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
 				Debug.Log("Did not Hit");
+				hitPoint = Vector3.zero;
 			}
+		}
+	}
+
+	private void OnDrawGizmos()
+	{
+		if (hitPoint != Vector3.zero)
+		{
+			Gizmos.color = Color.yellow;
+			Gizmos.DrawSphere(hitPoint, .5f);
 		}
 	}
 
