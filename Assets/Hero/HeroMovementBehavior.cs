@@ -34,10 +34,10 @@ public class HeroMovementBehavior : MonoBehaviour
 	float timeSinceLastJump = 60;
 
 	//grapple
-	bool isGrappled = false;
 	Vector3 grapplePoint;
 	Rigidbody myGrappleObjectRB;
 	ConfigurableJoint grapple;
+
 
 	//physics stuff
 	readonly int playerPhysicsIndex = 3;
