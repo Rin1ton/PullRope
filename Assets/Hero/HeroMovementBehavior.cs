@@ -34,10 +34,10 @@ public class HeroMovementBehavior : MonoBehaviour
 	float timeSinceLastJump = 60;
 
 	//grapple
-	bool isGrappled = false;
 	Vector3 grapplePoint;
 	Rigidbody myGrappleObjectRB;
 	ConfigurableJoint grapple;
+
 
 	//physics stuff
 	readonly int playerPhysicsIndex = 3;
@@ -187,7 +187,7 @@ public class HeroMovementBehavior : MonoBehaviour
 
 	void Grapple()
 	{
-		if (Input.GetKeyDown(KeyCode.Mouse0))
+		if (Input.GetKeyDown(grappleButton))
 		{
 			//create a layer mask that includes just the "player" physics layer
 			int layerMask = 1 << playerPhysicsIndex;
