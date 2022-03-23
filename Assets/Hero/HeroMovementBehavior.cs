@@ -46,6 +46,9 @@ public class HeroMovementBehavior : MonoBehaviour
 
 	private void Awake()
 	{
+		//
+		References.thePlayer = gameObject;
+
 		//get a reference to my rigidbody before the first frame
 		myRB = GetComponent<Rigidbody>();
 
@@ -213,7 +216,6 @@ public class HeroMovementBehavior : MonoBehaviour
 
 				//get a reference to the object I grappled
 				GameObject myGrappleObject = hit.collider.gameObject;
-				Destroy(myGrappleObject); //KILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILLKILL
 				myGrappleObjectRB = myGrappleObject.GetComponent<Rigidbody>();
 
 				//if this object has a rigid body...
