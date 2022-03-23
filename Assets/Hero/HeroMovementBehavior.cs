@@ -36,8 +36,8 @@ public class HeroMovementBehavior : MonoBehaviour
 	//grapple
 	Vector3 grapplePoint;
 	Rigidbody myGrappleObjectRB;
+	Rigidbody grappleObjectRBPrevConf;
 	ConfigurableJoint grapple;
-
 
 	//physics stuff
 	readonly int playerPhysicsIndex = 3;
@@ -46,6 +46,9 @@ public class HeroMovementBehavior : MonoBehaviour
 
 	private void Awake()
 	{
+		//
+		References.thePlayer = gameObject;
+
 		//get a reference to my rigidbody before the first frame
 		myRB = GetComponent<Rigidbody>();
 
@@ -195,38 +198,96 @@ public class HeroMovementBehavior : MonoBehaviour
 			//invert that layer mask;
 			layerMask = ~layerMask;
 
+			/* when I grapple I have to
+			 * 1. get a reference to the object I'm grappling
+			 * 2. get check if that thing has rigidbody
+			 * 3. if it does, save those parameters we're about to change about it
+			 * 4. add the "configurable joint" component to it, automatically adding a rigidbody as well
+			 * 5. get a reference to it again, in case it didn't exist a moment ago
+			 * 6. configure that RB
+			 */
+
 			RaycastHit hit;
 			// Does the ray intersect any objects excluding the player layer
 			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
 			{
+				//start by making sure we aren't already attached to something
+				Ungrapple();
+
 				//get a reference to the object I grappled
 				GameObject myGrappleObject = hit.collider.gameObject;
 				myGrappleObjectRB = myGrappleObject.GetComponent<Rigidbody>();
+
+				//if this object has a rigid body...
 				if (myGrappleObjectRB != null)
 				{
-					Rigidbody grappleRB = new Rigidbody();
-					grappleRB = myGrappleObjectRB;
+					//save that object's RB so we can put it back the way it was later
+					grappleObjectRBPrevConf = new Rigidbody();
+					grappleObjectRBPrevConf = myGrappleObjectRB;
 				}
 
-				//don't want multiple grapples at the same time
-				if (grapple != null)
-					Destroy(grapple);
+				//create our hingejoint. automatically adds a rigidbody as well.
+				grapple = myGrappleObject.AddComponent<ConfigurableJoint>();
+				
 
-				//create our hingejoint and configure it
-				grapple = gameObject.AddComponent<ConfigurableJoint>();
-				grapple.anchor = hit.point;
+				//if we don't have an RB saved for our object, then save it.
+				if (myGrappleObjectRB == null)
+				{
+					myGrappleObjectRB = myGrappleObject.GetComponent<Rigidbody>();
+				}
 
+				//configure the the RB
+				//if the object didn't have a rigidbody to begin with, then the object shouldn't move
+				if (grappleObjectRBPrevConf == null)
+				{
+					myGrappleObjectRB.constraints = RigidbodyConstraints.FreezeAll;
+				}
+
+				//configure grapple
+				grapple.xMotion = ConfigurableJointMotion.Limited;
+				grapple.yMotion = ConfigurableJointMotion.Limited;
+				grapple.zMotion = ConfigurableJointMotion.Limited;
 
 				grapplePoint = hit.point;
 				Debug.Log("Did Hit");
 			}
 			else
 			{
-				Destroy(grapple);
+				Ungrapple();
 				Debug.Log("Did not Hit");
 				grapplePoint = Vector3.zero;
 			}
 		}
+
+		if (Input.GetKeyUp(grappleButton))
+		{
+			Ungrapple();
+		}
+	}
+
+	void Ungrapple()
+	{
+		//destroy our tether
+		if (grapple != null)
+			Destroy(grapple);
+
+		//if the object didn't have an RB before, then get rid of the one we made
+		if (grappleObjectRBPrevConf == null)
+		{
+			if (myGrappleObjectRB != null)
+				Destroy(myGrappleObjectRB);
+		}
+		//otherwise, put it back to the way it was
+		else
+		{
+			if (myGrappleObjectRB != null)
+				myGrappleObjectRB = grappleObjectRBPrevConf;
+		}
+
+		grapple = null;
+		myGrappleObjectRB = null;
+		grappleObjectRBPrevConf = null;
+
 	}
 
 	private void OnDrawGizmos()
