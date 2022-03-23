@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ChasePlayerScript : MonoBehaviour
 {
     public GameObject player;
-    float distance;
-    float maxDistance = 6;
-    float minDistance = 3;
-    float MoveSpeed = 3;
+    public float distance;
+    public float maxDistance = 6;
+    public float minDistance = 3;
+    public NavMeshAgent _agent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +24,21 @@ public class ChasePlayerScript : MonoBehaviour
 
          if (Vector3.Distance(transform.position, player.transform.position) >= minDistance)
         {
-            transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+            
+            _agent.isStopped = false;
+            _agent.SetDestination(player.transform.position);
         }
 
-         if (Vector3.Distance(transform.position, player.transform.position) <= maxDistance)
+         else if (Vector3.Distance(transform.position, player.transform.position) <= maxDistance)
         {
+            
+            _agent.isStopped = true;
+            Debug.Log("get attacked lmao gottem");
             //this is for projectile or whatever
+        }
+         else
+        {
+           
         }
     }
 }
