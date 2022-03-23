@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class ChasePlayerScript : MonoBehaviour
 {
-    public GameObject player;
+    GameObject player;
     public float distance;
     public float maxDistance = 6;
     public float minDistance = 3;
@@ -14,7 +14,7 @@ public class ChasePlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        player = References.thePlayer;
     }
 
     // Update is called once per frame
