@@ -8,7 +8,7 @@ public class ChasePlayerScript : MonoBehaviour
     float distance;
     float maxDistance = 6;
     float minDistance = 3;
-    float MoveSpeed = 1;
+    float MoveSpeed = 3;
     // Start is called before the first frame update
     void Start()
     {
