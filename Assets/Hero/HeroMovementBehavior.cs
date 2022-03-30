@@ -37,6 +37,10 @@ public class HeroMovementBehavior : MonoBehaviour
 	Vector3 grapplePoint;
 	float grappleLength;
 	bool grappled = false;
+	float grappleWinchRate = 12.5f;
+	float minGrappleDistance = 2;
+	Vector3 additionalVelocity;
+	Vector3 myPositionLastFixedFrame;
 
 	//physics stuff
 	readonly int playerPhysicsIndex = 3;
@@ -213,6 +217,7 @@ public class HeroMovementBehavior : MonoBehaviour
 				grappled = true;
 				grapplePoint = hit.point;
 				grappleLength = (myCamera.transform.position - hit.point).magnitude;
+				myPositionLastFixedFrame = myRB.position;
 
 				grapplePoint = hit.point;
 				Debug.Log("Did Hit");
@@ -227,7 +232,7 @@ public class HeroMovementBehavior : MonoBehaviour
 
 		if (Input.GetKeyUp(grappleButton))
 		{
-			//Ungrapple();
+			Ungrapple();
 		}
 	}
 
@@ -240,22 +245,37 @@ public class HeroMovementBehavior : MonoBehaviour
 
 			float speedTowardsGrapplePoint = Mathf.Round(Vector3.Dot(myRB.velocity, directionToGrapple) * 100) / 100;
 
-			if (speedTowardsGrapplePoint < 0)
+			if (currentDistanceToGrapple > grappleLength)
 			{
-				if (currentDistanceToGrapple > grappleLength)
-				{
-					myRB.velocity -= speedTowardsGrapplePoint * directionToGrapple;
-					myRB.position = grapplePoint - directionToGrapple * grappleLength;
-				}
+				myRB.velocity -= speedTowardsGrapplePoint * directionToGrapple;
+				myRB.position = grapplePoint - directionToGrapple * grappleLength;
 			}
+
+			//speed is distance/time
+			//soooooooooooooo
+			//
+
+			grappleLength -= grappleWinchRate * Time.fixedDeltaTime;
+			
+			if (grappleLength <= minGrappleDistance)
+			{
+				Ungrapple();
+			}
+
+			additionalVelocity = (myRB.position - myPositionLastFixedFrame)/Time.fixedDeltaTime;
+			myPositionLastFixedFrame = myRB.position;
 		}
 	}
 
 	void Ungrapple()
 	{
-		grappled = false;
-		grappleLength = 0;
-		grapplePoint = Vector3.zero;
+		if (grappled)
+		{
+			grappled = false;
+			grappleLength = 0;
+			grapplePoint = Vector3.zero;
+			myRB.velocity = additionalVelocity;
+		}
 	}
 
 	private void OnDrawGizmos()
