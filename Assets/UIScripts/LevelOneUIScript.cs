@@ -6,6 +6,8 @@ public class LevelOneUIScript : MonoBehaviour
 {
     public static bool GamePaused = false;
 
+    public GameObject Crosshair;
+
     public GameObject PauseMenuObject;
 
     public UITimerScript timertext;
@@ -32,6 +34,7 @@ public class LevelOneUIScript : MonoBehaviour
     void Resume()
     {
         PauseMenuObject.SetActive(false);
+        Crosshair.SetActive(true);
         Time.timeScale = 1f;
         timertext.playing = true;
         GamePaused = false;
@@ -41,6 +44,7 @@ public class LevelOneUIScript : MonoBehaviour
     void Pause()
     {
         PauseMenuObject.SetActive(true);
+        Crosshair.SetActive(false);
         Time.timeScale = 0f;
         timertext.playing = false;
         GamePaused = true;
