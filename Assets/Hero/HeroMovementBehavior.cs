@@ -35,9 +35,8 @@ public class HeroMovementBehavior : MonoBehaviour
 
 	//grapple
 	Vector3 grapplePoint;
-	Rigidbody myGrappleObjectRB;
-	Rigidbody grappleObjectRBPrevConf;
-	ConfigurableJoint grapple;
+	float grappleLength;
+	bool grappled = false;
 
 	//physics stuff
 	readonly int playerPhysicsIndex = 3;
@@ -46,7 +45,7 @@ public class HeroMovementBehavior : MonoBehaviour
 
 	private void Awake()
 	{
-		//
+		//tell everyone we're the player
 		References.thePlayer = gameObject;
 
 		//get a reference to my rigidbody before the first frame
@@ -80,7 +79,7 @@ public class HeroMovementBehavior : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-
+		ApplyGrapplePhysics();
 	}
 
 	void Timers()
@@ -198,7 +197,7 @@ public class HeroMovementBehavior : MonoBehaviour
 			//invert that layer mask;
 			layerMask = ~layerMask;
 
-			/* when I grapple I have to
+			/* when I grapple I have to:
 			 * 1. get a reference to the object I'm grappling
 			 * 2. get check if that thing has rigidbody
 			 * 3. if it does, save those parameters we're about to change about it
@@ -211,42 +210,9 @@ public class HeroMovementBehavior : MonoBehaviour
 			// Does the ray intersect any objects excluding the player layer
 			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
 			{
-				//start by making sure we aren't already attached to something
-				Ungrapple();
-
-				//get a reference to the object I grappled
-				GameObject myGrappleObject = hit.collider.gameObject;
-				myGrappleObjectRB = myGrappleObject.GetComponent<Rigidbody>();
-
-				//if this object has a rigid body...
-				if (myGrappleObjectRB != null)
-				{
-					//save that object's RB so we can put it back the way it was later
-					grappleObjectRBPrevConf = new Rigidbody();
-					grappleObjectRBPrevConf = myGrappleObjectRB;
-				}
-
-				//create our hingejoint. automatically adds a rigidbody as well.
-				grapple = myGrappleObject.AddComponent<ConfigurableJoint>();
-				
-
-				//if we don't have an RB saved for our object, then save it.
-				if (myGrappleObjectRB == null)
-				{
-					myGrappleObjectRB = myGrappleObject.GetComponent<Rigidbody>();
-				}
-
-				//configure the the RB
-				//if the object didn't have a rigidbody to begin with, then the object shouldn't move
-				if (grappleObjectRBPrevConf == null)
-				{
-					myGrappleObjectRB.constraints = RigidbodyConstraints.FreezeAll;
-				}
-
-				//configure grapple
-				grapple.xMotion = ConfigurableJointMotion.Limited;
-				grapple.yMotion = ConfigurableJointMotion.Limited;
-				grapple.zMotion = ConfigurableJointMotion.Limited;
+				grappled = true;
+				grapplePoint = hit.point;
+				grappleLength = (myCamera.transform.position - hit.point).magnitude;
 
 				grapplePoint = hit.point;
 				Debug.Log("Did Hit");
@@ -261,33 +227,35 @@ public class HeroMovementBehavior : MonoBehaviour
 
 		if (Input.GetKeyUp(grappleButton))
 		{
-			Ungrapple();
+			//Ungrapple();
+		}
+	}
+
+	void ApplyGrapplePhysics()
+	{
+		if (grappled)
+		{
+			Vector3 directionToGrapple = Vector3.Normalize(grapplePoint - transform.position);
+			float currentDistanceToGrapple = Vector3.Distance(grapplePoint, transform.position);
+
+			float speedTowardsGrapplePoint = Mathf.Round(Vector3.Dot(myRB.velocity, directionToGrapple) * 100) / 100;
+
+			if (speedTowardsGrapplePoint < 0)
+			{
+				if (currentDistanceToGrapple > grappleLength)
+				{
+					myRB.velocity -= speedTowardsGrapplePoint * directionToGrapple;
+					myRB.position = grapplePoint - directionToGrapple * grappleLength;
+				}
+			}
 		}
 	}
 
 	void Ungrapple()
 	{
-		//destroy our tether
-		if (grapple != null)
-			Destroy(grapple);
-
-		//if the object didn't have an RB before, then get rid of the one we made
-		if (grappleObjectRBPrevConf == null)
-		{
-			if (myGrappleObjectRB != null)
-				Destroy(myGrappleObjectRB);
-		}
-		//otherwise, put it back to the way it was
-		else
-		{
-			if (myGrappleObjectRB != null)
-				myGrappleObjectRB = grappleObjectRBPrevConf;
-		}
-
-		grapple = null;
-		myGrappleObjectRB = null;
-		grappleObjectRBPrevConf = null;
-
+		grappled = false;
+		grappleLength = 0;
+		grapplePoint = Vector3.zero;
 	}
 
 	private void OnDrawGizmos()
