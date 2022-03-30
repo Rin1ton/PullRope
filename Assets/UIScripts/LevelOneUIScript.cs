@@ -14,7 +14,7 @@ public class LevelOneUIScript : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("Escape Pressed");
             if (GamePaused)
