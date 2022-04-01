@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PauseScript : MonoBehaviour
 {
+    public GameObject PauseMenuObject;
     // Start is called before the first frame update
     void Start()
     {
-        
+        PauseMenuObject.SetActive(false);
     }
 
     // Update is called once per frame

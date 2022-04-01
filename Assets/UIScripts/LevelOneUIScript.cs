@@ -15,6 +15,7 @@ public class LevelOneUIScript : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
+        timertext.playing = true;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -33,6 +34,7 @@ public class LevelOneUIScript : MonoBehaviour
 
     void Resume()
     {
+       // Cursor.visible = false;
         PauseMenuObject.SetActive(false);
         Crosshair.SetActive(true);
         Time.timeScale = 1f;
@@ -43,6 +45,7 @@ public class LevelOneUIScript : MonoBehaviour
 
     void Pause()
     {
+       // Cursor.visible = true;
         PauseMenuObject.SetActive(true);
         Crosshair.SetActive(false);
         Time.timeScale = 0f;
