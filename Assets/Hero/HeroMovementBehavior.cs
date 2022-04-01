@@ -12,14 +12,15 @@ public class HeroMovementBehavior : MonoBehaviour
 	readonly KeyCode grappleButton = KeyCode.Mouse0;
 
 	//mouselook stats
+	/*
+	 * NOTE: player sensitivity stored in references
+	 */ 
 	readonly float maxVerticalRotaion = 90;
 	public GameObject myCamera;
 	Quaternion myRBOriginalRotation;
 	Quaternion myCameraOriginalRotation;
 	float rotationX = 0;
 	float rotationY = 0;
-	readonly float xSens = 1;
-	readonly float ySens = 1;
 	readonly bool invertY = false;
 
 	//movement stats
@@ -34,6 +35,7 @@ public class HeroMovementBehavior : MonoBehaviour
 	float timeSinceLastJump = 60;
 
 	//grapple
+	public GameObject myGrappleHookPrefab;
 	Vector3 grapplePoint;
 	float grappleLength;
 	bool grappled = false;
@@ -94,11 +96,11 @@ public class HeroMovementBehavior : MonoBehaviour
 	void MouseLook()
 	{
 		//read the mouse inputs
-		rotationX += Input.GetAxisRaw("Mouse X") * xSens;
+		rotationX += Input.GetAxisRaw("Mouse X") * References.playerSensitivityX;
 		if (!invertY)
-			rotationY += Input.GetAxisRaw("Mouse Y") * ySens;
+			rotationY += Input.GetAxisRaw("Mouse Y") * References.playerSensitivityY;
 		else
-			rotationY -= Input.GetAxisRaw("Mouse Y") * ySens;
+			rotationY -= Input.GetAxisRaw("Mouse Y") * References.playerSensitivityY;
 
 		//clamp rotation and apply floats to quaternions
 		rotationY = Mathf.Clamp(rotationY, -maxVerticalRotaion, maxVerticalRotaion);

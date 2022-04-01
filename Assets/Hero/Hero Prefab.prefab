@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCamera: {fileID: 2475957099530570877}
+  myGrappleHookPrefab: {fileID: 6871793555895754987, guid: ce09852770156224fb4330e5b9997c18, type: 3}
 --- !u!114 &7707664387869451042
 MonoBehaviour:
   m_ObjectHideFlags: 0
