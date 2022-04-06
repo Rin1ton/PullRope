@@ -54,6 +54,7 @@ public class HeroMovementBehavior : MonoBehaviour
 	float grappleObjectLerpTime = 0;
 	Vector3 grappleStartPos;
 	GameObject myGrappleHookObject;
+	LineRenderer grappleObjectLR;
 	
 
 	//physics stuff
@@ -254,6 +255,7 @@ public class HeroMovementBehavior : MonoBehaviour
 				myGrappleHookObject.transform.parent = null;
 				grappleObjectLerpTime = 0;
 				grappleStartPos = myCamera.transform.position;
+				grappleObjectLR = myGrappleHookObject.GetComponent<LineRenderer>();
 			}
 			else
 			{
@@ -298,6 +300,10 @@ public class HeroMovementBehavior : MonoBehaviour
 			//apply our theoretical velocity to our actual velocity
 			additionalVelocity = (myRB.position - myPositionLastFixedFrame)/Time.fixedDeltaTime;
 			myPositionLastFixedFrame = myRB.position;
+
+			//set the line positions
+			grappleObjectLR.SetPosition(0, myGrappleHookObject.transform.position);
+			grappleObjectLR.SetPosition(1, myCamera.transform.position + new Vector3(.5f, 0, -.5f));
 
 			//if the grapple hasn't made it to the grapple point yet...
 			if (grappleObjectLerpTime != 1)
