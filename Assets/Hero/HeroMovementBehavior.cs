@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HeroMovementBehavior : MonoBehaviour
 {
+	readonly float shortTimerStop = 120;
+
 	//controls
 	readonly KeyCode forwardButton = KeyCode.W;
 	readonly KeyCode backwardButton = KeyCode.S;
@@ -28,14 +30,16 @@ public class HeroMovementBehavior : MonoBehaviour
 	readonly float topSpeed = 10;
 	readonly float airAcceleration = 1.22f;
 	readonly float groundAcceleration = 12;
+	readonly float timeToBHop = .1f;
 	Vector3 moveInput = new Vector3();
 
 	//jump Stats
 	float jumpVelocity = 20;
 	float timeSinceLastJump = 60;
+	float timeSinceBecameGrounded = 60;
+	bool wasGrounded = false;
 
 	//grapple
-	public GameObject myGrappleHookPrefab;
 	Vector3 grapplePoint;
 	float grappleLength;
 	bool grappled = false;
@@ -43,6 +47,14 @@ public class HeroMovementBehavior : MonoBehaviour
 	float minGrappleDistance = 2;
 	Vector3 additionalVelocity;
 	Vector3 myPositionLastFixedFrame;
+
+	//grapple object
+	readonly float grappleObjectMoveTimescale = 10;
+	public GameObject myGrappleHookPrefab;
+	float grappleObjectLerpTime = 0;
+	Vector3 grappleStartPos;
+	GameObject myGrappleHookObject;
+	
 
 	//physics stuff
 	readonly int playerPhysicsIndex = 3;
@@ -90,7 +102,19 @@ public class HeroMovementBehavior : MonoBehaviour
 
 	void Timers()
 	{
-		timeSinceLastJump += Time.deltaTime;
+		if (timeSinceLastJump < shortTimerStop)
+			timeSinceLastJump += Time.deltaTime;
+
+		if (!wasGrounded && myGroundChecker.IsGrounded)
+		{
+			timeSinceBecameGrounded = 0;
+			wasGrounded = true;
+		}
+		if (wasGrounded && !myGroundChecker.IsGrounded)
+			wasGrounded = false;
+
+		if (timeSinceBecameGrounded < shortTimerStop && myGroundChecker.IsGrounded)
+			timeSinceBecameGrounded += Time.deltaTime;
 	}
 
 	void MouseLook()
@@ -133,7 +157,7 @@ public class HeroMovementBehavior : MonoBehaviour
 		moveInput = (transform.right * xMovement + transform.forward * zMovement).normalized;
 
 		//call our friction function if we're on the ground
-		if (myGroundChecker.IsGrounded)
+		if (myGroundChecker.IsGrounded && timeSinceBecameGrounded > Time.deltaTime)
 			MoveOnGround(myRB.velocity, moveInput);
 		else
 			Accelerate(myRB.velocity, airAcceleration, moveInput);
@@ -214,6 +238,7 @@ public class HeroMovementBehavior : MonoBehaviour
 
 			RaycastHit hit;
 			// Does the ray intersect any objects excluding the player layer
+			//NOTE: this block runs once when the grapple starts
 			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
 			{
 				grappled = true;
@@ -223,6 +248,12 @@ public class HeroMovementBehavior : MonoBehaviour
 
 				grapplePoint = hit.point;
 				Debug.Log("Did Hit");
+
+				//send out grapple hook gameobject
+				myGrappleHookObject = Instantiate(myGrappleHookPrefab, myCamera.transform);
+				myGrappleHookObject.transform.parent = null;
+				grappleObjectLerpTime = 0;
+				grappleStartPos = myCamera.transform.position;
 			}
 			else
 			{
@@ -263,9 +294,21 @@ public class HeroMovementBehavior : MonoBehaviour
 			{
 				Ungrapple();
 			}
-
+			
+			//apply our theoretical velocity to our actual velocity
 			additionalVelocity = (myRB.position - myPositionLastFixedFrame)/Time.fixedDeltaTime;
 			myPositionLastFixedFrame = myRB.position;
+
+			//if the grapple hasn't made it to the grapple point yet...
+			if (grappleObjectLerpTime != 1)
+			{
+				//add to the grapple object lerp time
+				grappleObjectLerpTime += grappleObjectMoveTimescale * Time.fixedDeltaTime;
+				grappleObjectLerpTime = grappleObjectLerpTime > 1 ? 1 : grappleObjectLerpTime;
+
+				//then apply that to the position
+				myGrappleHookObject.transform.position = Vector3.Lerp(grappleStartPos, grapplePoint, grappleObjectLerpTime);
+			}
 		}
 	}
 
@@ -273,16 +316,20 @@ public class HeroMovementBehavior : MonoBehaviour
 	{
 		if (grappled)
 		{
+			//grapple physics
 			grappled = false;
 			grappleLength = 0;
 			grapplePoint = Vector3.zero;
 			myRB.velocity = additionalVelocity;
+
+			//grapple gameobject
+			Destroy(myGrappleHookObject);
 		}
 	}
 
 	private void OnDrawGizmos()
 	{
-		if (grapplePoint != Vector3.zero)
+		if (grapplePoint != Vector3.zero && false)
 		{
 			Gizmos.color = Color.yellow;
 			Gizmos.DrawSphere(grapplePoint, .5f);
