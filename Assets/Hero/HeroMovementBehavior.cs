@@ -28,7 +28,7 @@ public class HeroMovementBehavior : MonoBehaviour
 	//movement stats
 	readonly float friction = 7.5f;
 	readonly float topSpeed = 10;
-	readonly float airAcceleration = 1.22f;
+	readonly float airAcceleration = 1.45f;
 	readonly float groundAcceleration = 12;
 	readonly float timeToBHop = .1f;
 	Vector3 moveInput = new Vector3();
@@ -248,7 +248,6 @@ public class HeroMovementBehavior : MonoBehaviour
 				myPositionLastFixedFrame = myRB.position;
 
 				grapplePoint = hit.point;
-				Debug.Log("Did Hit");
 
 				//send out grapple hook gameobject
 				myGrappleHookObject = Instantiate(myGrappleHookPrefab, myCamera.transform);
@@ -256,12 +255,6 @@ public class HeroMovementBehavior : MonoBehaviour
 				grappleObjectLerpTime = 0;
 				grappleStartPos = myCamera.transform.position;
 				grappleObjectLR = myGrappleHookObject.GetComponent<LineRenderer>();
-			}
-			else
-			{
-				Ungrapple();
-				Debug.Log("Did not Hit");
-				grapplePoint = Vector3.zero;
 			}
 		}
 
