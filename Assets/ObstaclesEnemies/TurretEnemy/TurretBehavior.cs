@@ -7,8 +7,8 @@ public class TurretBehavior : MonoBehaviour
     GameObject player;
     public float time;
     public float distance;
-    public float maxDistance = 6;
-    public float minDistance = 3;
+    public float maxDistance;
+    public float minDistance;
     public GameObject bullet;
     public GameObject bulletspawnpoint;
     bool time2Shoot;

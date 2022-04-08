@@ -7,6 +7,10 @@ public class BulletBehavior : MonoBehaviour
     public float bulletSpeed;
     Vector3 goalpoint;
     GameObject player;
+    Vector3 knockbackVelocity;
+    public float forceMultiplier;
+    public float lifespan;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +23,18 @@ public class BulletBehavior : MonoBehaviour
     void Update()
     {
         transform.position += transform.forward * Time.deltaTime * bulletSpeed;
+
+        lifespan -= Time.deltaTime;
+        if (lifespan <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        knockbackVelocity = new Vector3((transform.position.x - player.transform.position.x) * forceMultiplier, 0, (transform.position.z - player.transform.position.z) * forceMultiplier);
+        player.GetComponent<Rigidbody>().velocity = -knockbackVelocity;
         Destroy(this.gameObject);
     }
 }
