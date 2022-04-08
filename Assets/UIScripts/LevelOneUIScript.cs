@@ -15,6 +15,7 @@ public class LevelOneUIScript : MonoBehaviour
 
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
     }
