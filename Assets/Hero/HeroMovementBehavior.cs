@@ -40,6 +40,7 @@ public class HeroMovementBehavior : MonoBehaviour
 	bool wasGrounded = false;
 
 	//grapple
+	readonly float maxGrappleDistance = 100;
 	Vector3 grapplePoint;
 	float grappleLength;
 	bool grappled = false;
@@ -242,19 +243,23 @@ public class HeroMovementBehavior : MonoBehaviour
 			//NOTE: this block runs once when the grapple starts
 			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
 			{
-				grappled = true;
-				grapplePoint = hit.point;
-				grappleLength = (myCamera.transform.position - hit.point).magnitude;
-				myPositionLastFixedFrame = myRB.position;
+				if (Vector3.Distance(hit.point, myCamera.transform.position) <= maxGrappleDistance)
+				{
 
-				grapplePoint = hit.point;
+					grappled = true;
+					grapplePoint = hit.point;
+					grappleLength = (myCamera.transform.position - hit.point).magnitude;
+					myPositionLastFixedFrame = myRB.position;
 
-				//send out grapple hook gameobject
-				myGrappleHookObject = Instantiate(myGrappleHookPrefab, myCamera.transform);
-				myGrappleHookObject.transform.parent = null;
-				grappleObjectLerpTime = 0;
-				grappleStartPos = myCamera.transform.position;
-				grappleObjectLR = myGrappleHookObject.GetComponent<LineRenderer>();
+					grapplePoint = hit.point;
+
+					//send out grapple hook gameobject
+					myGrappleHookObject = Instantiate(myGrappleHookPrefab, myCamera.transform);
+					myGrappleHookObject.transform.parent = null;
+					grappleObjectLerpTime = 0;
+					grappleStartPos = myCamera.transform.position;
+					grappleObjectLR = myGrappleHookObject.GetComponent<LineRenderer>();
+				}
 			}
 		}
 
