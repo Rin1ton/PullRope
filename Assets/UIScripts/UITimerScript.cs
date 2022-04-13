@@ -8,6 +8,7 @@ public class UITimerScript : MonoBehaviour
 {
 	public TMP_Text TimerText;
 	public bool playing;
+	public bool reset;
 	private float Timer;
 
 	void Update()
@@ -23,6 +24,15 @@ public class UITimerScript : MonoBehaviour
 			TimerText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + milliseconds.ToString("00");
 		}
 
+		if (reset == true)
+        {
+			Timer = 0;
+			TimerText.text = ("00" + ":" + "00"  + ":" + "00");
+		}
+		
+
 	}
+
+
 
 }
