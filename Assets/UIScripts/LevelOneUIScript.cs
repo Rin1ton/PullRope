@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class LevelOneUIScript : MonoBehaviour
 {
+   
+
     public static bool GamePaused = false;
 
     public GameObject Crosshair;
@@ -12,7 +14,21 @@ public class LevelOneUIScript : MonoBehaviour
 
     public UITimerScript timertext;
 
+    
+    public static LevelOneUIScript instance = null;
 
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
