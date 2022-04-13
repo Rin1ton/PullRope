@@ -11,6 +11,14 @@ public class MainMenuScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void ToMain()
+    {
+        SceneManager.LoadScene("Main Menu");
+
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
+    }
+
     public void QuitGame()
     {
         Application.Quit();
