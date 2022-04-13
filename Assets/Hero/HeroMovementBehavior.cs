@@ -95,6 +95,7 @@ public class HeroMovementBehavior : MonoBehaviour
 		Jump();
 		MovementInput();
 		Grapple();
+		CheckIfCanGrapple();
 	}
 
 	private void FixedUpdate()
@@ -241,25 +242,22 @@ public class HeroMovementBehavior : MonoBehaviour
 			RaycastHit hit;
 			// Does the ray intersect any objects excluding the player layer
 			//NOTE: this block runs once when the grapple starts
-			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, maxGrappleDistance, layerMask))
 			{
-				if (Vector3.Distance(hit.point, myCamera.transform.position) <= maxGrappleDistance)
-				{
+				
+				grappled = true;
+				grapplePoint = hit.point;
+				grappleLength = (myCamera.transform.position - hit.point).magnitude;
+				myPositionLastFixedFrame = myRB.position;
 
-					grappled = true;
-					grapplePoint = hit.point;
-					grappleLength = (myCamera.transform.position - hit.point).magnitude;
-					myPositionLastFixedFrame = myRB.position;
+				grapplePoint = hit.point;
 
-					grapplePoint = hit.point;
-
-					//send out grapple hook gameobject
-					myGrappleHookObject = Instantiate(myGrappleHookPrefab, myCamera.transform);
-					myGrappleHookObject.transform.parent = null;
-					grappleObjectLerpTime = 0;
-					grappleStartPos = myCamera.transform.position;
-					grappleObjectLR = myGrappleHookObject.GetComponent<LineRenderer>();
-				}
+				//send out grapple hook gameobject
+				myGrappleHookObject = Instantiate(myGrappleHookPrefab, myCamera.transform);
+				myGrappleHookObject.transform.parent = null;
+				grappleObjectLerpTime = 0;
+				grappleStartPos = myCamera.transform.position;
+				grappleObjectLR = myGrappleHookObject.GetComponent<LineRenderer>();
 			}
 		}
 
@@ -313,6 +311,25 @@ public class HeroMovementBehavior : MonoBehaviour
 				//then apply that to the position
 				myGrappleHookObject.transform.position = Vector3.Lerp(grappleStartPos, grapplePoint, grappleObjectLerpTime);
 			}
+		}
+	}
+
+	void CheckIfCanGrapple()
+	{
+
+		//create a layer mask that includes just the "player" physics layer
+		int layerMask = 1 << playerPhysicsIndex;
+
+		//invert that layer mask;
+		layerMask = ~layerMask;
+
+		RaycastHit hit;
+		if (Physics.Raycast(myCamera.transform.position, 
+							myCamera.transform.TransformDirection(Vector3.forward), 
+							out hit, maxGrappleDistance, layerMask))
+		{
+			//we can grapple, if this code is run
+
 		}
 	}
 

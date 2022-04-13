@@ -19,8 +19,10 @@ public class KillBoxBehavior : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-        SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
-	}
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
+        Scene scene = SceneManager.GetActiveScene(); 
+        SceneManager.LoadScene(scene.name);
+    }
     /*
      * Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
      * You forgot the parentheses at the end of GetActiveScene(); It actually works this way! :)     */
