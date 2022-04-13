@@ -8,4 +8,5 @@ public static class References
 
 	public static float playerSensitivityX = 1;
 	public static float playerSensitivityY = 1;
+	public static Color32 CrosshairColor;
 }

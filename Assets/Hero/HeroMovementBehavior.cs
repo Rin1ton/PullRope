@@ -40,7 +40,9 @@ public class HeroMovementBehavior : MonoBehaviour
 	bool wasGrounded = false;
 
 	//grapple
-	readonly float maxGrappleDistance = 100;
+	readonly float maxGrappleDistance = 40;
+	Color32 grappleableColor;
+	Color32 ungrappleableColor;
 	Vector3 grapplePoint;
 	float grappleLength;
 	bool grappled = false;
@@ -73,6 +75,10 @@ public class HeroMovementBehavior : MonoBehaviour
 
 		//get a reference to my ground checker
 		myGroundChecker = GetComponent<GroundCheckingBehavior>();
+
+		//set our grappleable and ungrappleable colors (green and white respectively)
+		grappleableColor = new Color32(0, 255, 0, 255);
+		ungrappleableColor = new Color32(255, 255, 255, 255);
 	}
 
 	// Start is called before the first frame update
@@ -323,13 +329,19 @@ public class HeroMovementBehavior : MonoBehaviour
 		//invert that layer mask;
 		layerMask = ~layerMask;
 
+		//create a hit object
 		RaycastHit hit;
+
+		//IF this code is run, then we're able to grapple the object we're looking at
 		if (Physics.Raycast(myCamera.transform.position, 
 							myCamera.transform.TransformDirection(Vector3.forward), 
 							out hit, maxGrappleDistance, layerMask))
 		{
-			//we can grapple, if this code is run
-
+			References.CrosshairColor = grappleableColor;
+		}
+		else
+		{
+			References.CrosshairColor = ungrappleableColor;
 		}
 	}
 
