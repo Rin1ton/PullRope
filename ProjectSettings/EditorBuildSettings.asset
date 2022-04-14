@@ -9,22 +9,22 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: ea0d0f39b29eba74cae5e4a89a8d78b4
   - enabled: 1
-    path: Assets/Scenes/level ideas/level idea one.unity
+    path: Assets/Scenes/Levels/level idea one.unity
     guid: 457ee81fe96a72640bfc9f3ea17e4d9f
   - enabled: 1
-    path: Assets/Scenes/level ideas/level idea 2.unity
+    path: Assets/Scenes/Levels/level idea 2.unity
     guid: be4b9bbd22eafce4fa4ba1b159d891f5
   - enabled: 1
-    path: Assets/Scenes/level ideas/level idea 3.unity
+    path: Assets/Scenes/Levels/level idea 3.unity
     guid: 75bffeef97ecef846b8853832cab625c
   - enabled: 1
-    path: Assets/Scenes/level ideas/level idea 4.unity
+    path: Assets/Scenes/Levels/level idea 4.unity
     guid: fb63ed52077999647884b80dec01ce16
   - enabled: 1
-    path: Assets/Scenes/level ideas/level idea 5.unity
+    path: Assets/Scenes/Levels/level idea 5.unity
     guid: 9aa2349686875734b9f06bef4c4d6f13
   - enabled: 1
-    path: Assets/Scenes/level ideas/level 6.unity
+    path: Assets/Scenes/Levels/level 6.unity
     guid: e292d5bf5fd50e647a74aa43c8f0b4fe
   - enabled: 1
     path: Assets/Scenes/End Screen.unity
