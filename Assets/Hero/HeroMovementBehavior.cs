@@ -165,11 +165,15 @@ public class HeroMovementBehavior : MonoBehaviour
 		//put a value in our input vector
 		moveInput = (transform.right * xMovement + transform.forward * zMovement).normalized;
 
+		//correct our moveInput with our original facing direction
+		Vector3 correctedMoveInput = new Vector3();
+		correctedMoveInput = myRBOriginalRotation * moveInput;
+
 		//call our friction function if we're on the ground
 		if (myGroundChecker.IsGrounded && timeSinceBecameGrounded > Time.deltaTime)
-			MoveOnGround(myRB.velocity, moveInput);
+			MoveOnGround(myRB.velocity, correctedMoveInput);
 		else
-			Accelerate(myRB.velocity, airAcceleration, moveInput);
+			Accelerate(myRB.velocity, airAcceleration, correctedMoveInput);
 	}
 
 	void MoveOnGround(Vector3 prevVelocity, Vector3 moveDir)
@@ -221,6 +225,9 @@ public class HeroMovementBehavior : MonoBehaviour
 
 		//save what our new velocity should be
 		Vector3 newVelocity = prevVelocity + wishDir * accelSpeed;
+
+		//before we move, compensate for starting looking another direction
+		//newVelocity = myRBOriginalRotation * newVelocity;
 
 		//now apply our witchcraft to my velocity to accelerate
 		myRB.velocity = newVelocity;
