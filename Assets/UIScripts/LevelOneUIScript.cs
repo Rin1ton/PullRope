@@ -32,8 +32,8 @@ public class LevelOneUIScript : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
-        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-        UnityEngine.Cursor.visible = false;
+       // UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+       // UnityEngine.Cursor.visible = false;
     }
 
     // Start is called before the first frame update
@@ -64,8 +64,8 @@ public class LevelOneUIScript : MonoBehaviour
         Time.timeScale = 1f;
         timertext.playing = true;
         GamePaused = false;
-        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-        UnityEngine.Cursor.visible = false;
+        //UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+       // UnityEngine.Cursor.visible = false;
         Debug.Log("Resuming Game");
     }
 
@@ -77,8 +77,8 @@ public class LevelOneUIScript : MonoBehaviour
         Time.timeScale = 0f;
         timertext.playing = false;
         GamePaused = true;
-        UnityEngine.Cursor.lockState = CursorLockMode.None;
-        UnityEngine.Cursor.visible = true;
+       // UnityEngine.Cursor.lockState = CursorLockMode.None;
+       // UnityEngine.Cursor.visible = true;
         Debug.Log("Pausing Game");
     }
 }
