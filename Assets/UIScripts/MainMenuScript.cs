@@ -11,7 +11,7 @@ public class MainMenuScript : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        timertext.reset = false;
+       // timertext.reset = false;
 }
 
     public void ToMain()
