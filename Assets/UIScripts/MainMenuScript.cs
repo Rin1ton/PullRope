@@ -21,7 +21,7 @@ public class MainMenuScript : MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         UnityEngine.Cursor.visible = true;
 
-        timertext.reset = true;
+       
     }
 
     public void QuitGame()

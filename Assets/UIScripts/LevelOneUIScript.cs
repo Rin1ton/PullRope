@@ -47,10 +47,10 @@ public class LevelOneUIScript : MonoBehaviour
     {
 
         Scene scene = SceneManager.GetActiveScene();
-        Debug.Log("Name: " + scene.name);
+       // Debug.Log("Name: " + scene.name);
         if (scene.name == "End Screen")
         {
-            Debug.Log("End Screen");
+          //  Debug.Log("End Screen");
             EndScreenMenu.SetActive(true);
             Crosshair.SetActive(false);
             timertext.playing = false;
