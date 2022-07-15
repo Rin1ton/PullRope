@@ -65,6 +65,11 @@ public class HeroMovementBehavior : MonoBehaviour
 	Rigidbody myRB;
 	GroundCheckingBehavior myGroundChecker;
 
+
+
+
+
+
 	private void Awake()
 	{
 		//tell everyone we're the player
@@ -93,6 +98,11 @@ public class HeroMovementBehavior : MonoBehaviour
 		myCameraOriginalRotation = myCamera.transform.rotation;
 	}
 
+
+
+
+
+
 	// Update is called once per frame
 	void Update()
 	{
@@ -108,6 +118,11 @@ public class HeroMovementBehavior : MonoBehaviour
 	{
 		ApplyGrapplePhysics();
 	}
+
+
+
+
+
 
 	void Timers()
 	{
