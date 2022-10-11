@@ -181,7 +181,7 @@ public class HeroMovementBehavior : MonoBehaviour
 		moveInput = (transform.right * xMovement + transform.forward * zMovement).normalized;
 
 		//correct our moveInput with our original facing direction
-		Vector3 correctedMoveInput = new Vector3();
+		Vector3 correctedMoveInput;
 		correctedMoveInput = myRBOriginalRotation * moveInput;
 
 		//call our friction function if we're on the ground
