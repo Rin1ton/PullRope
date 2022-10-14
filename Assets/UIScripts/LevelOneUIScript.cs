@@ -98,12 +98,11 @@ public class LevelOneUIScript : MonoBehaviour
         // Cursor.visible = false;
         PauseMenuObject.SetActive(false);
         Crosshair.SetActive(true);
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
         timertext.playing = true;
         GamePaused = false;
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
-        Debug.Log("Resuming Game");
     }
 
     void Pause()
@@ -111,7 +110,7 @@ public class LevelOneUIScript : MonoBehaviour
         // Cursor.visible = true;
         PauseMenuObject.SetActive(true);
         Crosshair.SetActive(false);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         timertext.playing = false;
         GamePaused = true;
         UnityEngine.Cursor.lockState = CursorLockMode.None;
