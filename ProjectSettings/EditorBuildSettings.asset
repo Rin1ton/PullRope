@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/End Screen.unity
     guid: 271b36c5a7240a74f933ba431247ac2c
+  - enabled: 1
+    path: Assets/Scenes/Skin Menu.unity
+    guid: 5c77c5b1bf9a52a499f49a8ce3812fe0
   m_configObjects: {}

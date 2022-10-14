@@ -24,6 +24,11 @@ public class MainMenuScript : MonoBehaviour
        
     }
 
+    public void ToSkins()
+    {
+        SceneManager.LoadScene("Skin Menu");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
