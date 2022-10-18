@@ -26,6 +26,8 @@ public static class References
 		public int cosmetic_sus;
 	}
 
+	public static localPlayerData myPlayer = DatabaseManager.CreatePlayer("");
+
 	/*
 	string username;
 	string password;
