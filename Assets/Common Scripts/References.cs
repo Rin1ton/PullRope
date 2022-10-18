@@ -26,6 +26,12 @@ public static class References
 		int cosmetic_sus;
 	}
 
+	public struct remotePlayerData
+	{
+		string username;
+		string equipped;
+	}
+
 	/*
 	string username;
 	string password;
@@ -42,5 +48,6 @@ public static class References
 	*/
 
 	public static PlayerData localPlayerData;
+	public static List<PlayerData> remotePlayersData;
 
 }
