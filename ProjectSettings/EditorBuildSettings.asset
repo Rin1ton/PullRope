@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Skin Menu.unity
     guid: 5c77c5b1bf9a52a499f49a8ce3812fe0
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer Menu.unity
+    guid: fab8a9920a0ab2a4abcd96bcf9b69af7
   m_configObjects: {}

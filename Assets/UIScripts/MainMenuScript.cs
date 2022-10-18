@@ -12,7 +12,7 @@ public class MainMenuScript : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
        // timertext.reset = false;
-}
+    }
 
     public void ToMain()
     {
@@ -35,5 +35,9 @@ public class MainMenuScript : MonoBehaviour
         Debug.Log("Quitting Game");
     }
 
+    public void ToMultiplayer()
+    {
+        SceneManager.LoadScene("Multiplayer Menu");
+    }
 
 }
