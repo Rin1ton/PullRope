@@ -21,8 +21,17 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
-	[SerializeField] private GameObject connectUI;
+	//login screen
 	[SerializeField] private InputField usernameField;
+	[SerializeField] private InputField passwordField;
+	[SerializeField] private InputField usernameCreateField;
+	[SerializeField] private InputField passwordCreateField;
+	[SerializeField] private InputField passwordConfirmField;
+
+	//connect screen
+	[SerializeField] private GameObject connectUI;
+	[SerializeField] private InputField ipAddressField;
+	[SerializeField] private InputField portField;
 
 	private void Awake()
 	{
@@ -35,6 +44,11 @@ public class UIManager : MonoBehaviour
 		connectUI.SetActive(false);
 
 		NetworkManager.Singleton.Connect();
+	}
+
+	public void SignInClicked()
+	{
+
 	}
 
 	public void BackToMain()
