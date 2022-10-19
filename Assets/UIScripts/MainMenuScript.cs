@@ -20,8 +20,6 @@ public class MainMenuScript : MonoBehaviour
 
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         UnityEngine.Cursor.visible = true;
-
-       
     }
 
     public void ToSkins()

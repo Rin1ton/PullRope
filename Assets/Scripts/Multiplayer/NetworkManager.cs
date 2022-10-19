@@ -29,8 +29,8 @@ public class NetworkManager : MonoBehaviour
 	
 	public Client Client { get; private set; }
 
-	[SerializeField] private string ip;
-	[SerializeField] private string port;
+	private string ip;
+	private string port;
 
 	private void Awake()
 	{
@@ -57,9 +57,24 @@ public class NetworkManager : MonoBehaviour
 		Client.Disconnect();
 	}
 
-	public void Connect()
+	public void Connect(string thisIp, string thisPort)
 	{
-		Client.Connect($"{ip}:{port}");
+		if (thisPort == "") {
+			thisPort = "7777";
+			port = "7777";
+		}
+
+		if (thisIp == "")
+		{
+			thisIp = "127.0.0.1";
+			ip = "127.0.0.1";
+		}
+
+		if (this)
+
+		Client.Connect($"{thisIp}:{thisPort}");
+		ip = thisIp;
+		port = thisPort;
 	}
 
 	private void DidConnect(object sender, EventArgs e)

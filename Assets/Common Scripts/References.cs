@@ -43,6 +43,4 @@ public static class References
 	int cosmetic_sus;
 	*/
 
-
-
 }
