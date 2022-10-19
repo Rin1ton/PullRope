@@ -1,13 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static References;
 // using MySql.Data.MySqlClient;
 
 public static class DatabaseManager
 {
-    public static References.localPlayerData CreatePlayer(string username)
+
+	private static localPlayerData _myPlayer;
+	public static localPlayerData MyPlayer
+	{
+		get
+		{
+			if (_myPlayer.username == "")
+			{
+				//INSERT: code that updates the _myPlayer object with what's in the database
+			}
+
+			return _myPlayer;
+		}
+		set
+		{
+			_myPlayer = value;
+
+			//INSERT: code that updates the player row in the database with what's in the _myPlayer object
+		}
+	}
+
+	public static string AttemptLogin(string username, string password)
+	{
+		//INSERT: code that will set the MyPlayer [sic] object to the row specified by the username and password, if it exists.
+
+		//return one of these strings (or any other messages you think we'd need) depending on the outcome of the login attempt.
+		if (true)
+		{
+			return "Login Successful!";
+		}
+		else
+		{
+			return "Incorrect Username and Password!";
+		}
+
+	}
+
+	public static localPlayerData CreatePlayer(string username)
     {
-        References.localPlayerData newPlayer = new References.localPlayerData();
+        localPlayerData newPlayer = new localPlayerData();
 
         string server = "localhost";
         string database = "pullrope";
