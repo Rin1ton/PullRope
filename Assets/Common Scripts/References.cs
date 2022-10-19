@@ -28,41 +28,6 @@ public static class References
 
 	//public static localPlayerData myPlayer = DatabaseManager.CreatePlayer("");
 
-	private static localPlayerData _myPlayer;
-	public static localPlayerData MyPlayer
-	{
-		get {
-			if (_myPlayer.username == "")
-			{
-				//INSERT: code that updates the _myPlayer object with what's in the database
-			}
-
-			return _myPlayer;
-		}
-		set
-		{
-			_myPlayer = value;
-
-			//INSERT: code that updates the player row in the database with what's in the _myPlayer object
-		}
-	}
-
-	public static string AttemptLogin(string username, string password)
-	{
-		//INSERT: code that will set the MyPlayer [sic] object to the row specified by the username and password, if it exists.
-
-		//return one of these strings (or any other messages you think we'd need) depending on the outcome of the login attempt.
-		if (true)
-		{
-			return "Login Successful!";
-		}
-		else
-		{
-			return "Incorrect Username and Password!";
-		}
-
-	}
-
 	/*
 	string username;
 	string password;
