@@ -86,6 +86,7 @@ public class UIManager : MonoBehaviour
 	{
 		Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.name);
 		//message.AddString(DatabaseManager.MyPlayer.username);
+		//message.AddString(usernameField.text);
 		message.AddString("Tom");
 		Debug.Log("TBI Account Login");
 		NetworkManager.Singleton.Client.Send(message);

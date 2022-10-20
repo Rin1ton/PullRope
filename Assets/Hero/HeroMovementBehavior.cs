@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using Riptide;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class HeroMovementBehavior : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class HeroMovementBehavior : MonoBehaviour
 	readonly KeyCode leftButton = KeyCode.A;
 	readonly KeyCode rightButton = KeyCode.D;
 	readonly KeyCode grappleButton = KeyCode.Mouse0;
+	readonly KeyCode boopButton = KeyCode.Mouse1;
 
 	//mouselook stats
 	/*
@@ -30,7 +33,6 @@ public class HeroMovementBehavior : MonoBehaviour
 	readonly float topSpeed = 10;
 	readonly float airAcceleration = 1.45f;
 	readonly float groundAcceleration = 12;
-	readonly float timeToBHop = .1f;
 	Vector3 moveInput = new Vector3();
 
 	//jump Stats
@@ -58,15 +60,31 @@ public class HeroMovementBehavior : MonoBehaviour
 	Vector3 grappleStartPos;
 	GameObject myGrappleHookObject;
 	LineRenderer grappleObjectLR;
-	
 
 	//physics stuff
 	readonly int playerPhysicsIndex = 3;
 	Rigidbody myRB;
 	GroundCheckingBehavior myGroundChecker;
 
+	//RipTide Stuff
+	public static Dictionary<ushort, HeroMovementBehavior> list = new Dictionary<ushort, HeroMovementBehavior>();
 
+	public ushort Id { get; private set; }
+	public string Username { get; private set; }
 
+	public static void Spawn(ushort id, string username)
+	{
+		HeroMovementBehavior player = Instantiate(GameLogic.Singleton.PlayerPrefab, new Vector3(0, 1, 0), Quaternion.identity).GetComponent<HeroMovementBehavior>();
+		player.name = $"Player {id} ({(string.IsNullOrEmpty(username) ? "Guest" : username)}";
+		player.Id = id;
+		player.Username = string.IsNullOrEmpty(username) ? $"Guest {id}" : username;
+	}
+
+	[MessageHandler((ushort)ClientToServerId.name)]
+	private static void Name(ushort fromClientId, Message message)
+	{
+		Spawn(fromClientId, message.GetString());
+	}
 
 
 
@@ -293,6 +311,11 @@ public class HeroMovementBehavior : MonoBehaviour
 		{
 			Ungrapple();
 		}
+	}
+
+	void Boop()
+	{
+
 	}
 
 	void ApplyGrapplePhysics()
