@@ -148,7 +148,7 @@ public static class DatabaseManager
 
         connection.Open(); // Connect to server
 
-        query = "SELECT @password FROM prData WHERE username = @username"; // Get password from user object
+        query = "SELECT password FROM prData WHERE username = @username"; // Get password from user object
         command = new MySqlCommand(query, connection);
 
         command.Parameters.AddWithValue("@username", username);
@@ -158,6 +158,7 @@ public static class DatabaseManager
         if (nId != null) // If user exists
         {
             MySqlDataReader reader = command.ExecuteReader();
+            reader.Read();
             if (pass == reader["password"].ToString()) // If password is correct
             {
                 return true;
@@ -189,7 +190,7 @@ public static class DatabaseManager
 
         connection.Open(); // Connect to server
 
-        query = "SELECT @password FROM prData WHERE username = @username"; // Get password from user object
+        query = "SELECT password FROM prData WHERE username = @username"; // Get password from user object
         command = new MySqlCommand(query, connection);
 
         command.Parameters.AddWithValue("@username", username);
@@ -198,7 +199,7 @@ public static class DatabaseManager
 
         if (nId == null) // If user does not exist
         {
-            query = "insert into prData values (username = @username, password = @pass, 0, 'skin_default', 0, 0, 0, 0, 0, 0, 0, 0);"; // Insert default values + user and pass
+            query = "insert into prData values(@username, @password, 0, 'skin_default', 0, 0, 0, 0, 0, 0, 0, 0);"; // Insert default values + user and pass
             command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@username", username);
