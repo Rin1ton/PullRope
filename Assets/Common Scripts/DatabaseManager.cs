@@ -23,24 +23,18 @@ public static class DatabaseManager
 	{
 		get
 		{
-            //INSERT: code that updates the _myPlayer object with what's in the database
             UpdateUser(_myPlayer.username);
-
 			return _myPlayer;
 		}
 		set
 		{
 			_myPlayer = value;
-
-            //INSERT: code that updates the player row in the database with what's in the _myPlayer object
             UpdateDatabase(_myPlayer);
 		}
 	}
 
-	public static string AttemptLogin(string username, string password)
+	public static string AttemptLogin(string username, string password) // Try to log into server using a username and password. User object will be updated with player data from server
 	{
-        //INSERT: code that will set the MyPlayer [sic] object to the row specified by the username and password, if it exists.
-		//return one of these strings (or any other messages you think we'd need) depending on the outcome of the login attempt.
 		if (CheckDatabase(username, password)) // If username and password are correct
 		{
             UpdateUser(_myPlayer.username); // Set the myPlayer object to the data from the database
@@ -148,7 +142,7 @@ public static class DatabaseManager
 
         connection.Open(); // Connect to server
 
-        query = "SELECT @password FROM prData WHERE username = @username"; // Get password from user object
+        query = "SELECT password FROM prData WHERE username = @username"; // Get password from user object
         command = new MySqlCommand(query, connection);
 
         command.Parameters.AddWithValue("@username", username);
@@ -158,6 +152,7 @@ public static class DatabaseManager
         if (nId != null) // If user exists
         {
             MySqlDataReader reader = command.ExecuteReader();
+            reader.Read();
             if (pass == reader["password"].ToString()) // If password is correct
             {
                 return true;
@@ -171,7 +166,7 @@ public static class DatabaseManager
         }
     }
 
-    public static string AttemptCreate(string username, string pass)
+    public static string AttemptCreate(string username, string pass) // Create an account. Checks if username is valid.
     {
         string output = "Account Created!";
 
@@ -189,7 +184,7 @@ public static class DatabaseManager
 
         connection.Open(); // Connect to server
 
-        query = "SELECT @password FROM prData WHERE username = @username"; // Get password from user object
+        query = "SELECT password FROM prData WHERE username = @username"; // Get password from user object
         command = new MySqlCommand(query, connection);
 
         command.Parameters.AddWithValue("@username", username);
@@ -198,7 +193,7 @@ public static class DatabaseManager
 
         if (nId == null) // If user does not exist
         {
-            query = "insert into prData values (username = @username, password = @pass, 0, 'skin_default', 0, 0, 0, 0, 0, 0, 0, 0);"; // Insert default values + user and pass
+            query = "insert into prData values(@username, @password, 0, 'skin_default', 0, 0, 0, 0, 0, 0, 0, 0);"; // Insert default values + user and pass
             command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@username", username);
