@@ -1,3 +1,4 @@
+using Riptide;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,9 +19,30 @@ public class Player : MonoBehaviour
 		list.Remove(Id);
 	}
 
-	public static void Spawn(ushort id, string username, Vector3 vector3)
+	public static void Spawn(ushort id, string username, Vector3 position)
 	{
+		Player player;
+		if (id == NetworkManager.Singleton.Client.Id)
+		{
+			player = Instantiate(GameLogic.Singleton.LocalPlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
+		}
+		else
+		{
+			player = Instantiate(GameLogic.Singleton.PlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
+			player.IsLocal = false;
+		}
 
+		player.name = $"Player {id} ({(string.IsNullOrEmpty(username) ? "Guest" : username)})";
+		player.Id = id;
+		player.username = username;
+
+		list.Add(id, player);
+	}
+
+	[MessageHandler((ushort)ServerToClientId.playerSpawned)]
+	private static void SpawnPlayer(Message message)
+	{
+		Spawn(message.GetUShort(), message.GetString(), message.GetVector3());
 	}
 
 }
