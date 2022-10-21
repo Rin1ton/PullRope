@@ -5,6 +5,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ServerToClientId : ushort
+{
+	playerSpawned = 1,
+}
+
 public enum ClientToServerId : ushort
 {
 	name = 1,

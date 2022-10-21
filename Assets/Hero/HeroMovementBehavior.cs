@@ -67,24 +67,6 @@ public class HeroMovementBehavior : MonoBehaviour
 	GroundCheckingBehavior myGroundChecker;
 
 	//RipTide Stuff
-	public static Dictionary<ushort, HeroMovementBehavior> list = new Dictionary<ushort, HeroMovementBehavior>();
-
-	public ushort Id { get; private set; }
-	public string Username { get; private set; }
-
-	public static void Spawn(ushort id, string username)
-	{
-		HeroMovementBehavior player = Instantiate(GameLogic.Singleton.PlayerPrefab, new Vector3(0, 1, 0), Quaternion.identity).GetComponent<HeroMovementBehavior>();
-		player.name = $"Player {id} ({(string.IsNullOrEmpty(username) ? "Guest" : username)}";
-		player.Id = id;
-		player.Username = string.IsNullOrEmpty(username) ? $"Guest {id}" : username;
-	}
-
-	[MessageHandler((ushort)ClientToServerId.name)]
-	private static void Name(ushort fromClientId, Message message)
-	{
-		Spawn(fromClientId, message.GetString());
-	}
 
 
 
@@ -115,7 +97,6 @@ public class HeroMovementBehavior : MonoBehaviour
 		myRBOriginalRotation = myRB.transform.rotation;
 		myCameraOriginalRotation = myCamera.transform.rotation;
 	}
-
 
 
 
