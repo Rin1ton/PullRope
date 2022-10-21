@@ -170,4 +170,47 @@ public static class DatabaseManager
             return false;
         }
     }
+
+    public static string AttemptCreate(string username, string pass)
+    {
+        string output = "Account Created!";
+
+        //INSERT: code to create an account with username and password if an account with that username doesn't already exist
+        string server = "localhost";
+        string database = "pullrope";
+        string dbusername = "root";
+        string password = "password";
+
+        string connstring = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + dbusername + ";" + "PASSWORD=" + password + ";";
+
+        string query; // SQL Statement
+        MySqlConnection connection = new MySqlConnection(connstring);
+        MySqlCommand command;
+
+        connection.Open(); // Connect to server
+
+        query = "SELECT @password FROM prData WHERE username = @username"; // Get password from user object
+        command = new MySqlCommand(query, connection);
+
+        command.Parameters.AddWithValue("@username", username);
+
+        var nId = command.ExecuteScalar();
+
+        if (nId == null) // If user does not exist
+        {
+            query = "insert into prData values (username = @username, password = @pass, 0, 'skin_default', 0, 0, 0, 0, 0, 0, 0, 0);"; // Insert default values + user and pass
+            command = new MySqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@username", username);
+            command.Parameters.AddWithValue("@password", pass);
+
+            command.ExecuteNonQuery(); // Execute Query, Create New Account
+            connection.Close(); // Close connection
+        }
+        else
+        {
+            output = "Username already taken.";
+        }
+        return output;
+    }
 }
