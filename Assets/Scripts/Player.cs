@@ -24,10 +24,13 @@ public class Player : MonoBehaviour
 		Player player;
 		if (id == NetworkManager.Singleton.Client.Id)
 		{
+			//spawn local player
 			player = Instantiate(GameLogic.Singleton.LocalPlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
+			player.IsLocal = true;
 		}
 		else
 		{
+			//spawn remote players
 			player = Instantiate(GameLogic.Singleton.PlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
 			player.IsLocal = false;
 		}
@@ -43,6 +46,19 @@ public class Player : MonoBehaviour
 	private static void SpawnPlayer(Message message)
 	{
 		Spawn(message.GetUShort(), message.GetString(), message.GetVector3());
+	}
+
+	[MessageHandler((ushort)ServerToClientId.playerTransform)]
+	private static void SetTransform(Message message)
+	{
+		if (list.TryGetValue(message.GetUShort(), out Player player) && !player.IsLocal)
+			player.Move(message.GetVector3(), message.GetVector3(), message.GetQuaternion());
+	}
+
+	private void Move(Vector3 camera, Vector3 position, Quaternion rotation)
+	{
+		transform.position = position;
+		transform.rotation = rotation;
 	}
 
 }
