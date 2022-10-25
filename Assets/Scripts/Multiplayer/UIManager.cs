@@ -53,10 +53,11 @@ public class UIManager : MonoBehaviour
 
 	public void SignInClicked()
 	{
-		string loginMessage = DatabaseManager.AttemptLogin(usernameField.text, passwordField.text);
+		/*string loginMessage = DatabaseManager.AttemptLogin(usernameField.text, passwordField.text);
 		messageBox.text = loginMessage;
 
-		if (loginMessage == "Login Successful!")
+		if (loginMessage == "Login Successful!")*/
+		Debug.Log("TBI \"CheckDatabase(string username, string pass)\" function");
 			SceneManager.LoadScene("Main Menu");
 	}
 
@@ -75,11 +76,21 @@ public class UIManager : MonoBehaviour
 		messageBox.text = accCreateMessage;
 	}
 
-	public void BackToMain()
+	public void BackToConnectMenu()
 	{
 		ipAddressField.interactable = true;
 		portField.interactable = true;
 		connectUI.SetActive(true);
+	}
+
+	public void BackButtonClicked()
+	{
+		BackToMain();
+	}
+
+	private void BackToMain()
+	{
+		SceneManager.LoadScene("Main Menu");
 	}
 
 	public void SendName()
