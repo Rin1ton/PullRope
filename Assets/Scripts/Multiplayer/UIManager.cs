@@ -53,12 +53,13 @@ public class UIManager : MonoBehaviour
 
 	public void SignInClicked()
 	{
-		/*string loginMessage = DatabaseManager.AttemptLogin(usernameField.text, passwordField.text);
+		string loginMessage = DatabaseManager.AttemptLogin(usernameField.text, passwordField.text);
 		messageBox.text = loginMessage;
 
-		if (loginMessage == "Login Successful!")*/
-		Debug.Log("TBI \"CheckDatabase(string username, string pass)\" function");
+		if (loginMessage == "Login Successful!")
 			SceneManager.LoadScene("Main Menu");
+		
+		Debug.Log("TBI \"CheckDatabase(string username, string pass)\" function");
 	}
 
 	public void CreateAccountClicked()
@@ -95,7 +96,7 @@ public class UIManager : MonoBehaviour
 
 	public void SendName()
 	{
-		Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.name);
+		Message message = Message.Create(MessageSendMode.Reliable, ClientToServerId.name);
 		//message.AddString(DatabaseManager.MyPlayer.username);
 		//message.AddString(usernameField.text);
 		message.AddString("Tom");
