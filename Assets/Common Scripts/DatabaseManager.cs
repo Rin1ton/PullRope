@@ -17,7 +17,7 @@ using System;
 
 public static class DatabaseManager
 {
-    static string universalPassword = "password";
+    static string universalPassword = DatabaseCredentials.databasePassword;
 
 	private static localPlayerData _myPlayer;
 	public static localPlayerData MyPlayer
