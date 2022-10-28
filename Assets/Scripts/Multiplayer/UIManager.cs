@@ -82,8 +82,8 @@ public class UIManager : MonoBehaviour
 		connectUI.SetActive(true);
 
 		//unlock the mouse and make it disappear
-		UnityEngine.Cursor.lockState = CursorLockMode.None;
-		UnityEngine.Cursor.visible = true;
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
 	}
 
 	public void BackButtonClicked()
