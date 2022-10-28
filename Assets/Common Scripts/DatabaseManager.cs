@@ -52,7 +52,7 @@ public static class DatabaseManager
     {
         localPlayerData newPlayer = new localPlayerData();
 
-        string server = "localhost";
+        string server = "127.0.0.01";
         string database = "pullrope";
         string dbusername = "root";
         string password = universalPassword;
@@ -94,7 +94,7 @@ public static class DatabaseManager
 
     public static void UpdateDatabase(localPlayerData player) // Update data information to that of the user
     {
-        string server = "localhost";
+        string server = "127.0.0.01";
         string database = "pullrope";
         string dbusername = "root";
         string password = universalPassword;
@@ -130,7 +130,7 @@ public static class DatabaseManager
 
     public static bool CheckDatabase(string username, string pass) // See if a particular username and password is valid
     {
-        string server = "localhost";
+        string server = "127.0.0.01";
         string database = "pullrope";
         string dbusername = "root";
         string password = universalPassword;
@@ -172,7 +172,7 @@ public static class DatabaseManager
         string output = "Account Created!";
 
         //INSERT: code to create an account with username and password if an account with that username doesn't already exist
-        string server = "localhost";
+        string server = "127.0.0.01";
         string database = "pullrope";
         string dbusername = "root";
         string password = universalPassword;
