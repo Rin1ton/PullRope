@@ -17,6 +17,7 @@ using System;
 
 public static class DatabaseManager
 {
+    static string universalPassword = "password";
 
 	private static localPlayerData _myPlayer;
 	public static localPlayerData MyPlayer
@@ -54,7 +55,7 @@ public static class DatabaseManager
         string server = "localhost";
         string database = "pullrope";
         string dbusername = "root";
-        string password = "password";
+        string password = universalPassword;
 
         string connstring = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + dbusername + ";" + "PASSWORD=" + password + ";";
 
@@ -96,7 +97,7 @@ public static class DatabaseManager
         string server = "localhost";
         string database = "pullrope";
         string dbusername = "root";
-        string password = "password";
+        string password = universalPassword;
 
         string connstring = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + dbusername + ";" + "PASSWORD=" + password + ";";
 
@@ -132,7 +133,7 @@ public static class DatabaseManager
         string server = "localhost";
         string database = "pullrope";
         string dbusername = "root";
-        string password = "password";
+        string password = universalPassword;
 
         string connstring = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + dbusername + ";" + "PASSWORD=" + password + ";";
 
@@ -174,7 +175,7 @@ public static class DatabaseManager
         string server = "localhost";
         string database = "pullrope";
         string dbusername = "root";
-        string password = "password";
+        string password = universalPassword;
 
         string connstring = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + dbusername + ";" + "PASSWORD=" + password + ";";
 
