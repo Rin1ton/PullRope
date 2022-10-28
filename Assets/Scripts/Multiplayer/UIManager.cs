@@ -99,8 +99,8 @@ public class UIManager : MonoBehaviour
 	public void SendName()
 	{
 		Message message = Message.Create(MessageSendMode.Reliable, ClientToServerId.name);
-		//message.AddString(DatabaseManager.MyPlayer.username);
-		message.AddString("Tome");
+		message.AddString(DatabaseManager.MyPlayer.username);
+		//message.AddString("Tome");
 		//message.AddString(usernameField.text);
 		Debug.Log("TBI Sending Name to Server");
 		NetworkManager.Singleton.Client.Send(message);

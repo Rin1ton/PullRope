@@ -38,7 +38,7 @@ public static class DatabaseManager
 	{
 		if (CheckDatabase(username, password)) // If username and password are correct
 		{
-            UpdateUser(_myPlayer.username); // Set the myPlayer object to the data from the database
+            MyPlayer = UpdateUser(username); // Set the myPlayer object to the data from the database
             return "Login Successful!";
 		}
 		else
