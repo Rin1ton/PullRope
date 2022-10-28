@@ -69,8 +69,8 @@ public class UIManager : MonoBehaviour
 			return;
 		}
 
-		string accCreateMessage = "Account Created!";
-		//string accCreateMessage = DatabaseManager.AttemptCreate(usernameCreateField.text, passwordCreateField.text);
+		//string accCreateMessage = "Account Created!";
+		string accCreateMessage = DatabaseManager.AttemptCreate(usernameCreateField.text, passwordCreateField.text);
 		Debug.Log("TBI Account Creation");
 		messageBox.text = accCreateMessage;
 	}
