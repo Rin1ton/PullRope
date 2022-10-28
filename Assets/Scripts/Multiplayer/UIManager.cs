@@ -58,8 +58,6 @@ public class UIManager : MonoBehaviour
 
 		if (loginMessage == "Login Successful!")
 			SceneManager.LoadScene("Main Menu");
-		
-		Debug.Log("TBI \"CheckDatabase(string username, string pass)\" function");
 	}
 
 	public void CreateAccountClicked()
@@ -82,6 +80,10 @@ public class UIManager : MonoBehaviour
 		ipAddressField.interactable = true;
 		portField.interactable = true;
 		connectUI.SetActive(true);
+
+		//unlock the mouse and make it disappear
+		UnityEngine.Cursor.lockState = CursorLockMode.None;
+		UnityEngine.Cursor.visible = true;
 	}
 
 	public void BackButtonClicked()
@@ -98,9 +100,9 @@ public class UIManager : MonoBehaviour
 	{
 		Message message = Message.Create(MessageSendMode.Reliable, ClientToServerId.name);
 		//message.AddString(DatabaseManager.MyPlayer.username);
+		message.AddString("Tome");
 		//message.AddString(usernameField.text);
-		message.AddString("Tom");
-		Debug.Log("TBI Account Login");
+		Debug.Log("TBI Sending Name to Server");
 		NetworkManager.Singleton.Client.Send(message);
 	}
 

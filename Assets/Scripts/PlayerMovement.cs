@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
 	private void FixedUpdate()
 	{
 		ApplyGrapplePhysics();
-
+		SendPosition();
 	}
 
 
@@ -413,13 +413,15 @@ public class PlayerMovement : MonoBehaviour
 
 	private void SendPosition()
 	{
-		Message message = Message.Create(MessageSendMode.Unreliable, ClientToServerId.playerTransform);
+		Message message = Message.Create(MessageSendMode.Reliable, ClientToServerId.playerTransform);
 		message.AddUShort(player.Id);
 
 		//movement
 		message.AddVector3(myCamera.transform.forward);
 		message.AddVector3(transform.position);
 		message.AddQuaternion(transform.rotation);
+
+		Debug.Log(myCamera.transform.forward + ", " + transform.position + ", " + transform.rotation);
 
 		NetworkManager.Singleton.Client.Send(message);
 	}
