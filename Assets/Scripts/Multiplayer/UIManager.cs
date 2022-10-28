@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using static References;
 
 public class UIManager : MonoBehaviour
 {
@@ -95,6 +96,9 @@ public class UIManager : MonoBehaviour
 	{
 		SceneManager.LoadScene("Main Menu");
 	}
+
+	private static localPlayerData _myPlayer;
+
 
 	public void SendName()
 	{

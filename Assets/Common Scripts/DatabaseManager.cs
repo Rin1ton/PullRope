@@ -24,7 +24,6 @@ public static class DatabaseManager
 	{
 		get
 		{
-            UpdateUser(_myPlayer.username);
 			return _myPlayer;
 		}
 		set
@@ -32,6 +31,16 @@ public static class DatabaseManager
 			_myPlayer = value;
             UpdateDatabase(_myPlayer);
 		}
+	}
+
+    public static void UnlockSkin(string skinName)
+    {
+        //IMPLEMENT: function to update database with the input skin unlocked
+    }
+
+    public static void EquipSkin(string skinName)
+    {
+		//IMPLEMENT: function to update database with the input skin equipped
 	}
 
 	public static string AttemptLogin(string username, string password) // Try to log into server using a username and password. User object will be updated with player data from server
@@ -209,4 +218,5 @@ public static class DatabaseManager
         }
         return output;
     }
+
 }
