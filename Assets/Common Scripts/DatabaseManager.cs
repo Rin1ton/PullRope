@@ -33,15 +33,85 @@ public static class DatabaseManager
 		}
 	}
 
-    public static void UnlockSkin(string skinName)
+    public static void UnlockSkin(string skinName) //function to update database with the input skin unlocked
     {
-        //IMPLEMENT: function to update database with the input skin unlocked
+        _myPlayer = DatabaseManager.MyPlayer; // Update myPlayer with current database info
+
+        if (skinName == "cosmetic_copper") // Check to see if skin exists, if so, mark it as earned
+        {
+            _myPlayer.cosmetic_copper = 1;
+        }
+        else if (skinName == "cosmetic_dirt")
+        {
+            _myPlayer.cosmetic_dirt = 1;
+        }
+        else if (skinName == "cosmetic_gold")
+        {
+            _myPlayer.cosmetic_gold = 1;
+        }
+        else if (skinName == "cosmetic_grass")
+        {
+            _myPlayer.cosmetic_grass = 1;
+        }
+        else if (skinName == "cosmetic_matrix")
+        {
+            _myPlayer.cosmetic_matrix = 1;
+        }
+        else if (skinName == "cosmetic_purple")
+        {
+            _myPlayer.cosmetic_purple = 1;
+        }
+        else if (skinName == "cosmetic_sapphire")
+        {
+            _myPlayer.cosmetic_sapphire = 1;
+        }
+        else if (skinName == "cosmetic_sus")
+        {
+            _myPlayer.cosmetic_sus = 1;
+        }
+
+        DatabaseManager.MyPlayer = _myPlayer; // Add the information to the database
     }
 
-    public static void EquipSkin(string skinName)
+    public static void EquipSkin(string skinName) //function to update database with the input skin equipped
     {
-		//IMPLEMENT: function to update database with the input skin equipped
-	}
+        _myPlayer = DatabaseManager.MyPlayer; // Update myPlayer with current database info
+
+        if (skinName == "cosmetic_copper") // Check to see if skin exists, if so, equip it
+        {
+            _myPlayer.equipped = skinName;
+        }
+        else if (skinName == "cosmetic_dirt")
+        {
+            _myPlayer.equipped = skinName;
+        }
+        else if (skinName == "cosmetic_gold")
+        {
+            _myPlayer.equipped = skinName;
+        }
+        else if (skinName == "cosmetic_grass")
+        {
+            _myPlayer.equipped = skinName;
+        }
+        else if (skinName == "cosmetic_matrix")
+        {
+            _myPlayer.equipped = skinName;
+        }
+        else if (skinName == "cosmetic_purple")
+        {
+            _myPlayer.equipped = skinName;
+        }
+        else if (skinName == "cosmetic_sapphire")
+        {
+            _myPlayer.equipped = skinName;
+        }
+        else if (skinName == "cosmetic_sus")
+        {
+            _myPlayer.equipped = skinName;
+        }
+
+        DatabaseManager.MyPlayer = _myPlayer; // Add the information to the database
+    }
 
 	public static string AttemptLogin(string username, string password) // Try to log into server using a username and password. User object will be updated with player data from server
 	{
