@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class CoinLogic : MonoBehaviour
 {
     GameObject player;
-    
+    private References.localPlayerData _myPlayer;
+
+    int coinAmount;
     void Start()
     {
         player = References.thePlayer;
@@ -15,6 +17,9 @@ public class CoinLogic : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        _myPlayer = DatabaseManager.MyPlayer;
+        _myPlayer.coincount += 1;
+        DatabaseManager.MyPlayer = _myPlayer;
         Destroy(this.gameObject);
     }
 
