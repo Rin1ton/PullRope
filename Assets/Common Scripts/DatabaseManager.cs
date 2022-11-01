@@ -278,7 +278,7 @@ public static class DatabaseManager
 
         var nId = command.ExecuteScalar();
 
-        if (nId == null) // If user does not exist
+        if (nId == null && !string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password)) // If user does not exist
         {
             query = "insert into prData values(@username, @password, 0, 'skin_default', 0, 0, 0, 0, 0, 0, 0, 0);"; // Insert default values + user and pass
             command = new MySqlCommand(query, connection);
@@ -292,6 +292,14 @@ public static class DatabaseManager
         else
         {
             output = "Username already taken.";
+        }
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            output = "Username is invalid.";
+        }
+        else if (!string.IsNullOrWhiteSpace(password))
+        {
+            output = "Password is invalid.";
         }
         return output;
     }
