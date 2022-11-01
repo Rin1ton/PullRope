@@ -33,6 +33,13 @@ public static class DatabaseManager
 		}
 	}
 
+    public static void AdjustCoins(int coinChange) // Adjust the amount of coins the player has (send negative value to subtract)
+    {
+        _myPlayer = DatabaseManager.MyPlayer;
+        _myPlayer.coincount += coinChange;
+        DatabaseManager.MyPlayer = _myPlayer;
+    }
+
     public static void UnlockSkin(string skinName) //function to update database with the input skin unlocked
     {
         _myPlayer = DatabaseManager.MyPlayer; // Update myPlayer with current database info
@@ -271,7 +278,7 @@ public static class DatabaseManager
 
         var nId = command.ExecuteScalar();
 
-        if (nId == null) // If user does not exist
+        if (nId == null && !string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password)) // If user does not exist
         {
             query = "insert into prData values(@username, @password, 0, 'skin_default', 0, 0, 0, 0, 0, 0, 0, 0);"; // Insert default values + user and pass
             command = new MySqlCommand(query, connection);
@@ -285,6 +292,14 @@ public static class DatabaseManager
         else
         {
             output = "Username already taken.";
+        }
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            output = "Username is invalid.";
+        }
+        else if (!string.IsNullOrWhiteSpace(password))
+        {
+            output = "Password is invalid.";
         }
         return output;
     }
