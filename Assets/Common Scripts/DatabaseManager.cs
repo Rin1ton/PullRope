@@ -33,6 +33,13 @@ public static class DatabaseManager
 		}
 	}
 
+    public static void AdjustCoins(int coinChange) // Adjust the amount of coins the player has (send negative value to subtract)
+    {
+        _myPlayer = DatabaseManager.MyPlayer;
+        _myPlayer.coincount += coinChange;
+        DatabaseManager.MyPlayer = _myPlayer;
+    }
+
     public static void UnlockSkin(string skinName) //function to update database with the input skin unlocked
     {
         _myPlayer = DatabaseManager.MyPlayer; // Update myPlayer with current database info
