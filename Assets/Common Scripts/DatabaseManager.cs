@@ -274,11 +274,27 @@ public static class DatabaseManager
         query = "SELECT password FROM prData WHERE username = @username"; // Get password from user object
         command = new MySqlCommand(query, connection);
 
-        command.Parameters.AddWithValue("@username", username);
+        for (int i = 0; i < username.Length; i++) // For length of username
+        {
+            if (username[i] == ' ' || username[i] == ';' || username[i] == '*') // If username has invalid letter
+            {
+                return "Invalid username."; // Cancel process
+            }
+        }
+
+        for (int i = 0; i < pass.Length; i++) // For length of password
+        {
+            if (pass[i] == ' ' || pass[i] == ';' || pass[i] == '*') // If password has invalid letter
+            {
+                return "Invalid password."; // Cancel process
+            }
+        }
+
+        command.Parameters.AddWithValue("@username", username); // Only valid usernames get to this point
 
         var nId = command.ExecuteScalar();
 
-        if (nId == null && !string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password)) // If user does not exist
+        if (nId == null && !string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(pass)) // If user does not exist OR the username or password are blank
         {
             query = "insert into prData values(@username, @password, 0, 'skin_default', 0, 0, 0, 0, 0, 0, 0, 0);"; // Insert default values + user and pass
             command = new MySqlCommand(query, connection);
