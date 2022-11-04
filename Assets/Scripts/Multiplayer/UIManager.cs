@@ -114,6 +114,7 @@ public class UIManager : MonoBehaviour
 	{
 		Message message = Message.Create(MessageSendMode.Reliable, ClientToServerId.name);
 		message.AddString(DatabaseManager.MyPlayer.username);
+		message.AddString(References.currentSkinName);
 		NetworkManager.Singleton.Client.Send(message);
 	}
 

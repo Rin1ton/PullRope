@@ -47,6 +47,25 @@ public class Player : MonoBehaviour
 		list.Add(id, player);
 	}
 
+	[MessageHandler((ushort)ServerToClientId.playerSpawned)]
+	private static void SpawnPlayer(Message message)
+	{
+		Spawn(message.GetUShort(), message.GetString(), message.GetVector3(), message.GetString());
+	}
+
+	[MessageHandler((ushort)ServerToClientId.playerTransform)]
+	private static void SetTransform(Message message)
+	{
+		if (list.TryGetValue(message.GetUShort(), out Player player) && !player.IsLocal)
+			player.Move(message.GetVector3(), message.GetVector3(), message.GetQuaternion());
+	}
+
+	private void Move(Vector3 camera, Vector3 position, Quaternion rotation)
+	{
+		transform.position = position;
+		transform.rotation = rotation;
+	}
+
 	private static Material SetRemotePlayerSkin(string skinName)
 	{
 		switch (skinName)
@@ -71,24 +90,4 @@ public class Player : MonoBehaviour
 				return References.currentSkin;
 		}
 	}
-
-	[MessageHandler((ushort)ServerToClientId.playerSpawned)]
-	private static void SpawnPlayer(Message message)
-	{
-		Spawn(message.GetUShort(), message.GetString(), message.GetVector3(), message.GetString());
-	}
-
-	[MessageHandler((ushort)ServerToClientId.playerTransform)]
-	private static void SetTransform(Message message)
-	{
-		if (list.TryGetValue(message.GetUShort(), out Player player) && !player.IsLocal)
-			player.Move(message.GetVector3(), message.GetVector3(), message.GetQuaternion());
-	}
-
-	private void Move(Vector3 camera, Vector3 position, Quaternion rotation)
-	{
-		transform.position = position;
-		transform.rotation = rotation;
-	}
-
 }
