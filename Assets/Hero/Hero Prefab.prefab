@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 4304690884127590948}
   - component: {fileID: 5916392581871812159}
   - component: {fileID: 7707664387869451042}
+  - component: {fileID: -8801867845687291377}
   m_Layer: 3
   m_Name: Hero Prefab
   m_TagString: Untagged
@@ -147,7 +148,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c5657e38321447546b3b1556dead9a7f, type: 2}
+  - {fileID: 2100000, guid: 9724114feb7260b468571698b47655bb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -223,5 +224,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d8c796f52cfa16429405dde9d9f7c54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8801867845687291377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9059571477339505127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71b01af85a546441a1ec771cb027e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
