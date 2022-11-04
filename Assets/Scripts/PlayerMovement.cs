@@ -421,8 +421,6 @@ public class PlayerMovement : MonoBehaviour
 		message.AddVector3(transform.position);
 		message.AddQuaternion(transform.rotation);
 
-		Debug.Log(myCamera.transform.forward + ", " + transform.position + ", " + transform.rotation);
-
 		NetworkManager.Singleton.Client.Send(message);
 	}
 

@@ -67,18 +67,9 @@ public class NetworkManager : MonoBehaviour
 
 	public void Connect(string thisIp, string thisPort)
 	{
-		if (thisPort == "") {
-			thisPort = "7777";
-			port = "7777";
-		}
+		if (thisPort == "")	thisPort = "7777";
 
-		if (thisIp == "")
-		{
-			thisIp = "127.0.0.1";
-			ip = "127.0.0.1";
-		}
-
-		if (this)
+		if (thisIp == "") thisIp = "127.0.0.1";
 
 		Client.Connect($"{thisIp}:{thisPort}");
 		ip = thisIp;
