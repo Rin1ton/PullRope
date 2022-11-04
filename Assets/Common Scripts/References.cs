@@ -10,6 +10,7 @@ public static class References
 	public static float playerSensitivityY = 1;
 	public static Color32 CrosshairColor;
 	public static Material currentSkin;
+	public static string currentSkinName;
 	public struct localPlayerData
 	{
 		public string username;
