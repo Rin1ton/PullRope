@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 		list.Remove(Id);
 	}
 
-	public static void Spawn(ushort id, string username, Vector3 position)
+	public static void Spawn(ushort id, string username, Vector3 position, string mySkinName)
 	{
 		Player player;
 		if (id == NetworkManager.Singleton.Client.Id)
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
 	[MessageHandler((ushort)ServerToClientId.playerSpawned)]
 	private static void SpawnPlayer(Message message)
 	{
-		Spawn(message.GetUShort(), message.GetString(), message.GetVector3());
+		Spawn(message.GetUShort(), message.GetString(), message.GetVector3(), message.GetString());
 	}
 
 	[MessageHandler((ushort)ServerToClientId.playerTransform)]
