@@ -44,35 +44,35 @@ public static class DatabaseManager
     {
         _myPlayer = DatabaseManager.MyPlayer; // Update myPlayer with current database info
 
-        if (skinName == "cosmetic_copper") // Check to see if skin exists, if so, mark it as earned
+        if (skinName == "skin_copper") // Check to see if skin exists, if so, mark it as earned
         {
             _myPlayer.cosmetic_copper = 1;
         }
-        else if (skinName == "cosmetic_dirt")
+        else if (skinName == "skin_dirt")
         {
             _myPlayer.cosmetic_dirt = 1;
         }
-        else if (skinName == "cosmetic_gold")
+        else if (skinName == "skin_gold")
         {
             _myPlayer.cosmetic_gold = 1;
         }
-        else if (skinName == "cosmetic_grass")
+        else if (skinName == "skin_grass")
         {
             _myPlayer.cosmetic_grass = 1;
         }
-        else if (skinName == "cosmetic_matrix")
+        else if (skinName == "skin_matrix")
         {
             _myPlayer.cosmetic_matrix = 1;
         }
-        else if (skinName == "cosmetic_purple")
+        else if (skinName == "skin_purple")
         {
             _myPlayer.cosmetic_purple = 1;
         }
-        else if (skinName == "cosmetic_sapphire")
+        else if (skinName == "skin_sapphire")
         {
             _myPlayer.cosmetic_sapphire = 1;
         }
-        else if (skinName == "cosmetic_sus")
+        else if (skinName == "skin_sus")
         {
             _myPlayer.cosmetic_sus = 1;
         }
@@ -84,19 +84,19 @@ public static class DatabaseManager
     {
         _myPlayer = DatabaseManager.MyPlayer; // Update myPlayer with current database info
 
-        if (skinName == "cosmetic_copper") // Check to see if skin exists, if so, equip it
+        if (skinName == "skin_copper") // Check to see if skin exists, if so, equip it
         {
             _myPlayer.equipped = skinName;
         }
-        else if (skinName == "cosmetic_dirt")
+        else if (skinName == "skin_dirt")
         {
             _myPlayer.equipped = skinName;
         }
-        else if (skinName == "cosmetic_gold")
+        else if (skinName == "skin_gold")
         {
             _myPlayer.equipped = skinName;
         }
-        else if (skinName == "cosmetic_grass")
+        else if (skinName == "skin_grass")
         {
             _myPlayer.equipped = skinName;
         }
@@ -104,15 +104,15 @@ public static class DatabaseManager
         {
             _myPlayer.equipped = skinName;
         }
-        else if (skinName == "cosmetic_purple")
+        else if (skinName == "skin_purple")
         {
             _myPlayer.equipped = skinName;
         }
-        else if (skinName == "cosmetic_sapphire")
+        else if (skinName == "skin_sapphire")
         {
             _myPlayer.equipped = skinName;
         }
-        else if (skinName == "cosmetic_sus")
+        else if (skinName == "skin_sus")
         {
             _myPlayer.equipped = skinName;
         }
