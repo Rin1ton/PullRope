@@ -100,7 +100,7 @@ public static class DatabaseManager
         {
             _myPlayer.equipped = skinName;
         }
-        else if (skinName == "cosmetic_matrix")
+        else if (skinName == "skin_matrix")
         {
             _myPlayer.equipped = skinName;
         }
