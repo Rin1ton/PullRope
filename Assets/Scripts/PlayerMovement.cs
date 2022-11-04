@@ -413,7 +413,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void SendPosition()
 	{
-		Message message = Message.Create(MessageSendMode.Reliable, ClientToServerId.playerTransform);
+		Message message = Message.Create(MessageSendMode.Unreliable, ClientToServerId.playerTransform);
 		message.AddUShort(player.Id);
 
 		//movement
