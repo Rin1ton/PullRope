@@ -586,7 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 612ddcfac9a58c743aa9c91ae3f60160, type: 2}
+  m_Material: {fileID: 2100000, guid: 52fa6ff103fbdc64bae7dd278b94e285, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -2817,14 +2817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 216eef13141d456439b9560e80368c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skin1: {fileID: 2100000, guid: c5657e38321447546b3b1556dead9a7f, type: 2}
-  skin2: {fileID: 2100000, guid: 8457dde4954605242a769306e1ba2294, type: 2}
-  skin3: {fileID: 2100000, guid: 15c8ba6122f02e441b64a9056f50786f, type: 2}
-  skin4: {fileID: 2100000, guid: df6be323856266a4c8b23e0bc1b80c89, type: 2}
-  skin5: {fileID: 2100000, guid: 2e02932a0f0b93a4584d0f26ef307c60, type: 2}
-  skin6: {fileID: 2100000, guid: 612ddcfac9a58c743aa9c91ae3f60160, type: 2}
-  skin7: {fileID: 2100000, guid: 20ef11c2f305b4b479ea054af58875b6, type: 2}
-  skin8: {fileID: 2100000, guid: 9724114feb7260b468571698b47655bb, type: 2}
   player: {fileID: 9059571477339505127, guid: 300e2d325a528094eb44fddbfdbc5988, type: 3}
   icon: {fileID: 184138451}
 --- !u!1 &1146819114
@@ -3788,7 +3780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 2e02932a0f0b93a4584d0f26ef307c60, type: 2}
+  m_Material: {fileID: 2100000, guid: a69778ce6334ab34e95767d5a8c7dfd1, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -4265,7 +4257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 20ef11c2f305b4b479ea054af58875b6, type: 2}
+  m_Material: {fileID: 2100000, guid: ced38ad38630c5e4fb1b7ce52e0f6e10, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}

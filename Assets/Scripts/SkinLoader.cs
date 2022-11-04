@@ -16,9 +16,22 @@ public class SkinLoader : MonoBehaviour
     [SerializeField] public static Material skin7;
     [SerializeField] public static Material skin8;
     [SerializeField] public static Material defaultSkin;
-    [SerializeField] public static GameObject player;
-    [SerializeField] public static GameObject icon;
+    [SerializeField] public GameObject player;
+    [SerializeField] public GameObject icon;
 
+    private void Awake()
+    {
+        defaultSkin = Resources.Load("skin_default") as Material;
+        skin1 = Resources.Load("skin_dirt") as Material;
+        skin2 = Resources.Load("skin_copper") as Material;
+        skin3 = Resources.Load("skin_gold") as Material;
+        skin4 = Resources.Load("skin_sapphire") as Material;
+        skin5 = Resources.Load("skin_purple") as Material;
+        skin6 = Resources.Load("skin_grass") as Material;
+        skin7 = Resources.Load("skin_matrix") as Material;
+        skin8 = Resources.Load("skin_sus") as Material;
+        
+    }
 
     public void Skin1ButtonClicked()//Dirt
     {
