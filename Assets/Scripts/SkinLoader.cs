@@ -15,6 +15,7 @@ public class SkinLoader : MonoBehaviour
     [SerializeField] public static Material skin6;
     [SerializeField] public static Material skin7;
     [SerializeField] public static Material skin8;
+    [SerializeField] public static Material defaultSkin;
     [SerializeField] public static GameObject player;
     [SerializeField] public static GameObject icon;
 
