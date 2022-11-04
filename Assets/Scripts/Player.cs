@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 	public bool IsLocal { get; private set; }
 
 	private string username;
+	private string mySkin;
 
 	private void OnDestroy()
 	{
@@ -26,20 +27,33 @@ public class Player : MonoBehaviour
 		{
 			//spawn local player
 			player = Instantiate(GameLogic.Singleton.LocalPlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
+			player.gameObject.GetComponent<MeshRenderer>().material = References.currentSkin;
 			player.IsLocal = true;
 		}
 		else
 		{
 			//spawn remote players
 			player = Instantiate(GameLogic.Singleton.PlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
+
 			player.IsLocal = false;
 		}
 
 		player.name = $"Player {id} ({(string.IsNullOrEmpty(username) ? "Guest" : username)})";
 		player.Id = id;
 		player.username = username;
+		player.mySkin = mySkinName;
 
 		list.Add(id, player);
+	}
+
+	private Material SetRemotePlayerSking(string skinName)
+	{
+		switch (skinName)
+		{
+			case "cosmetic_dirt":
+				return SkinLoader.skin1;
+			case ""
+		}
 	}
 
 	[MessageHandler((ushort)ServerToClientId.playerSpawned)]
