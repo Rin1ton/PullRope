@@ -41,9 +41,19 @@ public class UIManager : MonoBehaviour
 	private void Awake()
 	{
 		Singleton = this;
-	}
 
-	public void ConnectClicked()
+        SkinLoader.defaultSkin = Resources.Load("skin_default") as Material;
+        SkinLoader.skin1 = Resources.Load("skin_dirt") as Material;
+        SkinLoader.skin2 = Resources.Load("skin_copper") as Material;
+        SkinLoader.skin3 = Resources.Load("skin_gold") as Material;
+        SkinLoader.skin4 = Resources.Load("skin_sapphire") as Material;
+        SkinLoader.skin5 = Resources.Load("skin_purple") as Material;
+        SkinLoader.skin6 = Resources.Load("skin_grass") as Material;
+        SkinLoader.skin7 = Resources.Load("skin_matrix") as Material;
+        SkinLoader.skin8 = Resources.Load("skin_sus") as Material;
+    }
+  
+    public void ConnectClicked()
 	{
 		ipAddressField.interactable = false;
 		portField.interactable = false;
