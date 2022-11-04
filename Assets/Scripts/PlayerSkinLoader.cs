@@ -10,10 +10,13 @@ public class PlayerSkinLoader : MonoBehaviour
     private References.localPlayerData _myPlayer;
 
     // Start is called before the first frame update
+    [SerializeField] public static Material defaultSkin;
+
     void Start()
     {
         player = References.thePlayer;
         skin = References.currentSkin;
+
 
         player.GetComponent<MeshRenderer>().material = skin;
     }

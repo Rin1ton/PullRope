@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 	public bool IsLocal { get; private set; }
 
 	private string username;
+	private string mySkin;
 
 	private void OnDestroy()
 	{
@@ -26,20 +27,49 @@ public class Player : MonoBehaviour
 		{
 			//spawn local player
 			player = Instantiate(GameLogic.Singleton.LocalPlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
+			player.gameObject.GetComponent<MeshRenderer>().material = References.currentSkin;
 			player.IsLocal = true;
 		}
 		else
 		{
 			//spawn remote players
 			player = Instantiate(GameLogic.Singleton.PlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
+			if (SetRemotePlayerSkin(mySkinName) != null)
+				player.GetComponent<MeshRenderer>().material = SetRemotePlayerSkin(mySkinName);
 			player.IsLocal = false;
 		}
 
 		player.name = $"Player {id} ({(string.IsNullOrEmpty(username) ? "Guest" : username)})";
 		player.Id = id;
 		player.username = username;
+		player.mySkin = mySkinName;
 
 		list.Add(id, player);
+	}
+
+	private static Material SetRemotePlayerSkin(string skinName)
+	{
+		switch (skinName)
+		{
+			case "skin_dirt":
+				return SkinLoader.skin1;
+			case "skin_copper":
+				return SkinLoader.skin2;
+			case "skin_gold":
+				return SkinLoader.skin3;
+			case "skin_sapphire":
+				return SkinLoader.skin4;
+			case "skin_purple":
+				return SkinLoader.skin5;
+			case "skin_grass":
+				return SkinLoader.skin6;
+			case "skin_matrix":
+				return SkinLoader.skin7;
+			case "skin_sus":
+				return SkinLoader.skin8;
+			default:
+				return References.currentSkin;
+		}
 	}
 
 	[MessageHandler((ushort)ServerToClientId.playerSpawned)]
