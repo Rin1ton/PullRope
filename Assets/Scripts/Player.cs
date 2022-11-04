@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 		{
 			//spawn local player
 			player = Instantiate(GameLogic.Singleton.LocalPlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
-			player.gameObject.GetComponent<MeshRenderer>().material = References.currentSkin;
+			player.transform.GetChild(0).GetComponent<MeshRenderer>().material = References.currentSkin;
 			player.IsLocal = true;
 		}
 		else
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
 			//spawn remote players
 			player = Instantiate(GameLogic.Singleton.PlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
 			if (SetRemotePlayerSkin(mySkinName) != null)
-				player.GetComponent<MeshRenderer>().material = SetRemotePlayerSkin(mySkinName);
+				player.transform.GetChild(0).GetComponent<MeshRenderer>().material = SetRemotePlayerSkin(mySkinName);
 			player.IsLocal = false;
 		}
 
