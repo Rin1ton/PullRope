@@ -51,6 +51,10 @@ public class UIManager : MonoBehaviour
         SkinLoader.skin6 = Resources.Load("skin_grass") as Material;
         SkinLoader.skin7 = Resources.Load("skin_matrix") as Material;
         SkinLoader.skin8 = Resources.Load("skin_sus") as Material;
+
+		Debug.Log("Implement loading skin from database");
+		currentSkin = SkinLoader.defaultSkin;
+		currentSkinName = "skin_default";
     }
   
     public void ConnectClicked()
