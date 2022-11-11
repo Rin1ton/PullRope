@@ -40,6 +40,46 @@ public static class DatabaseManager
         DatabaseManager.MyPlayer = _myPlayer;
     }
 
+    private static string Encrypt(string original) // Encrypt the inserted string
+    {
+        string encrypted = "";
+        int length = original.Length - 1;
+
+        for (int i = 0; i < length + 1; i++)
+        {
+            if (original[length - i] == 'a')
+            {
+                encrypted += "*";
+            }
+            else
+            {
+                encrypted += original[length - i];
+            }
+        }
+
+        return encrypted;
+    }
+
+    private static string Decrypt(string original) // Decrypt the inserted string
+    {
+        string decrypted = "";
+        int length = original.Length - 1;
+
+        for (int i = 0; i < length + 1; i++)
+        {
+            if (original[length - i] == '*')
+            {
+                decrypted += "a";
+            }
+            else
+            {
+                decrypted += original[length - i];
+            }
+        }
+
+        return decrypted;
+    }
+
     public static void UnlockSkin(string skinName) //function to update database with the input skin unlocked
     {
         _myPlayer = DatabaseManager.MyPlayer; // Update myPlayer with current database info
@@ -161,7 +201,7 @@ public static class DatabaseManager
         while (reader.Read()) // Read all information from that particular user and insert it into the newPlayer object
         {
             newPlayer.username = reader["username"].ToString();
-            newPlayer.password = reader["password"].ToString();
+            newPlayer.password = Decrypt(reader["password"].ToString());
             newPlayer.coincount = Int32.Parse(reader["coincount"].ToString());
             newPlayer.equipped = reader["equipped"].ToString();
             newPlayer.cosmetic_copper = Int32.Parse(reader["cosmetic_copper"].ToString());
@@ -240,7 +280,7 @@ public static class DatabaseManager
         {
             MySqlDataReader reader = command.ExecuteReader();
             reader.Read();
-            if (pass == reader["password"].ToString()) // If password is correct
+            if (pass == Decrypt(reader["password"].ToString())) // If password is correct
             {
                 return true;
             }
@@ -300,7 +340,7 @@ public static class DatabaseManager
             command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@username", username);
-            command.Parameters.AddWithValue("@password", pass);
+            command.Parameters.AddWithValue("@password", Encrypt(pass));
 
             command.ExecuteNonQuery(); // Execute Query, Create New Account
             connection.Close(); // Close connection
@@ -313,7 +353,7 @@ public static class DatabaseManager
         {
             output = "Username is invalid.";
         }
-        else if (!string.IsNullOrWhiteSpace(password))
+        else if (string.IsNullOrWhiteSpace(password))
         {
             output = "Password is invalid.";
         }
