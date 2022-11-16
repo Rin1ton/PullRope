@@ -34,8 +34,8 @@ public class Player : MonoBehaviour
 		{
 			//spawn remote players
 			player = Instantiate(GameLogic.Singleton.PlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
-			if (SetRemotePlayerSkin(mySkinName) != null)
-				player.transform.GetChild(0).GetComponent<MeshRenderer>().material = SetRemotePlayerSkin(mySkinName);
+			if (SkinLoader.SkinNameToMaterial(mySkinName) != null)
+				player.transform.GetChild(0).GetComponent<MeshRenderer>().material = SkinLoader.SkinNameToMaterial(mySkinName);
 			player.IsLocal = false;
 		}
 
@@ -66,28 +66,4 @@ public class Player : MonoBehaviour
 		transform.rotation = rotation;
 	}
 
-	private static Material SetRemotePlayerSkin(string skinName)
-	{
-		switch (skinName)
-		{
-			case "skin_dirt":
-				return SkinLoader.skin1;
-			case "skin_copper":
-				return SkinLoader.skin2;
-			case "skin_gold":
-				return SkinLoader.skin3;
-			case "skin_sapphire":
-				return SkinLoader.skin4;
-			case "skin_purple":
-				return SkinLoader.skin5;
-			case "skin_grass":
-				return SkinLoader.skin6;
-			case "skin_matrix":
-				return SkinLoader.skin7;
-			case "skin_sus":
-				return SkinLoader.skin8;
-			default:
-				return References.currentSkin;
-		}
-	}
 }

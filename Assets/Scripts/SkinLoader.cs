@@ -21,7 +21,7 @@ public class SkinLoader : MonoBehaviour
 
     private void Awake()
     {
-        defaultSkin = Resources.Load("skin_default") as Material;
+        /*defaultSkin = Resources.Load("skin_default") as Material;
         skin1 = Resources.Load("skin_dirt") as Material;
         skin2 = Resources.Load("skin_copper") as Material;
         skin3 = Resources.Load("skin_gold") as Material;
@@ -30,10 +30,35 @@ public class SkinLoader : MonoBehaviour
         skin6 = Resources.Load("skin_grass") as Material;
         skin7 = Resources.Load("skin_matrix") as Material;
         skin8 = Resources.Load("skin_sus") as Material;
-        
+        */
     }
 
-    public void Skin1ButtonClicked()//Dirt
+	public static Material SkinNameToMaterial(string skinName)
+	{
+		switch (skinName)
+		{
+			case "skin_dirt":
+				return skin1;
+			case "skin_copper":
+				return skin2;
+			case "skin_gold":
+				return skin3;
+			case "skin_sapphire":
+				return skin4;
+			case "skin_purple":
+				return skin5;
+			case "skin_grass":
+				return skin6;
+			case "skin_matrix":
+				return skin7;
+			case "skin_sus":
+				return skin8;
+			default:
+				return defaultSkin;
+		}
+	}
+
+	public void Skin1ButtonClicked()//Dirt
     {
         player.GetComponent<MeshRenderer>().material = skin1;
         icon.GetComponent<MeshRenderer>().material = skin1;

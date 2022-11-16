@@ -38,6 +38,9 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private InputField ipAddressField;
 	[SerializeField] private InputField portField;
 
+	// UIManager is in the very first menu of the very first scene when the game is started.
+	// if something needs to be initialized from the beginning, it should be done from this
+	// awake function.
 	private void Awake()
 	{
 		Singleton = this;
@@ -53,8 +56,8 @@ public class UIManager : MonoBehaviour
         SkinLoader.skin8 = Resources.Load("skin_sus") as Material;
 
 		Debug.Log("Implement loading skin from database");
-		currentSkin = SkinLoader.defaultSkin;
 		currentSkinName = "skin_default";
+		currentSkin = SkinLoader.SkinNameToMaterial("skin_default");
     }
   
     public void ConnectClicked()
@@ -68,11 +71,23 @@ public class UIManager : MonoBehaviour
 
 	public void SignInClicked()
 	{
-		string loginMessage = DatabaseManager.AttemptLogin(usernameField.text, passwordField.text);
-		messageBox.text = loginMessage;
+		if (usernameField.text == "Guest")
+		{
 
-		if (loginMessage == "Login Successful!")
-			SceneManager.LoadScene("Main Menu");
+		} else
+		{
+			string loginMessage = DatabaseManager.AttemptLogin(usernameField.text, passwordField.text);
+			messageBox.text = loginMessage; 
+			if (loginMessage == "Login Successful!")
+			{
+				//set our skin
+				currentSkinName = DatabaseManager.MyPlayer.equipped;
+				currentSkin = SkinLoader.SkinNameToMaterial(DatabaseManager.MyPlayer.equipped);
+
+				SceneManager.LoadScene("Main Menu");
+			}
+		}
+
 	}
 
 	public void CreateAccountClicked()
@@ -86,7 +101,6 @@ public class UIManager : MonoBehaviour
 
 		//string accCreateMessage = "Account Created!";
 		string accCreateMessage = DatabaseManager.AttemptCreate(usernameCreateField.text, passwordCreateField.text);
-		Debug.Log("TBI Account Creation");
 		messageBox.text = accCreateMessage;
 	}
 
