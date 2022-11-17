@@ -162,7 +162,12 @@ public static class DatabaseManager
 
 	public static string AttemptLogin(string username, string password) // Try to log into server using a username and password. User object will be updated with player data from server
 	{
-		if (CheckDatabase(username, password)) // If username and password are correct
+        if (username == "Guest" || username == "guest" || username == "GUEST") // If guest login
+        {
+            MyPlayer = CreateDummy(); // Creates a guest account
+            return "Logging in on guest account.";
+        }
+        if (CheckDatabase(username, password)) // If username and password are correct
 		{
             MyPlayer = UpdateUser(username); // Set the myPlayer object to the data from the database
             return "Login Successful!";
@@ -173,6 +178,30 @@ public static class DatabaseManager
 		}
 
 	}
+
+    public static localPlayerData CreateDummy() // Creates a "fake" player account
+    {
+        localPlayerData newPlayer = new localPlayerData();
+
+        // Randomly generate username
+
+        string dummyUsername = "ph";
+
+        newPlayer.username = dummyUsername;
+        newPlayer.password = "N/A";
+        newPlayer.coincount = 0;
+        newPlayer.equipped = "skin_default";
+        newPlayer.cosmetic_copper = 0;
+        newPlayer.cosmetic_dirt = 0;
+        newPlayer.cosmetic_gold = 0;
+        newPlayer.cosmetic_grass = 0;
+        newPlayer.cosmetic_matrix = 0;
+        newPlayer.cosmetic_purple = 0;
+        newPlayer.cosmetic_sapphire = 0;
+        newPlayer.cosmetic_sus = 0;
+
+        return newPlayer;
+    }
 
 	public static localPlayerData UpdateUser(string username) // Update user information to that of the database
     {
@@ -313,6 +342,11 @@ public static class DatabaseManager
 
         query = "SELECT password FROM prData WHERE username = @username"; // Get password from user object
         command = new MySqlCommand(query, connection);
+
+        if (username == "Guest" || username == "guest" || username == "GUEST") // If trying to overwrite guest user
+        {
+            return "Invalid username.";
+        }
 
         for (int i = 0; i < username.Length; i++) // For length of username
         {
