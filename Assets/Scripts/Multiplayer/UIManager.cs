@@ -71,21 +71,18 @@ public class UIManager : MonoBehaviour
 
 	public void SignInClicked()
 	{
-		if (usernameField.text == "Guest")
-		{
+		// this line will pull the data for the user from the database, if it exists,
+		// and put it into the DatabaseManager.MyPlayer variable
+		string loginMessage = DatabaseManager.AttemptLogin(usernameField.text, passwordField.text);
 
-		} else
+		messageBox.text = loginMessage; 
+		if (loginMessage == "Login Successful!")
 		{
-			string loginMessage = DatabaseManager.AttemptLogin(usernameField.text, passwordField.text);
-			messageBox.text = loginMessage; 
-			if (loginMessage == "Login Successful!")
-			{
-				//set our skin
-				currentSkinName = DatabaseManager.MyPlayer.equipped;
-				currentSkin = SkinLoader.SkinNameToMaterial(DatabaseManager.MyPlayer.equipped);
+			//set our skin
+			currentSkinName = DatabaseManager.MyPlayer.equipped;
+			currentSkin = SkinLoader.SkinNameToMaterial(DatabaseManager.MyPlayer.equipped);
 
-				SceneManager.LoadScene("Main Menu");
-			}
+			SceneManager.LoadScene("Main Menu");
 		}
 
 	}

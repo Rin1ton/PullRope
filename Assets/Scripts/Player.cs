@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
 	private string username;
 	private string mySkin;
 
+	[SerializeField] private Interpolator interpolator;
+
 	private void OnDestroy()
 	{
 		list.Remove(Id);
@@ -50,19 +52,24 @@ public class Player : MonoBehaviour
 	[MessageHandler((ushort)ServerToClientId.playerSpawned)]
 	private static void SpawnPlayer(Message message)
 	{
+		//		Player ID			 Player Username	 Transform.position     playerSkinName
 		Spawn(message.GetUShort(), message.GetString(), message.GetVector3(), message.GetString());
 	}
 
 	[MessageHandler((ushort)ServerToClientId.playerTransform)]
 	private static void SetTransform(Message message)
 	{
+		//						Player ID
 		if (list.TryGetValue(message.GetUShort(), out Player player) && !player.IsLocal)
-			player.Move(message.GetVector3(), message.GetVector3(), message.GetQuaternion());
+			//				Server tick			Camera Forward		transform.position		transform.rotation
+			player.Move(message.GetUShort(), message.GetVector3(), message.GetVector3(), message.GetQuaternion());
 	}
 
-	private void Move(Vector3 camera, Vector3 position, Quaternion rotation)
+	private void Move(ushort tick, Vector3 camera, Vector3 position, Quaternion rotation)
 	{
-		transform.position = position;
+		//transform.position = position;
+
+		interpolator.NewUpdate(tick, position);
 		transform.rotation = rotation;
 	}
 
