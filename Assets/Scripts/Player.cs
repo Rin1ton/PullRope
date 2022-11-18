@@ -67,9 +67,8 @@ public class Player : MonoBehaviour
 
 	private void Move(ushort tick, Vector3 camera, Vector3 position, Quaternion rotation)
 	{
-		//transform.position = position;
-
-		interpolator.NewUpdate(tick, position);
+		transform.position = position;
+		//interpolator.NewUpdate(tick, position);
 		transform.rotation = rotation;
 	}
 
