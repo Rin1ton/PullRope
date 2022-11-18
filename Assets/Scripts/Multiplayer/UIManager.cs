@@ -55,7 +55,6 @@ public class UIManager : MonoBehaviour
         SkinLoader.skin7 = Resources.Load("skin_matrix") as Material;
         SkinLoader.skin8 = Resources.Load("skin_sus") as Material;
 
-		Debug.Log("Implement loading skin from database");
 		currentSkinName = "skin_default";
 		currentSkin = SkinLoader.SkinNameToMaterial("skin_default");
     }
@@ -74,9 +73,9 @@ public class UIManager : MonoBehaviour
 		// this line will pull the data for the user from the database, if it exists,
 		// and put it into the DatabaseManager.MyPlayer variable
 		string loginMessage = DatabaseManager.AttemptLogin(usernameField.text, passwordField.text);
-
 		messageBox.text = loginMessage; 
-		if (loginMessage == "Login Successful!")
+
+		if (loginMessage == "Login Successful!" || loginMessage == "Logging in as Guest!")
 		{
 			//set our skin
 			currentSkinName = DatabaseManager.MyPlayer.equipped;
