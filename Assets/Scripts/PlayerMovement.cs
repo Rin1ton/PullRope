@@ -420,6 +420,7 @@ public class PlayerMovement : MonoBehaviour
 		message.AddVector3(myCamera.transform.forward);
 		message.AddVector3(transform.position);
 		message.AddQuaternion(transform.rotation);
+		message.AddVector3(myRB.velocity);
 
 		NetworkManager.Singleton.Client.Send(message);
 	}

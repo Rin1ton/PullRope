@@ -189,9 +189,48 @@ public static class DatabaseManager
 
 		// Randomly generate username
 
-		string dummyUsername = "ph";
+		//string dummyUsername = "ph";
 
-		newPlayer.username = dummyUsername;
+		string[] fakeUsernames = {
+			"Rock",
+			"Rat",
+			"Bone",
+			"Bulky Roll",
+			"Big Cheese",
+			"Stinky Binky",
+			"Blimp",
+			"Gob",
+			"Peacock",
+			"Kanye",
+			"Jesus Christ Himself",
+			"Orack Barama",
+			"Skrunko",
+			"Sam Serious Stone",
+			"Corben McFree",
+			"Mike Tyson",
+			"Morbius",
+			"BEan",
+			"Cynder",
+			"Griff the Grub",
+			"Bill Nye the Chill Guy",
+			"Krinko",
+			"Big Mac",
+			"two juicebox one straw",
+			"evaporated bean",
+			"cement-addicted",
+			"three toes mcgee",
+			"2006 toyota camry",
+			"ankle biter",
+			"Double Lettuce",
+			"Angry Preg-nocerous",
+			"Brian D",
+			"Bobo Denkirk",
+			"2006 toyota camry"
+		};
+
+		int nameIndex = UnityEngine.Random.Range(0, fakeUsernames.Length - 1);
+
+		newPlayer.username = fakeUsernames[nameIndex];
 		newPlayer.password = "N/A";
 		newPlayer.coincount = 0;
 		newPlayer.equipped = "skin_default";

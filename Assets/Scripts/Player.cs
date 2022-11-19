@@ -1,18 +1,23 @@
+using MySql.Data.MySqlClient;
 using Riptide;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
 	public static Dictionary<ushort, Player> list = new Dictionary<ushort, Player>();
+	[NonSerialized] public Rigidbody myRB;
+	[SerializeField] TextMeshPro myBillboard;
 
 	public ushort Id { get; private set; }
 	
 	//is this the local player?
 	public bool IsLocal { get; private set; }
 
-	private string username;
+	public string username { get; private set; }
 	private string mySkin;
 
 	[SerializeField] private Interpolator interpolator;
@@ -29,6 +34,7 @@ public class Player : MonoBehaviour
 		{
 			//spawn local player
 			player = Instantiate(GameLogic.Singleton.LocalPlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
+			References.thePlayer = player.gameObject;
 			player.transform.GetChild(0).GetComponent<MeshRenderer>().material = References.currentSkin;
 			player.IsLocal = true;
 		}
@@ -37,7 +43,12 @@ public class Player : MonoBehaviour
 			//spawn remote players
 			player = Instantiate(GameLogic.Singleton.PlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
 			if (SkinLoader.SkinNameToMaterial(mySkinName) != null)
+			{
 				player.transform.GetChild(0).GetComponent<MeshRenderer>().material = SkinLoader.SkinNameToMaterial(mySkinName);
+				Debug.LogWarning(mySkinName);
+			}
+			player.myBillboard.text = username;
+			player.myRB = player.transform.GetChild(0).GetComponent<Rigidbody>();
 			player.IsLocal = false;
 		}
 
@@ -61,15 +72,16 @@ public class Player : MonoBehaviour
 	{
 		//						Player ID
 		if (list.TryGetValue(message.GetUShort(), out Player player) && !player.IsLocal)
-			//				Server tick			Camera Forward		transform.position		transform.rotation
-			player.Move(message.GetUShort(), message.GetVector3(), message.GetVector3(), message.GetQuaternion());
+			//				Server tick			Camera Forward		transform.position		transform.rotation			velocity
+			player.Move(message.GetUShort(), message.GetVector3(), message.GetVector3(), message.GetQuaternion(), message.GetVector3());
 	}
 
-	private void Move(ushort tick, Vector3 camera, Vector3 position, Quaternion rotation)
+	private void Move(ushort tick, Vector3 camera, Vector3 position, Quaternion rotation, Vector3 velocity)
 	{
 		transform.position = position;
 		//interpolator.NewUpdate(tick, position);
 		transform.rotation = rotation;
+		myRB.velocity = velocity;
 	}
 
 }
