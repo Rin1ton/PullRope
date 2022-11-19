@@ -171,14 +171,21 @@ public static class DatabaseManager
 			MyPlayer = CreateDummy(); // Creates a guest account
 			return "Logging in as Guest!";
 		}
-		if (CheckDatabase(username, password)) // If username and password are correct
+
+		try
 		{
-			MyPlayer = UpdateUser(username); // Set the myPlayer object to the data from the database
-			return "Login Successful!";
-		}
-		else
+            if (CheckDatabase(username, password)) // If username and password are correct
+            {
+                MyPlayer = UpdateUser(username); // Set the myPlayer object to the data from the database
+                return "Login Successful!";
+            }
+            else
+            {
+                return "Incorrect Username and/or Password!";
+            }
+        }
 		{
-			return "Incorrect Username and/or Password!";
+			return "Please create a guest account.";
 		}
 
 	}
