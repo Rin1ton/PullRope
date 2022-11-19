@@ -172,7 +172,7 @@ public static class DatabaseManager
 			return "Logging in as Guest!";
 		}
 
-		try
+		try // If requires database usage
 		{
             if (CheckDatabase(username, password)) // If username and password are correct
             {
@@ -184,6 +184,7 @@ public static class DatabaseManager
                 return "Incorrect Username and/or Password!";
             }
         }
+		catch
 		{
 			return "Please create a guest account.";
 		}
