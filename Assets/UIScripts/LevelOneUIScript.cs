@@ -17,6 +17,8 @@ public class LevelOneUIScript : MonoBehaviour
 
     public UITimerScript timertext;
 
+    bool grantOnce = true;
+
 
     public static LevelOneUIScript instance = null;
 
@@ -34,6 +36,8 @@ public class LevelOneUIScript : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
 
         DontDestroyOnLoad(this.gameObject);
+
+        CoinGrantMonoplayer.RecordCurrentTime();
     }
     void Start()
     {
@@ -47,22 +51,28 @@ public class LevelOneUIScript : MonoBehaviour
     {
 
         Scene scene = SceneManager.GetActiveScene();
-       // Debug.Log("Name: " + scene.name);
+        // Debug.Log("Name: " + scene.name);
         if (scene.name == "End Screen")
         {
-          //  Debug.Log("End Screen");
+            //  Debug.Log("End Screen");
             EndScreenMenu.SetActive(true);
             Crosshair.SetActive(false);
             timertext.playing = false;
             UnityEngine.Cursor.lockState = CursorLockMode.None;
             UnityEngine.Cursor.visible = true;
 
+            if (grantOnce == true) // Only do this once per game
+            {
+                CoinGrantMonoplayer.EndGame();
+                grantOnce = false;
+            }
         }
 
         if (scene.name == "Main Menu")
         {
             timertext.reset = true;
             EndScreenMenu.SetActive(false);
+            grantOnce = true;
         }
 
 
