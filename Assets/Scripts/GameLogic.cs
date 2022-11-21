@@ -21,6 +21,7 @@ public class GameLogic : MonoBehaviour
 
 	public GameObject LocalPlayerPrefab => localPlayerPrefab;
 	public GameObject PlayerPrefab => playerPrefab;
+	public List<SpawnPoint> SpawnPoints = new List<SpawnPoint>();
 
 	[Header("Prefabs")]
 	[SerializeField] private GameObject localPlayerPrefab;

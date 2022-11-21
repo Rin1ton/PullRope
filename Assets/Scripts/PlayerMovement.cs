@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 	Vector3 moveInput = new Vector3();
 
 	//jump Stats
-	float jumpVelocity = 20;
+	float jumpVelocity = 10;
 	float timeSinceLastJump = 60;
 	float timeSinceBecameGrounded = 60;
 	bool wasGrounded = false;

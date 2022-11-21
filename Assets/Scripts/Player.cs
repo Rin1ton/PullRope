@@ -1,4 +1,5 @@
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.TeleTrust;
 using Riptide;
 using System;
 using System.Collections;
@@ -22,9 +23,24 @@ public class Player : MonoBehaviour
 
 	[SerializeField] private Interpolator interpolator;
 
+	private void Awake()
+	{
+		myRB = GetComponent<Rigidbody>();
+	}
+
 	private void OnDestroy()
 	{
 		list.Remove(Id);
+	}
+
+	private void Update()
+	{
+		//respawn player
+		if (Vector3.Distance(transform.position, Vector3.zero) >= 80 || transform.position.y <= -45)
+		{
+			myRB.velocity = Vector3.zero;
+			transform.position = GameLogic.Singleton.SpawnPoints[UnityEngine.Random.Range(0, GameLogic.Singleton.SpawnPoints.Count - 1)].transform.position;
+		}
 	}
 
 	public static void Spawn(ushort id, string username, Vector3 position, string mySkinName)
@@ -33,7 +49,7 @@ public class Player : MonoBehaviour
 		if (id == NetworkManager.Singleton.Client.Id)
 		{
 			//spawn local player
-			player = Instantiate(GameLogic.Singleton.LocalPlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
+			player = Instantiate(GameLogic.Singleton.LocalPlayerPrefab, GameLogic.Singleton.SpawnPoints[UnityEngine.Random.Range(0, GameLogic.Singleton.SpawnPoints.Count - 1)].transform.position, Quaternion.identity).GetComponent<Player>();
 			References.thePlayer = player.gameObject;
 			player.transform.GetChild(0).GetComponent<MeshRenderer>().material = References.currentSkin;
 			player.IsLocal = true;
@@ -41,7 +57,7 @@ public class Player : MonoBehaviour
 		else
 		{
 			//spawn remote players
-			player = Instantiate(GameLogic.Singleton.PlayerPrefab, position, Quaternion.identity).GetComponent<Player>();
+			player = Instantiate(GameLogic.Singleton.PlayerPrefab, new Vector3(0, -40, 0), Quaternion.identity).GetComponent<Player>();
 			if (SkinLoader.SkinNameToMaterial(mySkinName) != null)
 			{
 				player.transform.GetChild(0).GetComponent<MeshRenderer>().material = SkinLoader.SkinNameToMaterial(mySkinName);
