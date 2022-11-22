@@ -25,18 +25,23 @@ public class UIManager : MonoBehaviour
 	}
 
 	[SerializeField] private TextMeshProUGUI messageBox;
+	[Space(2)]
 
 	//login screen
+	[Header("Login Screen")]
 	[SerializeField] private InputField usernameField;
 	[SerializeField] private InputField passwordField;
 	[SerializeField] private InputField usernameCreateField;
 	[SerializeField] private InputField passwordCreateField;
 	[SerializeField] private InputField passwordConfirmField;
+	[Space(2)]
 
 	//connect screen
+	[Header("Connect Screen")]
 	[SerializeField] private GameObject connectUI;
 	[SerializeField] private InputField ipAddressField;
 	[SerializeField] private InputField portField;
+	[SerializeField] private TextMeshProUGUI myUsernameHUD;
 
 	// UIManager is in the very first menu of the very first scene when the game is started.
 	// if something needs to be initialized from the beginning, it should be done from this
@@ -64,6 +69,8 @@ public class UIManager : MonoBehaviour
 		ipAddressField.interactable = false;
 		portField.interactable = false;
 		connectUI.SetActive(false);
+		myUsernameHUD.enabled = true;
+		myUsernameHUD.text = DatabaseManager.MyPlayer.username;
 
 		NetworkManager.Singleton.Connect(ipAddressField.text, portField.text);
 	}

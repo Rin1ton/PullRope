@@ -245,6 +245,7 @@ MonoBehaviour:
   connectUI: {fileID: 1732752594}
   ipAddressField: {fileID: 0}
   portField: {fileID: 0}
+  myUsernameHUD: {fileID: 0}
 --- !u!114 &469760229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1725,8 +1726,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1542738589}
   m_TextComponent: {fileID: 1622698345}
   m_Placeholder: {fileID: 2133464960}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -1868,8 +1869,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1551664341}
   m_TextComponent: {fileID: 1951910326}
   m_Placeholder: {fileID: 1269327180}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -2609,8 +2610,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1910080016}
   m_TextComponent: {fileID: 1845406431}
   m_Placeholder: {fileID: 1555849239}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0

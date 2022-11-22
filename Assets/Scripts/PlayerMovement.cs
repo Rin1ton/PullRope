@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 	Vector3 moveInput = new Vector3();
 
 	//jump Stats
-	float jumpVelocity = 20;
+	float jumpVelocity = 10;
 	float timeSinceLastJump = 60;
 	float timeSinceBecameGrounded = 60;
 	bool wasGrounded = false;
@@ -420,6 +420,7 @@ public class PlayerMovement : MonoBehaviour
 		message.AddVector3(myCamera.transform.forward);
 		message.AddVector3(transform.position);
 		message.AddQuaternion(transform.rotation);
+		message.AddVector3(myRB.velocity);
 
 		NetworkManager.Singleton.Client.Send(message);
 	}
