@@ -60,8 +60,8 @@ public class UIManager : MonoBehaviour
         SkinLoader.skin7 = Resources.Load("skin_matrix") as Material;
         SkinLoader.skin8 = Resources.Load("skin_sus") as Material;
 
-		currentSkinName = "skin_default";
-		currentSkin = SkinLoader.SkinNameToMaterial("skin_default");
+		//currentSkinName = "skin_default";
+		//currentSkin = SkinLoader.SkinNameToMaterial("skin_default");
     }
   
     public void ConnectClicked()

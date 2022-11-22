@@ -63,6 +63,10 @@ public class PlayerMovement : MonoBehaviour
 	GameObject myGrappleHookObject;
 	LineRenderer grappleObjectLR;
 
+	//boop
+	readonly float timeBetweenBoops = 1;
+	float timeSinceLastBoop = 120;
+
 	//physics stuff
 	readonly int playerPhysicsIndex = 3;
 	Rigidbody myRB;
@@ -145,6 +149,9 @@ public class PlayerMovement : MonoBehaviour
 
 		if (timeSinceBecameGrounded < shortTimerStop && myGroundChecker.IsGrounded)
 			timeSinceBecameGrounded += Time.deltaTime;
+
+		if (timeSinceLastBoop < timeBetweenBoops)
+			timeSinceLastBoop += Time.deltaTime;
 	}
 
 	void MouseLook()
@@ -171,7 +178,6 @@ public class PlayerMovement : MonoBehaviour
 		//keyboard inputs
 		float xMovement = 0;
 		float zMovement = 0;
-		Vector3 unityMoveInput = Vector3.zero;
 
 		//set our floats to the inputs of the player
 		if (Input.GetKey(forwardButton))
@@ -303,7 +309,11 @@ public class PlayerMovement : MonoBehaviour
 
 	void Boop()
 	{
+		//if we try to boop while boop is available
+		if (timeSinceLastBoop >= timeBetweenBoops && Input.GetKey(boopButton))
+		{
 
+		}
 	}
 
 	void ApplyGrapplePhysics()

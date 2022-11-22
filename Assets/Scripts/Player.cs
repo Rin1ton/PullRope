@@ -61,7 +61,6 @@ public class Player : MonoBehaviour
 			if (SkinLoader.SkinNameToMaterial(mySkinName) != null)
 			{
 				player.transform.GetChild(0).GetComponent<MeshRenderer>().material = SkinLoader.SkinNameToMaterial(mySkinName);
-				Debug.LogWarning(mySkinName);
 			}
 			player.myBillboard.text = username;
 			player.myRB = player.transform.GetChild(0).GetComponent<Rigidbody>();

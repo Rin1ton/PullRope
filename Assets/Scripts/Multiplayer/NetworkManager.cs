@@ -16,7 +16,8 @@ public enum ServerToClientId : ushort
 public enum ClientToServerId : ushort
 {
 	name = 1,
-	playerTransform, 
+	playerTransform,
+	playerBooped,
 }
 
 public class NetworkManager : MonoBehaviour
