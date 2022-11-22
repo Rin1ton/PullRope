@@ -30,7 +30,10 @@ public class UITimerScript : MonoBehaviour
 			TimerText.text = ("00" + ":" + "00"  + ":" + "00");
 		}
 		
-
+		if (playing == false)
+		{
+			TimerText.text = "";
+		}
 	}
 
 
