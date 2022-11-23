@@ -60,8 +60,12 @@ public class UIManager : MonoBehaviour
         SkinLoader.skin7 = Resources.Load("skin_matrix") as Material;
         SkinLoader.skin8 = Resources.Load("skin_sus") as Material;
 
-		//currentSkinName = "skin_default";
-		//currentSkin = SkinLoader.SkinNameToMaterial("skin_default");
+		if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Login Screen"))
+		{
+			Debug.LogWarning($"current scene is {SceneManager.GetActiveScene()}, setting current skin to default skin");
+			currentSkinName = "skin_default";
+			currentSkin = SkinLoader.SkinNameToMaterial("skin_default");
+		}
     }
   
     public void ConnectClicked()

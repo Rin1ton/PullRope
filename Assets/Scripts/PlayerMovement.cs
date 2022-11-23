@@ -121,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
 		MovementInput();
 		Grapple();
 		CheckIfCanGrapple();
+		Boop();
 	}
 
 	private void FixedUpdate()
@@ -312,6 +313,7 @@ public class PlayerMovement : MonoBehaviour
 		//if we try to boop while boop is available
 		if (timeSinceLastBoop >= timeBetweenBoops && Input.GetKey(boopButton))
 		{
+			//send a message to the server that we're booping
 
 		}
 	}
