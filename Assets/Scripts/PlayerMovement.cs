@@ -426,7 +426,6 @@ public class PlayerMovement : MonoBehaviour
 		{
 			timeSinceLastBoop = 0;
 
-			Debug.Log("booping");
 			//send a message to the server that we're booping
 			Message message = Message.Create(MessageSendMode.Unreliable, ClientToServerId.playerBooped);
 
@@ -440,8 +439,9 @@ public class PlayerMovement : MonoBehaviour
 	[MessageHandler((ushort)ServerToClientId.playerBooped)]
 	private static void GetBooped(Message message)
 	{
-		Debug.Log("I've been booped!");
-		References.thePlayer.GetComponent<Rigidbody>().velocity += (message.GetVector3() * 10);
+		Vector3 boopDirection = message.GetVector3();
+		boopDirection *= 15;
+		References.thePlayer.GetComponent<Rigidbody>().velocity += boopDirection;
 	}
 
 }
