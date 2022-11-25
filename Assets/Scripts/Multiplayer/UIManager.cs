@@ -143,6 +143,19 @@ public class UIManager : MonoBehaviour
 		NetworkManager.Singleton.Client.Send(message);
 	}
 
+	public void GuestAccountClicked()
+	{
+        string loginMessage = DatabaseManager.AttemptLogin("guest", passwordField.text);
+        messageBox.text = loginMessage;
 
+        if (loginMessage == "Logging in as Guest!")
+        {
+            //set our skin
+            currentSkinName = DatabaseManager.MyPlayer.equipped;
+            currentSkin = SkinLoader.SkinNameToMaterial(DatabaseManager.MyPlayer.equipped);
+
+            SceneManager.LoadScene("Main Menu");
+        }
+    }
 
 }
