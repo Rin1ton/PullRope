@@ -2433,7 +2433,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 797719791}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: BackButtonClicked
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2442,7 +2442,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &676033824
 MonoBehaviour:
   m_ObjectHideFlags: 0

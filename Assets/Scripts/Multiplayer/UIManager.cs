@@ -62,7 +62,6 @@ public class UIManager : MonoBehaviour
 
 		if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Login Screen"))
 		{
-			Debug.LogWarning($"current scene is {SceneManager.GetActiveScene()}, setting current skin to default skin");
 			currentSkinName = "skin_default";
 			currentSkin = SkinLoader.SkinNameToMaterial("skin_default");
 		}
@@ -129,7 +128,13 @@ public class UIManager : MonoBehaviour
 
 	private void BackToMain()
 	{
+		LevelOneUIScript.KillMe();
 		SceneManager.LoadScene("Main Menu");
+	}
+
+	public void QuitGame()
+	{
+		Application.Quit();
 	}
 
 	private static localPlayerData _myPlayer;

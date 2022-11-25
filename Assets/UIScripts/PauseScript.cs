@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseScript : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class PauseScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             QuitGame();
+        }
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main Menu"))
+        {
+            Destroy(PauseMenuObject);
+            Destroy(this);
         }
     }
 

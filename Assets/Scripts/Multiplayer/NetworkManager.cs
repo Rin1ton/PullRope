@@ -11,6 +11,7 @@ public enum ServerToClientId : ushort
 	playerSpawned = 1,
 	playerTransform,
 	sync,
+	playerBooped,
 }
 
 public enum ClientToServerId : ushort

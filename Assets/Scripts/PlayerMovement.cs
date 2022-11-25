@@ -1,4 +1,5 @@
-﻿using Riptide;
+﻿using MySql.Data.MySqlClient;
+using Riptide;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -271,15 +272,6 @@ public class PlayerMovement : MonoBehaviour
 			//invert that layer mask;
 			layerMask = ~layerMask;
 
-			/* when I grapple I have to:
-			 * 1. get a reference to the object I'm grappling
-			 * 2. get check if that thing has rigidbody
-			 * 3. if it does, save those parameters we're about to change about it
-			 * 4. add the "configurable joint" component to it, automatically adding a rigidbody as well
-			 * 5. get a reference to it again, in case it didn't exist a moment ago
-			 * 6. configure that RB
-			 */
-
 			RaycastHit hit;
 			// Does the ray intersect any objects excluding the player layer
 			//NOTE: this block runs once when the grapple starts
@@ -305,16 +297,6 @@ public class PlayerMovement : MonoBehaviour
 		if (Input.GetKeyUp(grappleButton))
 		{
 			Ungrapple();
-		}
-	}
-
-	void Boop()
-	{
-		//if we try to boop while boop is available
-		if (timeSinceLastBoop >= timeBetweenBoops && Input.GetKey(boopButton))
-		{
-			//send a message to the server that we're booping
-
 		}
 	}
 
@@ -435,6 +417,31 @@ public class PlayerMovement : MonoBehaviour
 		message.AddVector3(myRB.velocity);
 
 		NetworkManager.Singleton.Client.Send(message);
+	}
+
+	void Boop()
+	{
+		//if we try to boop while boop is available
+		if (timeSinceLastBoop >= timeBetweenBoops && Input.GetKey(boopButton))
+		{
+			timeSinceLastBoop = 0;
+
+			Debug.Log("booping");
+			//send a message to the server that we're booping
+			Message message = Message.Create(MessageSendMode.Unreliable, ClientToServerId.playerBooped);
+
+			message.AddUShort(player.Id);
+
+			NetworkManager.Singleton.Client.Send(message);
+		}
+	}
+
+	// This function is called when we are booped by another player
+	[MessageHandler((ushort)ServerToClientId.playerBooped)]
+	private static void GetBooped(Message message)
+	{
+		Debug.Log("I've been booped!");
+		References.thePlayer.GetComponent<Rigidbody>().velocity += (message.GetVector3() * 10);
 	}
 
 }
