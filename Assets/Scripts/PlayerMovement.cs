@@ -16,8 +16,8 @@ public class PlayerMovement : MonoBehaviour
 	readonly KeyCode backwardButton = KeyCode.S;
 	readonly KeyCode leftButton = KeyCode.A;
 	readonly KeyCode rightButton = KeyCode.D;
-	readonly KeyCode grappleButton = KeyCode.Mouse0;
-	readonly KeyCode boopButton = KeyCode.Mouse1;
+	readonly KeyCode grappleButton = KeyCode.Mouse1;
+	readonly KeyCode boopButton = KeyCode.Mouse0;
 
 	//mouselook stats
 	/*
