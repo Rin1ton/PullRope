@@ -10,6 +10,7 @@ public class UITimerScript : MonoBehaviour
 	public bool playing;
 	public bool reset;
 	private float Timer;
+	public bool inMainMenu;
 
 	void Update()
 	{
@@ -25,15 +26,15 @@ public class UITimerScript : MonoBehaviour
 		}
 
 		if (reset == true)
-        {
-			Timer = 0;
-			TimerText.text = ("00" + ":" + "00"  + ":" + "00");
-		}
-		
-		if (playing == false)
 		{
-			TimerText.text = "";
+			Timer = 0;
+			TimerText.text = ("00" + ":" + "00" + ":" + "00");
 		}
+
+		if (inMainMenu == true)
+		{
+            TimerText.text = "";
+        }
 	}
 
 

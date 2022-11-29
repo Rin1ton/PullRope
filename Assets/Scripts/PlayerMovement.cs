@@ -65,8 +65,11 @@ public class PlayerMovement : MonoBehaviour
 	LineRenderer grappleObjectLR;
 
 	//boop
-	readonly float timeBetweenBoops = 1;
-	float timeSinceLastBoop = 120;
+	static readonly float timeBetweenBoops = 1;
+	static float timeSinceLastBoop = 120;
+	static float verticalBoopSpeed = 5;
+	static float horizontalBoopSpeed = 15;
+	[SerializeField] ParticleSystem myBoopPS;
 
 	//physics stuff
 	readonly int playerPhysicsIndex = 3;
@@ -426,6 +429,9 @@ public class PlayerMovement : MonoBehaviour
 		{
 			timeSinceLastBoop = 0;
 
+			//play particle system
+			myBoopPS.Play();
+
 			//send a message to the server that we're booping
 			Message message = Message.Create(MessageSendMode.Unreliable, ClientToServerId.playerBooped);
 
@@ -440,7 +446,12 @@ public class PlayerMovement : MonoBehaviour
 	private static void GetBooped(Message message)
 	{
 		Vector3 boopDirection = message.GetVector3();
-		boopDirection *= 15;
+		boopDirection *= horizontalBoopSpeed;
+		if (boopDirection.y < 5)
+		{
+			boopDirection = Vector3.ProjectOnPlane(boopDirection, Vector3.up);
+			boopDirection = new Vector3(boopDirection.x, boopDirection.y + verticalBoopSpeed, boopDirection.z);
+		}
 		References.thePlayer.GetComponent<Rigidbody>().velocity += boopDirection;
 	}
 
