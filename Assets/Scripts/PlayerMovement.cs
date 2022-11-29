@@ -430,7 +430,8 @@ public class PlayerMovement : MonoBehaviour
 			timeSinceLastBoop = 0;
 
 			//play particle system
-			myBoopPS.Play();
+			if (myBoopPS != null)
+				myBoopPS.Play();
 
 			//send a message to the server that we're booping
 			Message message = Message.Create(MessageSendMode.Unreliable, ClientToServerId.playerBooped);
@@ -447,7 +448,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		Vector3 boopDirection = message.GetVector3();
 		boopDirection *= horizontalBoopSpeed;
-		if (boopDirection.y < 5)
+		if (boopDirection.y < verticalBoopSpeed)
 		{
 			boopDirection = Vector3.ProjectOnPlane(boopDirection, Vector3.up);
 			boopDirection = new Vector3(boopDirection.x, boopDirection.y + verticalBoopSpeed, boopDirection.z);
