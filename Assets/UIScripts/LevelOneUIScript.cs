@@ -85,6 +85,7 @@ public class LevelOneUIScript : MonoBehaviour
 			timertext.reset = true;
 			EndScreenMenu.SetActive(false);
 			grantOnce = true;
+			timertext.inMainMenu = true;
 		}
 
 
@@ -94,13 +95,14 @@ public class LevelOneUIScript : MonoBehaviour
 			timertext.reset = false;
 			Crosshair.SetActive(true);
 			timertext.playing = true;
-		}
+            timertext.inMainMenu = false;
+        }
 
-		
 
-			//timertext.playing = true;
 
-			if (Input.GetKeyDown(KeyCode.Escape) &&  (scene.name != "End Screen"))
+		//timertext.playing = true;
+
+		if (Input.GetKeyDown(KeyCode.Escape) &&  (scene.name != "End Screen"))
 		{
 			Debug.Log("Escape Pressed");
 			if (GamePaused)
