@@ -67,8 +67,8 @@ public class PlayerMovement : MonoBehaviour
 	//boop
 	static readonly float timeBetweenBoops = 1;
 	static float timeSinceLastBoop = 120;
-	static float verticalBoopSpeed = 5;
-	static float horizontalBoopSpeed = 15;
+	static float verticalBoopSpeed = 10;
+	static float horizontalBoopSpeed = 30;
 	[SerializeField] ParticleSystem myBoopPS;
 
 	//physics stuff
