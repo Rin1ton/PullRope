@@ -18,6 +18,7 @@ public class SkinLoader : MonoBehaviour
     [SerializeField] public static Material defaultSkin;
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject icon;
+    private References.localPlayerData _myPlayer;
 
     private void Awake()
     {
@@ -60,67 +61,248 @@ public class SkinLoader : MonoBehaviour
 
 	public void Skin1ButtonClicked()//Dirt
     {
-        player.GetComponent<MeshRenderer>().material = skin1;
-        icon.GetComponent<MeshRenderer>().material = skin1;
-        References.currentSkin = skin1;
-        References.currentSkinName = "skin_dirt";
-        DatabaseManager.EquipSkin("skin_dirt");
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_dirt == 1)
+        {
+            player.GetComponent<MeshRenderer>().material = skin1;
+            References.currentSkin = skin1;
+            References.currentSkinName = "skin_dirt";
+            DatabaseManager.EquipSkin("skin_dirt");
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }        
+    }
+    public void Skin1Purchase()
+    {
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_dirt == 0)
+        {
+            _myPlayer.coincount -= 25;
+            _myPlayer.cosmetic_dirt = 1;
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
+        
     }
     public void Skin2ButtonClicked()
     {
-        player.GetComponent<MeshRenderer>().material = skin2;
-        icon.GetComponent<MeshRenderer>().material = skin2;
-        References.currentSkin = skin2;
-        References.currentSkinName = "skin_copper";
-        DatabaseManager.EquipSkin("skin_copper");
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_copper == 1)
+        {
+            player.GetComponent<MeshRenderer>().material = skin2;
+            References.currentSkin = skin2;
+            References.currentSkinName = "skin_copper";
+            DatabaseManager.EquipSkin("skin_copper");
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
+    }
+    public void Skin2Purchase()
+    {
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_copper == 0)
+        {
+            _myPlayer.coincount -= 50;
+            _myPlayer.cosmetic_copper = 1;
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
     }
     public void Skin3ButtonClicked()
     {
-        player.GetComponent<MeshRenderer>().material = skin3;
-        icon.GetComponent<MeshRenderer>().material = skin3;
-        References.currentSkin = skin3;
-        References.currentSkinName = "skin_gold";
-        DatabaseManager.EquipSkin("skin_gold");
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_gold == 1)
+        {
+            player.GetComponent<MeshRenderer>().material = skin3;
+            References.currentSkin = skin3;
+            References.currentSkinName = "skin_gold";
+            DatabaseManager.EquipSkin("skin_gold");
+        }
+        else
+        {
+            return;
+        }
+    }
+    public void Skin3Purchase()
+    {
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_gold == 0)
+        {
+            _myPlayer.coincount -= 100;
+            _myPlayer.cosmetic_gold = 1;
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
     }
     public void Skin4ButtonClicked()
     {
-        player.GetComponent<MeshRenderer>().material = skin4;
-        icon.GetComponent<MeshRenderer>().material = skin4;
-        References.currentSkin = skin4;
-        References.currentSkinName = "skin_sapphire";
-        DatabaseManager.EquipSkin("skin_sapphire");
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_sapphire == 1)
+        {
+            player.GetComponent<MeshRenderer>().material = skin4;
+            References.currentSkin = skin4;
+            References.currentSkinName = "skin_sapphire";
+            DatabaseManager.EquipSkin("skin_sapphire");
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
+    }
+    public void Skin4Purchase()
+    {
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_sapphire == 0)
+        {
+            _myPlayer.coincount -= 125;
+            _myPlayer.cosmetic_sapphire = 1;
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
+        
     }
     public void Skin5ButtonClicked()
     {
-        player.GetComponent<MeshRenderer>().material = skin5;
-        icon.GetComponent<MeshRenderer>().material = skin5;
-        References.currentSkin = skin5;
-        References.currentSkinName = "skin_purple";
-        DatabaseManager.EquipSkin("skin_purple");
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_purple == 1)
+        {
+            player.GetComponent<MeshRenderer>().material = skin5;
+            References.currentSkin = skin5;
+            References.currentSkinName = "skin_purple";
+            DatabaseManager.EquipSkin("skin_purple");
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
+    }
+    public void Skin5Purchase()
+    {
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_purple == 0)
+        {
+            _myPlayer.coincount -= 55;
+            _myPlayer.cosmetic_purple = 1;
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
+        
     }
     public void Skin6ButtonClicked()
     {
-        player.GetComponent<MeshRenderer>().material = skin6;
-        icon.GetComponent<MeshRenderer>().material = skin6;
-        References.currentSkin = skin6;
-        References.currentSkinName = "skin_grass";
-        DatabaseManager.EquipSkin("skin_grass");
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_grass == 1)
+        {
+            player.GetComponent<MeshRenderer>().material = skin6;
+            References.currentSkin = skin6;
+            References.currentSkinName = "skin_grass";
+            DatabaseManager.EquipSkin("skin_grass");
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
+    }
+    public void Skin6Purchase()
+    {
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_grass == 0)
+        {
+            _myPlayer.coincount -= 40;
+            _myPlayer.cosmetic_grass = 1;
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
+        
     }
     public void Skin7ButtonClicked()
     {
-        player.GetComponent<MeshRenderer>().material = skin7;
-        icon.GetComponent<MeshRenderer>().material = skin7;
-        References.currentSkin = skin7;
-        References.currentSkinName = "skin_matrix";
-        DatabaseManager.EquipSkin("skin_matrix");
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_matrix == 1)
+        {
+            player.GetComponent<MeshRenderer>().material = skin7;
+            References.currentSkin = skin7;
+            References.currentSkinName = "skin_matrix";
+            DatabaseManager.EquipSkin("skin_matrix");
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
+    }
+    public void Skin7Purchase()
+    {
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_matrix == 0)
+        {
+            _myPlayer.coincount -= 200;
+            _myPlayer.cosmetic_matrix = 1;
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
+        
     }
     public void Skin8ButtonClicked()
     {
-        player.GetComponent<MeshRenderer>().material = skin8;
-        icon.GetComponent<MeshRenderer>().material = skin8;
-        References.currentSkin = skin8;
-        References.currentSkinName = "skin_sus";
-        DatabaseManager.EquipSkin("skin_sus");
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_sus == 1)
+        {
+            player.GetComponent<MeshRenderer>().material = skin8;
+            References.currentSkin = skin8;
+            References.currentSkinName = "skin_sus";
+            DatabaseManager.EquipSkin("skin_sus");
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
+    }
+    public void Skin8Purchase()
+    {
+        _myPlayer = DatabaseManager.MyPlayer;
+        if (_myPlayer.cosmetic_sus == 0)
+        {
+            _myPlayer.coincount -= 999;
+            _myPlayer.cosmetic_sus = 1;
+            DatabaseManager.MyPlayer = _myPlayer;
+        }
+        else
+        {
+            return;
+        }
+        
     }
 
 }
