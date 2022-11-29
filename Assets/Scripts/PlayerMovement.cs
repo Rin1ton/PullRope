@@ -449,7 +449,7 @@ public class PlayerMovement : MonoBehaviour
 		boopDirection *= horizontalBoopSpeed;
 		if (boopDirection.y < 5)
 		{
-			boopDirection = Vector3.Project(boopDirection, Vector3.up);
+			boopDirection = Vector3.ProjectOnPlane(boopDirection, Vector3.up);
 			boopDirection = new Vector3(boopDirection.x, boopDirection.y + verticalBoopSpeed, boopDirection.z);
 		}
 		References.thePlayer.GetComponent<Rigidbody>().velocity += boopDirection;
