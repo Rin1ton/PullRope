@@ -14,7 +14,7 @@ public class HeroMovementBehavior : MonoBehaviour
 	readonly KeyCode leftButton = KeyCode.A;
 	readonly KeyCode rightButton = KeyCode.D;
 	readonly KeyCode grappleButton = KeyCode.Mouse0;
-	readonly KeyCode boopButton = KeyCode.Mouse1;
+	//readonly KeyCode boopButton = KeyCode.Mouse1;
 
 	//mouselook stats
 	/*

@@ -24,6 +24,9 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
+	public static bool isPaused { get; private set; } = false;
+	private KeyCode PauseButton = KeyCode.Escape;
+
 	[SerializeField] private TextMeshProUGUI messageBox;
 	[Space(2)]
 
@@ -39,9 +42,16 @@ public class UIManager : MonoBehaviour
 	//connect screen
 	[Header("Connect Screen")]
 	[SerializeField] private GameObject connectUI;
+	[SerializeField] private GameObject inGameHUD;
 	[SerializeField] private InputField ipAddressField;
 	[SerializeField] private InputField portField;
 	[SerializeField] private TextMeshProUGUI myUsernameHUD;
+	[Space(2)]
+
+	//options
+	[Header("Options")]
+	[SerializeField] private Slider sensSlider;
+	[SerializeField] private InputField sensInputBox;
 
 	// UIManager is in the very first menu of the very first scene when the game is started.
 	// if something needs to be initialized from the beginning, it should be done from this
@@ -50,28 +60,74 @@ public class UIManager : MonoBehaviour
 	{
 		Singleton = this;
 
-        SkinLoader.defaultSkin = Resources.Load("skin_default") as Material;
-        SkinLoader.skin1 = Resources.Load("skin_dirt") as Material;
-        SkinLoader.skin2 = Resources.Load("skin_copper") as Material;
-        SkinLoader.skin3 = Resources.Load("skin_gold") as Material;
-        SkinLoader.skin4 = Resources.Load("skin_sapphire") as Material;
-        SkinLoader.skin5 = Resources.Load("skin_purple") as Material;
-        SkinLoader.skin6 = Resources.Load("skin_grass") as Material;
-        SkinLoader.skin7 = Resources.Load("skin_matrix") as Material;
-        SkinLoader.skin8 = Resources.Load("skin_sus") as Material;
+		SkinLoader.defaultSkin = Resources.Load("skin_default") as Material;
+		SkinLoader.skin1 = Resources.Load("skin_dirt") as Material;
+		SkinLoader.skin2 = Resources.Load("skin_copper") as Material;
+		SkinLoader.skin3 = Resources.Load("skin_gold") as Material;
+		SkinLoader.skin4 = Resources.Load("skin_sapphire") as Material;
+		SkinLoader.skin5 = Resources.Load("skin_purple") as Material;
+		SkinLoader.skin6 = Resources.Load("skin_grass") as Material;
+		SkinLoader.skin7 = Resources.Load("skin_matrix") as Material;
+		SkinLoader.skin8 = Resources.Load("skin_sus") as Material;
 
 		if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Login Screen"))
 		{
 			currentSkinName = "skin_default";
 			currentSkin = SkinLoader.SkinNameToMaterial("skin_default");
 		}
-    }
-  
-    public void ConnectClicked()
+
+		if (inGameHUD != null)
+			inGameHUD.SetActive(false);
+	}
+
+	private void Update()
 	{
-		ipAddressField.interactable = false;
-		portField.interactable = false;
+		if (Input.GetKeyDown(PauseButton))
+			Pause();
+	}
+
+	private void Pause()
+	{
+		//pause the game
+		if (!isPaused)
+		{
+			isPaused = true;
+			connectUI.SetActive(true);
+			inGameHUD.SetActive(false);
+			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
+		} 
+		//un-pause the game
+		else
+		{
+			isPaused = false;
+			connectUI.SetActive(false);
+			inGameHUD.SetActive(true);
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
+		}
+	}
+
+	public void SensSliderMoved()
+	{
+		sensInputBox.text = sensSlider.value.ToString();
+		playerSensitivityX = sensSlider.value;
+		playerSensitivityY = sensSlider.value;
+	}
+
+	public void SensInputBoxChanged()
+	{
+		sensSlider.value = float.Parse(sensInputBox.text);
+		playerSensitivityX = sensSlider.value;
+		playerSensitivityY = sensSlider.value;
+	}
+
+	public void ConnectClicked()
+	{
+		//ipAddressField.interactable = false;
+		//portField.interactable = false;
 		connectUI.SetActive(false);
+		inGameHUD.SetActive(true);
 		myUsernameHUD.enabled = true;
 		myUsernameHUD.text = DatabaseManager.MyPlayer.username;
 
@@ -115,6 +171,7 @@ public class UIManager : MonoBehaviour
 		ipAddressField.interactable = true;
 		portField.interactable = true;
 		connectUI.SetActive(true);
+		inGameHUD.SetActive(false);
 
 		//unlock the mouse and make it disappear
 		Cursor.lockState = CursorLockMode.None;
@@ -150,17 +207,17 @@ public class UIManager : MonoBehaviour
 
 	public void GuestAccountClicked()
 	{
-        string loginMessage = DatabaseManager.AttemptLogin("guest", passwordField.text);
-        messageBox.text = loginMessage;
+		string loginMessage = DatabaseManager.AttemptLogin("guest", passwordField.text);
+		messageBox.text = loginMessage;
 
-        if (loginMessage == "Logging in as Guest!")
-        {
-            //set our skin
-            currentSkinName = DatabaseManager.MyPlayer.equipped;
-            currentSkin = SkinLoader.SkinNameToMaterial(DatabaseManager.MyPlayer.equipped);
+		if (loginMessage == "Logging in as Guest!")
+		{
+			//set our skin
+			currentSkinName = DatabaseManager.MyPlayer.equipped;
+			currentSkin = SkinLoader.SkinNameToMaterial(DatabaseManager.MyPlayer.equipped);
 
-            SceneManager.LoadScene("Main Menu");
-        }
-    }
+			SceneManager.LoadScene("Main Menu");
+		}
+	}
 
 }

@@ -120,12 +120,15 @@ public class PlayerMovement : MonoBehaviour
 	void Update()
 	{
 		Timers();
-		MouseLook();
-		Jump();
-		MovementInput();
-		Grapple();
+		if (!UIManager.isPaused)
+		{
+			MouseLook();
+			Jump();
+			MovementInput();
+			Grapple();
+			Boop();
+		}
 		CheckIfCanGrapple();
-		Boop();
 	}
 
 	private void FixedUpdate()
