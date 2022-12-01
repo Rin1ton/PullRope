@@ -17,7 +17,6 @@ public class SkinLoader : MonoBehaviour
     [SerializeField] public static Material skin8;
     [SerializeField] public static Material defaultSkin;
     [SerializeField] public GameObject player;
-    [SerializeField] public GameObject icon;
     private References.localPlayerData _myPlayer;
 
     private void Awake()
