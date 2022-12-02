@@ -18,7 +18,7 @@ public class SkinLoader : MonoBehaviour
     [SerializeField] public static Material defaultSkin;
     [SerializeField] public GameObject player;
     private References.localPlayerData _myPlayer;
-
+    public Text coinCount;
     private void Awake()
     {
         /*defaultSkin = Resources.Load("skin_default") as Material;
@@ -67,6 +67,7 @@ public class SkinLoader : MonoBehaviour
             References.currentSkin = skin1;
             References.currentSkinName = "skin_dirt";
             DatabaseManager.EquipSkin("skin_dirt");
+            _myPlayer.equipped = "skin_dirt";
             DatabaseManager.MyPlayer = _myPlayer;
         }
         else
@@ -80,6 +81,7 @@ public class SkinLoader : MonoBehaviour
         if (_myPlayer.cosmetic_dirt == 0)
         {
             _myPlayer.coincount -= 25;
+            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
             _myPlayer.cosmetic_dirt = 1;
             DatabaseManager.MyPlayer = _myPlayer;
         }
@@ -98,6 +100,7 @@ public class SkinLoader : MonoBehaviour
             References.currentSkin = skin2;
             References.currentSkinName = "skin_copper";
             DatabaseManager.EquipSkin("skin_copper");
+            _myPlayer.equipped = "skin_copper";
             DatabaseManager.MyPlayer = _myPlayer;
         }
         else
@@ -111,6 +114,7 @@ public class SkinLoader : MonoBehaviour
         if (_myPlayer.cosmetic_copper == 0)
         {
             _myPlayer.coincount -= 50;
+            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
             _myPlayer.cosmetic_copper = 1;
             DatabaseManager.MyPlayer = _myPlayer;
         }
@@ -127,6 +131,7 @@ public class SkinLoader : MonoBehaviour
             player.GetComponent<MeshRenderer>().material = skin3;
             References.currentSkin = skin3;
             References.currentSkinName = "skin_gold";
+            _myPlayer.equipped = "skin_gold";
             DatabaseManager.EquipSkin("skin_gold");
         }
         else
@@ -140,6 +145,7 @@ public class SkinLoader : MonoBehaviour
         if (_myPlayer.cosmetic_gold == 0)
         {
             _myPlayer.coincount -= 100;
+            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
             _myPlayer.cosmetic_gold = 1;
             DatabaseManager.MyPlayer = _myPlayer;
         }
@@ -157,6 +163,7 @@ public class SkinLoader : MonoBehaviour
             References.currentSkin = skin4;
             References.currentSkinName = "skin_sapphire";
             DatabaseManager.EquipSkin("skin_sapphire");
+            _myPlayer.equipped = "skin_sapphire";
             DatabaseManager.MyPlayer = _myPlayer;
         }
         else
@@ -170,6 +177,7 @@ public class SkinLoader : MonoBehaviour
         if (_myPlayer.cosmetic_sapphire == 0)
         {
             _myPlayer.coincount -= 125;
+            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
             _myPlayer.cosmetic_sapphire = 1;
             DatabaseManager.MyPlayer = _myPlayer;
         }
@@ -188,6 +196,7 @@ public class SkinLoader : MonoBehaviour
             References.currentSkin = skin5;
             References.currentSkinName = "skin_purple";
             DatabaseManager.EquipSkin("skin_purple");
+            _myPlayer.equipped = "skin_purple";
             DatabaseManager.MyPlayer = _myPlayer;
         }
         else
@@ -201,6 +210,7 @@ public class SkinLoader : MonoBehaviour
         if (_myPlayer.cosmetic_purple == 0)
         {
             _myPlayer.coincount -= 55;
+            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
             _myPlayer.cosmetic_purple = 1;
             DatabaseManager.MyPlayer = _myPlayer;
         }
@@ -219,6 +229,7 @@ public class SkinLoader : MonoBehaviour
             References.currentSkin = skin6;
             References.currentSkinName = "skin_grass";
             DatabaseManager.EquipSkin("skin_grass");
+            _myPlayer.equipped = "skin_grass";
             DatabaseManager.MyPlayer = _myPlayer;
         }
         else
@@ -232,6 +243,7 @@ public class SkinLoader : MonoBehaviour
         if (_myPlayer.cosmetic_grass == 0)
         {
             _myPlayer.coincount -= 40;
+            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
             _myPlayer.cosmetic_grass = 1;
             DatabaseManager.MyPlayer = _myPlayer;
         }
@@ -250,6 +262,7 @@ public class SkinLoader : MonoBehaviour
             References.currentSkin = skin7;
             References.currentSkinName = "skin_matrix";
             DatabaseManager.EquipSkin("skin_matrix");
+            _myPlayer.equipped = "skin_matrix";
             DatabaseManager.MyPlayer = _myPlayer;
         }
         else
@@ -263,6 +276,7 @@ public class SkinLoader : MonoBehaviour
         if (_myPlayer.cosmetic_matrix == 0)
         {
             _myPlayer.coincount -= 200;
+            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
             _myPlayer.cosmetic_matrix = 1;
             DatabaseManager.MyPlayer = _myPlayer;
         }
@@ -281,6 +295,7 @@ public class SkinLoader : MonoBehaviour
             References.currentSkin = skin8;
             References.currentSkinName = "skin_sus";
             DatabaseManager.EquipSkin("skin_sus");
+            _myPlayer.equipped = "skin_sus";
             DatabaseManager.MyPlayer = _myPlayer;
         }
         else
@@ -294,6 +309,7 @@ public class SkinLoader : MonoBehaviour
         if (_myPlayer.cosmetic_sus == 0)
         {
             _myPlayer.coincount -= 999;
+            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
             _myPlayer.cosmetic_sus = 1;
             DatabaseManager.MyPlayer = _myPlayer;
         }
