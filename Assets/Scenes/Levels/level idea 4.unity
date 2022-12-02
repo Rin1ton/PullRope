@@ -519,7 +519,7 @@ Transform:
   m_LocalScale: {x: 10.096243, y: 0.07018771, z: 4.7123876}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1001 &305501100
 PrefabInstance:
@@ -1542,7 +1542,7 @@ Transform:
   m_LocalScale: {x: 4.954739, y: 0.44168752, z: 5.0769525}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1523010878
 PrefabInstance:
@@ -1898,6 +1898,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5916392581871812159, guid: 300e2d325a528094eb44fddbfdbc5988, type: 3}
+      propertyPath: grappleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 49cc0d46648ee9d43a933bc206702759, type: 3}
     - target: {fileID: 8275419172040242794, guid: 300e2d325a528094eb44fddbfdbc5988, type: 3}
       propertyPath: m_RootOrder
       value: 0

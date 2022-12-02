@@ -66,9 +66,13 @@ public class HeroMovementBehavior : MonoBehaviour
 	Rigidbody myRB;
 	GroundCheckingBehavior myGroundChecker;
 
-	//RipTide Stuff
+    //RipTide Stuff
 
+    //Audio Stuff
 
+    public AudioClip grappleSound;
+	public AudioClip punchSound;
+	public AudioClip coinSound;
 
 	private void Awake()
 	{
@@ -271,7 +275,7 @@ public class HeroMovementBehavior : MonoBehaviour
 			//NOTE: this block runs once when the grapple starts
 			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, maxGrappleDistance, layerMask))
 			{
-				
+
 				grappled = true;
 				grapplePoint = hit.point;
 				grappleLength = (myCamera.transform.position - hit.point).magnitude;
@@ -285,7 +289,10 @@ public class HeroMovementBehavior : MonoBehaviour
 				grappleObjectLerpTime = 0;
 				grappleStartPos = myCamera.transform.position;
 				grappleObjectLR = myGrappleHookObject.GetComponent<LineRenderer>();
-			}
+
+                //SFX
+                AudioSource.PlayClipAtPoint(grappleSound, transform.position, 1);
+            }
 		}
 
 		if (Input.GetKeyUp(grappleButton))

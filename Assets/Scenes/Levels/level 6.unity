@@ -716,6 +716,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5916392581871812159, guid: 300e2d325a528094eb44fddbfdbc5988, type: 3}
+      propertyPath: grappleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 49cc0d46648ee9d43a933bc206702759, type: 3}
     - target: {fileID: 8275419172040242794, guid: 300e2d325a528094eb44fddbfdbc5988, type: 3}
       propertyPath: m_RootOrder
       value: 0
