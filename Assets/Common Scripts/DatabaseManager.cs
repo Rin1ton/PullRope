@@ -126,7 +126,7 @@ public static class DatabaseManager
 	public static void EquipSkin(string skinName) //function to update database with the input skin equipped
 	{
 		_myPlayer = MyPlayer; // Update myPlayer with current database info
-		Debug.Log("random string");
+
 		if (skinName == "skin_copper") // Check to see if skin exists, if so, equip it
 		{
 			_myPlayer.equipped = skinName;
