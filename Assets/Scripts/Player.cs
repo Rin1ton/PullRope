@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
 	public string username { get; private set; }
 	private string mySkin;
 
+	public int score { get; private set; } = 0;
+
 	[SerializeField] private Interpolator interpolator;
 
 	private void Awake()
@@ -73,6 +75,7 @@ public class Player : MonoBehaviour
 		player.mySkin = mySkinName;
 
 		list.Add(id, player);
+		UIManager.UpdateScoreboard();
 	}
 
 	[MessageHandler((ushort)ServerToClientId.playerSpawned)]

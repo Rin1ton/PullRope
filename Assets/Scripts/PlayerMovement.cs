@@ -305,7 +305,8 @@ public class PlayerMovement : MonoBehaviour
 				grappleObjectLR = myGrappleHookObject.GetComponent<LineRenderer>();
 
 				//SFX
-				AudioSource.PlayClipAtPoint(grappleSound, transform.position, 1);
+				if (grappleSound != null)
+					AudioSource.PlayClipAtPoint(grappleSound, transform.position, 1);
 			}
 		}
 
@@ -453,7 +454,8 @@ public class PlayerMovement : MonoBehaviour
 			NetworkManager.Singleton.Client.Send(message);
 
 			//SFX
-			AudioSource.PlayClipAtPoint(punchSound, transform.position, 1);
+			if (punchSound != null)
+				AudioSource.PlayClipAtPoint(punchSound, transform.position, 1);
 		}
 	}
 

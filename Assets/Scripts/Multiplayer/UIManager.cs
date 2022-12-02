@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
 
 	public static bool isPaused { get; private set; } = false;
 	private KeyCode PauseButton = KeyCode.Escape;
+	private KeyCode ScoreBoardButton = KeyCode.Tab;
 
 	[SerializeField] private TextMeshProUGUI messageBox;
 	[Space(2)]
@@ -37,21 +38,27 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private InputField usernameCreateField;
 	[SerializeField] private InputField passwordCreateField;
 	[SerializeField] private InputField passwordConfirmField;
-	[Space(2)]
 
 	//connect screen
+	[Space(2)]
 	[Header("Connect Screen")]
 	[SerializeField] private GameObject connectUI;
 	[SerializeField] private GameObject inGameHUD;
 	[SerializeField] private InputField ipAddressField;
 	[SerializeField] private InputField portField;
 	[SerializeField] private TextMeshProUGUI myUsernameHUD;
-	[Space(2)]
 
 	//options
+	[Space(2)]
 	[Header("Options")]
 	[SerializeField] private Slider sensSlider;
 	[SerializeField] private InputField sensInputBox;
+
+	//scoreboard
+	[Space(2)]
+	[Header("Options")]
+	[SerializeField] private GameObject scoreboardObject;
+	[SerializeField] private TextMeshProUGUI scoreboardTextBox;
 
 	// UIManager is in the very first menu of the very first scene when the game is started.
 	// if something needs to be initialized from the beginning, it should be done from this
@@ -78,12 +85,19 @@ public class UIManager : MonoBehaviour
 
 		if (inGameHUD != null)
 			inGameHUD.SetActive(false);
+		if (scoreboardObject != null)
+			scoreboardObject.SetActive(false);
 	}
 
 	private void Update()
 	{
 		if (Input.GetKeyDown(PauseButton))
 			Pause();
+
+		if (Input.GetKeyDown(ScoreBoardButton))
+			scoreboardObject.SetActive(true);
+		if (Input.GetKeyUp(ScoreBoardButton))
+			scoreboardObject.SetActive(false);
 	}
 
 	private void Pause()
@@ -218,6 +232,40 @@ public class UIManager : MonoBehaviour
 
 			SceneManager.LoadScene("Main Menu");
 		}
+	}
+
+	public static void UpdateScoreboard()
+	{
+		string scoreboardText = "";
+
+		//copy the list that the player has so we can massacre it
+		List<Player> players = new List<Player>();
+		foreach (Player player in Player.list.Values)
+			players.Add(player);
+
+		//sorting
+		for (int i = 0; i < players.Count - 1; i++)
+		{
+			int worstScore = i;
+			for (int j = i + 1; j < players.Count; j++)
+			{
+				if (players[j].score < players[worstScore].score)
+				{
+					worstScore = j;
+				}
+			}
+			Player tempPlayer = players[worstScore];
+			players[worstScore] = players[i];
+			players[i] = tempPlayer;
+		}
+
+		//now with sorted player list, print scoreboard
+		for (int i = 0; i < players.Count; i++)
+			scoreboardText += ($"{i + 1}. {players[i].username} - {players[i].score}\n");
+
+		Singleton.scoreboardTextBox.text = scoreboardText;
+
+		Debug.Log("TBI: send messages to the server for every client to update scoreboard as well");
 	}
 
 }
