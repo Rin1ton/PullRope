@@ -76,15 +76,15 @@ public class PlayerMovement : MonoBehaviour
 	Rigidbody myRB;
 	GroundCheckingBehavior myGroundChecker;
 
-    //RipTide Stuff
+	//RipTide Stuff
 
-    //Audio Stuff
+	//Audio Stuff
 
-    public AudioClip grappleSound;
-    public AudioClip punchSound;
-    public AudioClip coinSound;
+	public AudioClip grappleSound;
+	public AudioClip punchSound;
+	public static AudioClip punchedSound;
 
-    private void OnValidate()
+	private void OnValidate()
 	{
 		if (player == null)
 			player = GetComponent<Player>();
@@ -304,9 +304,9 @@ public class PlayerMovement : MonoBehaviour
 				grappleStartPos = myCamera.transform.position;
 				grappleObjectLR = myGrappleHookObject.GetComponent<LineRenderer>();
 
-                //SFX
-                AudioSource.PlayClipAtPoint(grappleSound, transform.position, 1);
-            }
+				//SFX
+				AudioSource.PlayClipAtPoint(grappleSound, transform.position, 1);
+			}
 		}
 
 		if (Input.GetKeyUp(grappleButton))
@@ -452,9 +452,9 @@ public class PlayerMovement : MonoBehaviour
 
 			NetworkManager.Singleton.Client.Send(message);
 
-            //SFX
-            AudioSource.PlayClipAtPoint(punchSound, transform.position, 1);
-        }
+			//SFX
+			AudioSource.PlayClipAtPoint(punchSound, transform.position, 1);
+		}
 	}
 
 	// This function is called when we are booped by another player
@@ -470,5 +470,4 @@ public class PlayerMovement : MonoBehaviour
 		}
 		References.thePlayer.GetComponent<Rigidbody>().velocity += boopDirection;
 	}
-
 }
