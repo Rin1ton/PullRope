@@ -10,7 +10,7 @@ public class NextLevel : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        AudioSource.PlayClipAtPoint(successSound, transform.position, 1);
+        // AudioSource.PlayClipAtPoint(successSound, transform.position, 1);
     }
 
 }
