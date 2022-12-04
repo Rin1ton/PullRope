@@ -71,7 +71,7 @@ public class HeroMovementBehavior : MonoBehaviour
     //Audio Stuff
 
     public AudioClip grappleSound;
-	public AudioClip punchSound;
+	public AudioClip ungrappleSound;
 	public AudioClip coinSound;
 
 	private void Awake()
@@ -387,6 +387,9 @@ public class HeroMovementBehavior : MonoBehaviour
 			grappleLength = 0;
 			grapplePoint = Vector3.zero;
 			myRB.velocity = additionalVelocity;
+
+			//sfx
+			AudioSource.PlayClipAtPoint(ungrappleSound, transform.position, 1);
 
 			//grapple gameobject
 			Destroy(myGrappleHookObject);

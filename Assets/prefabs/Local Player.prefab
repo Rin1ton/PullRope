@@ -53,6 +53,8 @@ MonoBehaviour:
   myCamera: {fileID: 8288143900887197111}
   myGrappleHookPrefab: {fileID: 6871793555895754987, guid: ce09852770156224fb4330e5b9997c18, type: 3}
   myBoopPS: {fileID: 2361017514220156803}
+  grappleSound: {fileID: 8300000, guid: 49cc0d46648ee9d43a933bc206702759, type: 3}
+  punchSound: {fileID: 8300000, guid: dbce8c35ea797de4a9e3068e4a88b63a, type: 3}
 --- !u!114 &6999971208357613671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,6 +85,8 @@ MonoBehaviour:
   myCamera: {fileID: 8288143900887197111}
   myGrappleHookPrefab: {fileID: 6871793555895754987, guid: ce09852770156224fb4330e5b9997c18, type: 3}
   myBoopPS: {fileID: 0}
+  grappleSound: {fileID: 8300000, guid: 49cc0d46648ee9d43a933bc206702759, type: 3}
+  punchSound: {fileID: 8300000, guid: dbce8c35ea797de4a9e3068e4a88b63a, type: 3}
 --- !u!54 &8287848566591406467
 Rigidbody:
   m_ObjectHideFlags: 0
