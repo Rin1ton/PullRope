@@ -21,7 +21,8 @@ public class CoinLogic : MonoBehaviour
         _myPlayer = DatabaseManager.MyPlayer;
         _myPlayer.coincount += 1;
         DatabaseManager.MyPlayer = _myPlayer;
-        AudioSource.PlayClipAtPoint(coinSound, transform.position, 1);
+        if (coinSound != null)
+            AudioSource.PlayClipAtPoint(coinSound, transform.position, 1);
         Destroy(this.gameObject);
     }
 

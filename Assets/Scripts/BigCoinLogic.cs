@@ -20,7 +20,8 @@ public class BigCoinLogic : MonoBehaviour
         _myPlayer = DatabaseManager.MyPlayer;
         _myPlayer.coincount += 10;
         DatabaseManager.MyPlayer = _myPlayer;
-        AudioSource.PlayClipAtPoint(coinSound, transform.position, 1);
+        if (coinSound != null)
+            AudioSource.PlayClipAtPoint(coinSound, transform.position, 1);
         Destroy(this.gameObject);
     }
 
