@@ -12,6 +12,9 @@ public class TurretBehavior : MonoBehaviour
     public GameObject bullet;
     public GameObject bulletspawnpoint;
     bool time2Shoot;
+
+    public AudioClip shootSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +43,8 @@ public class TurretBehavior : MonoBehaviour
             if (time2Shoot)
             {
                 Instantiate(bullet, bulletspawnpoint.transform.position, transform.rotation);
-                Debug.Log("shoot");
+                if (shootSound != null)
+                    AudioSource.PlayClipAtPoint(shootSound, transform.position, 1);
             }
         }
     }
