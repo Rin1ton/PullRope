@@ -16,6 +16,7 @@ public class CoinCountUI : MonoBehaviour
 
         _myPlayer = DatabaseManager.MyPlayer;
         coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
+        DatabaseManager.MyPlayer = _myPlayer;
     }
 
     // Update is called once per frame
