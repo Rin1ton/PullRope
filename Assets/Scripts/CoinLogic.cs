@@ -7,6 +7,7 @@ public class CoinLogic : MonoBehaviour
 {
     GameObject player;
     private References.localPlayerData _myPlayer;
+    public AudioClip coinSound;
 
     int coinAmount;
     void Start()
@@ -20,6 +21,8 @@ public class CoinLogic : MonoBehaviour
         _myPlayer = DatabaseManager.MyPlayer;
         _myPlayer.coincount += 1;
         DatabaseManager.MyPlayer = _myPlayer;
+        if (coinSound != null)
+            AudioSource.PlayClipAtPoint(coinSound, transform.position, 1);
         Destroy(this.gameObject);
     }
 

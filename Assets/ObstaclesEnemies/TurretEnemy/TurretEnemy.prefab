@@ -134,6 +134,7 @@ MonoBehaviour:
   minDistance: 0
   bullet: {fileID: 2886227426734088672, guid: bedb3f3eccec38c48bac8d055867ad66, type: 3}
   bulletspawnpoint: {fileID: 2710052982676583086}
+  shootSound: {fileID: 8300000, guid: b164fb42f22a06449b7930bd723bc6f7, type: 3}
 --- !u!135 &2710052982214377486
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -3114,9 +3114,12 @@ MonoBehaviour:
   passwordCreateField: {fileID: 0}
   passwordConfirmField: {fileID: 0}
   connectUI: {fileID: 0}
+  inGameHUD: {fileID: 0}
   ipAddressField: {fileID: 0}
   portField: {fileID: 0}
   myUsernameHUD: {fileID: 0}
+  sensSlider: {fileID: 0}
+  sensInputBox: {fileID: 0}
 --- !u!1 &800971410
 GameObject:
   m_ObjectHideFlags: 0
@@ -4823,6 +4826,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5916392581871812159, guid: 300e2d325a528094eb44fddbfdbc5988, type: 3}
+      propertyPath: grappleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 49cc0d46648ee9d43a933bc206702759, type: 3}
     - target: {fileID: 8275419172040242794, guid: 300e2d325a528094eb44fddbfdbc5988, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -6545,6 +6552,7 @@ MonoBehaviour:
   TimerText: {fileID: 2034928186}
   playing: 0
   reset: 0
+  inMainMenu: 0
 --- !u!114 &2034928186
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,7 +3,14 @@ guid: b196ff646c62c694fa485adb8a7bca6a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {instanceID: 0}
+  - myCamera: {instanceID: 0}
+  - myGrappleHookPrefab: {instanceID: 0}
+  - myBoopPS: {instanceID: 0}
+  - grappleSound: {fileID: 8300000, guid: 49cc0d46648ee9d43a933bc206702759, type: 3}
+  - punchSound: {fileID: 8300000, guid: dbce8c35ea797de4a9e3068e4a88b63a, type: 3}
+  - coinSound: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

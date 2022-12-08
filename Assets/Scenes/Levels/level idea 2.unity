@@ -1343,6 +1343,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5916392581871812159, guid: 300e2d325a528094eb44fddbfdbc5988, type: 3}
+      propertyPath: grappleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 49cc0d46648ee9d43a933bc206702759, type: 3}
     - target: {fileID: 8275419172040242794, guid: 300e2d325a528094eb44fddbfdbc5988, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2109,7 +2113,7 @@ Transform:
   - {fileID: 406835738}
   - {fileID: 1382017529}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1530633603 stripped
 Transform:

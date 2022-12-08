@@ -37,6 +37,8 @@ public class NetworkManager : MonoBehaviour
 			}
 		}
 	}
+
+	public static bool isConnected { get; private set; } = false;
 	
 	public Client Client { get; private set; }
 
@@ -111,6 +113,7 @@ public class NetworkManager : MonoBehaviour
 	private void DidConnect(object sender, EventArgs e)
 	{
 		UIManager.Singleton.SendName();
+		isConnected = true;
 	}
 
 	private void FailedToConnect(object sender, EventArgs e)
@@ -121,7 +124,9 @@ public class NetworkManager : MonoBehaviour
 	private void PlayerLeft(object sender, ClientDisconnectedEventArgs e)
 	{
 		if (Player.list.TryGetValue(e.Id, out Player player))
+		{
 			Destroy(player.gameObject);
+		}
 	}
 
 	private void DidDisconnect(object sender, EventArgs e)
@@ -129,6 +134,7 @@ public class NetworkManager : MonoBehaviour
 		UIManager.Singleton.BackToConnectMenu();
 		foreach (Player player in Player.list.Values)
 			Destroy(player.gameObject);
+		isConnected = false;
 	}
 
 	private void SetTick(ushort serverTick)

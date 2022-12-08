@@ -78,6 +78,12 @@ public class PlayerMovement : MonoBehaviour
 
 	//RipTide Stuff
 
+	//Audio Stuff
+
+	public AudioClip grappleSound;
+	public AudioClip punchSound;
+	public static AudioClip punchedSound;
+
 	private void OnValidate()
 	{
 		if (player == null)
@@ -297,6 +303,10 @@ public class PlayerMovement : MonoBehaviour
 				grappleObjectLerpTime = 0;
 				grappleStartPos = myCamera.transform.position;
 				grappleObjectLR = myGrappleHookObject.GetComponent<LineRenderer>();
+
+				//SFX
+				if (grappleSound != null)
+					AudioSource.PlayClipAtPoint(grappleSound, transform.position, 1);
 			}
 		}
 
@@ -442,6 +452,10 @@ public class PlayerMovement : MonoBehaviour
 			message.AddUShort(player.Id);
 
 			NetworkManager.Singleton.Client.Send(message);
+
+			//SFX
+			if (punchSound != null)
+				AudioSource.PlayClipAtPoint(punchSound, transform.position, 1);
 		}
 	}
 
@@ -457,6 +471,10 @@ public class PlayerMovement : MonoBehaviour
 			boopDirection = new Vector3(boopDirection.x, boopDirection.y + verticalBoopSpeed, boopDirection.z);
 		}
 		References.thePlayer.GetComponent<Rigidbody>().velocity += boopDirection;
-	}
 
+		if (punchedSound != null)
+		{
+            AudioSource.PlayClipAtPoint(punchedSound, new Vector3(boopDirection.x, boopDirection.y, boopDirection.z), 1);
+        }
+	}
 }
