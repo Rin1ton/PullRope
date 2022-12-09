@@ -288,6 +288,9 @@ public class PlayerMovement : MonoBehaviour
 
 	void Grapple()
 	{
+		if (timeUntilGrappleAgain > 0)
+			return;
+
 		if (Input.GetKeyDown(grappleButton))
 		{
 			//create a layer mask that includes just the "player" physics layer
@@ -299,10 +302,12 @@ public class PlayerMovement : MonoBehaviour
 			RaycastHit hit;
 			// Does the ray intersect any objects excluding the player layer
 			//NOTE: this block runs once when the grapple starts
-			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, maxGrappleDistance, layerMask) &&
+			if (Physics.Raycast(myCamera.transform.position, 
+								myCamera.transform.TransformDirection(Vector3.forward), 
+								out hit, maxGrappleDistance, layerMask) &&
 			timeUntilGrappleAgain <= 0)
 			{
-
+				Debug.Log(timeUntilGrappleAgain);
 				grappled = true;
 				grapplePoint = hit.point;
 				grappleLength = (myCamera.transform.position - hit.point).magnitude;
@@ -497,5 +502,6 @@ public class PlayerMovement : MonoBehaviour
 
 		timeSinceBooped = 0;
 		References.localPlayerMovement.Ungrapple();
+		References.localPlayerMovement.timeUntilGrappleAgain = References.localPlayerMovement.grappleCooldown;
 	}
 }
