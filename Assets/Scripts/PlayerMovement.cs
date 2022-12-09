@@ -66,9 +66,11 @@ public class PlayerMovement : MonoBehaviour
 
 	//boop
 	static readonly float timeBetweenBoops = 1;
+	static readonly float timeAfterBoopForCredit = 0.15f;
 	static float timeSinceLastBoop = 120;
-	static float verticalBoopSpeed = 10;
-	static float horizontalBoopSpeed = 30;
+	static float verticalBoopSpeed = 20;
+	static float horizontalBoopSpeed = 60;
+	static float timeSinceBooped = 120;
 	[SerializeField] ParticleSystem myBoopPS;
 
 	//physics stuff
@@ -110,8 +112,8 @@ public class PlayerMovement : MonoBehaviour
 	void Start()
 	{
 		//lock the mouse and make it disappear
-		UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-		UnityEngine.Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 
 		//get my original rotation
 		myRBOriginalRotation = myRB.transform.rotation;
@@ -135,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
 			Boop();
 		}
 		CheckIfCanGrapple();
+		if (timeSinceBooped >= timeAfterBoopForCredit && myGroundChecker.IsGrounded) Player.playerThatKilledMeID = -1;
 	}
 
 	private void FixedUpdate()
@@ -166,6 +169,9 @@ public class PlayerMovement : MonoBehaviour
 
 		if (timeSinceLastBoop < timeBetweenBoops)
 			timeSinceLastBoop += Time.deltaTime;
+
+		if (timeSinceBooped <= timeAfterBoopForCredit)
+			timeSinceBooped += Time.deltaTime;
 	}
 
 	void MouseLook()
@@ -463,6 +469,8 @@ public class PlayerMovement : MonoBehaviour
 	[MessageHandler((ushort)ServerToClientId.playerBooped)]
 	private static void GetBooped(Message message)
 	{
+		int booperID = message.GetUShort();
+
 		Vector3 boopDirection = message.GetVector3();
 		boopDirection *= horizontalBoopSpeed;
 		if (boopDirection.y < verticalBoopSpeed)
@@ -476,5 +484,9 @@ public class PlayerMovement : MonoBehaviour
 		{
             AudioSource.PlayClipAtPoint(punchedSound, new Vector3(boopDirection.x, boopDirection.y, boopDirection.z), 1);
         }
+
+		Player.playerThatKilledMeID = booperID;
+
+		timeSinceBooped = 0;
 	}
 }

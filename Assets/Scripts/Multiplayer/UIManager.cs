@@ -252,7 +252,7 @@ public class UIManager : MonoBehaviour
 			int worstScore = i;
 			for (int j = i + 1; j < players.Count; j++)
 			{
-				if (players[j].score < players[worstScore].score)
+				if (players[j].Score < players[worstScore].Score)
 				{
 					worstScore = j;
 				}
@@ -263,12 +263,17 @@ public class UIManager : MonoBehaviour
 		}
 
 		//now with sorted player list, print scoreboard
-		for (int i = 0; i < players.Count; i++)
-			scoreboardText += ($"{i + 1}. {players[i].username} - {players[i].score}\n");
+		for (int i = players.Count - 1; i >= 0; i--)
+			scoreboardText += ($"{(players.Count - i) + 1}. {players[i].username} - {players[i].Score}\n");
 
 		Singleton.scoreboardTextBox.text = scoreboardText;
-
-		Debug.Log("TBI: send messages to the server for every client to update scoreboard as well");
 	}
 
+	[MessageHandler((ushort)ServerToClientId.updatePlayerScore)]
+	private static void UpdatePlayerScore(Message message)
+	{
+		Player player;
+		Player.list.TryGetValue(message.GetUShort(), out player);
+		player.Score = message.GetInt();
+	}
 }

@@ -12,6 +12,7 @@ public enum ServerToClientId : ushort
 	playerTransform,
 	sync,
 	playerBooped,
+	updatePlayerScore,
 }
 
 public enum ClientToServerId : ushort
@@ -19,6 +20,7 @@ public enum ClientToServerId : ushort
 	name = 1,
 	playerTransform,
 	playerBooped,
+	playerRespawned,
 }
 
 public class NetworkManager : MonoBehaviour
@@ -141,11 +143,7 @@ public class NetworkManager : MonoBehaviour
 
 	private void SetTick(ushort serverTick)
 	{
-		if (Mathf.Abs(ServerTick - serverTick) > tickDivergenceTolerance)
-		{
-			Debug.Log($"Client tick: {ServerTick} -> {serverTick}");
-			ServerTick = serverTick;
-		}
+		
 	}
 
 	[MessageHandler((ushort)ServerToClientId.sync)]
