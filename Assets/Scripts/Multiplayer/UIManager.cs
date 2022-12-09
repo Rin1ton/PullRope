@@ -203,7 +203,6 @@ public class UIManager : MonoBehaviour
 
 	private void BackToMain()
 	{
-		LevelOneUIScript.KillMe();
 		SceneManager.LoadScene("Main Menu");
 	}
 
