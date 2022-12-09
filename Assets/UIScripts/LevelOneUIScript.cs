@@ -19,6 +19,8 @@ public class LevelOneUIScript : MonoBehaviour
 
 	bool grantOnce = true;
 
+	[SerializeField] private GameObject theCanvas;
+
 
 	public static LevelOneUIScript instance = null;
 
@@ -47,17 +49,6 @@ public class LevelOneUIScript : MonoBehaviour
 		// UnityEngine.Cursor.visible = false;
 	}
 
-	public static void KillMe()
-	{
-		if (instance != null)
-		{
-			Destroy(instance);
-			if (GameObject.Find("EventSystem") != null)
-				Destroy(GameObject.Find("EventSystem"));
-			instance = null;
-		}
-	}
-
 	// Start is called before the first frame update
 	void Update()
 	{
@@ -82,13 +73,13 @@ public class LevelOneUIScript : MonoBehaviour
 
 		if (scene.name == "Main Menu")
 		{
+			Destroy(theCanvas);
+			Debug.Log("myball");
 			timertext.reset = true;
 			EndScreenMenu.SetActive(false);
 			grantOnce = true;
 			timertext.inMainMenu = true;
 		}
-
-
 
 		if ((scene.name == "level idea one") && (GamePaused == false))
 		{

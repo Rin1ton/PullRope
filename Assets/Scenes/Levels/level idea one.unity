@@ -3009,6 +3009,7 @@ MonoBehaviour:
   PauseMenuObject: {fileID: 220152403}
   EndScreenMenu: {fileID: 576860218}
   timertext: {fileID: 2034928185}
+  theCanvas: {fileID: 797719785}
 --- !u!114 &797719787
 MonoBehaviour:
   m_ObjectHideFlags: 0
