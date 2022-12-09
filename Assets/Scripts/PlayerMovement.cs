@@ -289,7 +289,9 @@ public class PlayerMovement : MonoBehaviour
 	void Grapple()
 	{
 		if (timeUntilGrappleAgain > 0)
-			return;
+		{
+			Debug.Log("Time until can grapple: " + timeUntilGrappleAgain);
+		}
 
 		if (Input.GetKeyDown(grappleButton))
 		{
@@ -307,8 +309,8 @@ public class PlayerMovement : MonoBehaviour
 								out hit, maxGrappleDistance, layerMask) &&
 			timeUntilGrappleAgain <= 0)
 			{
-				Debug.Log(timeUntilGrappleAgain);
-				grappled = true;
+                Debug.Log("Grappled at time: " + timeUntilGrappleAgain);
+                grappled = true;
 				grapplePoint = hit.point;
 				grappleLength = (myCamera.transform.position - hit.point).magnitude;
 				myPositionLastFixedFrame = myRB.position;
@@ -495,13 +497,15 @@ public class PlayerMovement : MonoBehaviour
 
 		if (punchedSound != null)
 		{
-            AudioSource.PlayClipAtPoint(punchedSound, new Vector3(boopDirection.x, boopDirection.y, boopDirection.z), 1);
-        }
+			AudioSource.PlayClipAtPoint(punchedSound, new Vector3(boopDirection.x, boopDirection.y, boopDirection.z), 1);
+		}
 
 		Player.playerThatKilledMeID = booperID;
 
 		timeSinceBooped = 0;
 		References.localPlayerMovement.Ungrapple();
 		References.localPlayerMovement.timeUntilGrappleAgain = References.localPlayerMovement.grappleCooldown;
+
+		Debug.Log("Grapple cooldown: " + References.localPlayerMovement.timeUntilGrappleAgain);
 	}
 }
