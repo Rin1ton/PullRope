@@ -106,8 +106,10 @@ public class UIManager : MonoBehaviour
 		if (!isPaused)
 		{
 			isPaused = true;
-			connectUI.SetActive(true);
-			inGameHUD.SetActive(false);
+			if (connectUI != null)
+				connectUI.SetActive(true);
+			if (inGameHUD != null)
+				inGameHUD.SetActive(false);
 			Cursor.lockState = CursorLockMode.None;
 			Cursor.visible = true;
 		} 
@@ -115,8 +117,10 @@ public class UIManager : MonoBehaviour
 		else
 		{
 			isPaused = false;
-			connectUI.SetActive(false);
-			inGameHUD.SetActive(true);
+			if (connectUI != null)
+				connectUI.SetActive(false);
+			if (inGameHUD != null)
+				inGameHUD.SetActive(true);
 			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
 		}
