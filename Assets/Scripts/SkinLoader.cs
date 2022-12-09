@@ -80,10 +80,17 @@ public class SkinLoader : MonoBehaviour
         _myPlayer = DatabaseManager.MyPlayer;
         if (_myPlayer.cosmetic_dirt == 0)
         {
-            _myPlayer.coincount -= 25;
-            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
-            _myPlayer.cosmetic_dirt = 1;
-            DatabaseManager.MyPlayer = _myPlayer;
+            if(_myPlayer.coincount >= 25)
+            {
+                _myPlayer.coincount -= 25;
+                coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
+                _myPlayer.cosmetic_dirt = 1;
+                DatabaseManager.MyPlayer = _myPlayer;
+            }
+            else
+            {
+                return;
+            }
         }
         else
         {
@@ -113,10 +120,18 @@ public class SkinLoader : MonoBehaviour
         _myPlayer = DatabaseManager.MyPlayer;
         if (_myPlayer.cosmetic_copper == 0)
         {
-            _myPlayer.coincount -= 50;
-            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
-            _myPlayer.cosmetic_copper = 1;
-            DatabaseManager.MyPlayer = _myPlayer;
+            if (_myPlayer.coincount >= 25)
+            {
+                _myPlayer.coincount -= 50;
+                coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
+                _myPlayer.cosmetic_copper = 1;
+                DatabaseManager.MyPlayer = _myPlayer;
+            }
+            else
+            {
+                return;
+            }
+                
         }
         else
         {
@@ -144,10 +159,18 @@ public class SkinLoader : MonoBehaviour
         _myPlayer = DatabaseManager.MyPlayer;
         if (_myPlayer.cosmetic_gold == 0)
         {
-            _myPlayer.coincount -= 100;
-            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
-            _myPlayer.cosmetic_gold = 1;
-            DatabaseManager.MyPlayer = _myPlayer;
+            if (_myPlayer.coincount >= 100)
+            {
+                _myPlayer.coincount -= 100;
+                coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
+                _myPlayer.cosmetic_gold = 1;
+                DatabaseManager.MyPlayer = _myPlayer;
+            }
+            else
+            {
+                return;
+            }
+            
         }
         else
         {
@@ -176,10 +199,18 @@ public class SkinLoader : MonoBehaviour
         _myPlayer = DatabaseManager.MyPlayer;
         if (_myPlayer.cosmetic_sapphire == 0)
         {
-            _myPlayer.coincount -= 125;
-            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
-            _myPlayer.cosmetic_sapphire = 1;
-            DatabaseManager.MyPlayer = _myPlayer;
+            if (_myPlayer.coincount >= 125)
+            {
+                _myPlayer.coincount -= 125;
+                coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
+                _myPlayer.cosmetic_sapphire = 1;
+                DatabaseManager.MyPlayer = _myPlayer;
+            }
+            else
+            {
+                return;
+            }
+            
         }
         else
         {
@@ -209,10 +240,18 @@ public class SkinLoader : MonoBehaviour
         _myPlayer = DatabaseManager.MyPlayer;
         if (_myPlayer.cosmetic_purple == 0)
         {
-            _myPlayer.coincount -= 55;
-            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
-            _myPlayer.cosmetic_purple = 1;
-            DatabaseManager.MyPlayer = _myPlayer;
+            if (_myPlayer.coincount >= 55)
+            {
+                _myPlayer.coincount -= 55;
+                coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
+                _myPlayer.cosmetic_purple = 1;
+                DatabaseManager.MyPlayer = _myPlayer;
+            }
+            else
+            {
+                return;
+            }
+            
         }
         else
         {
@@ -242,10 +281,18 @@ public class SkinLoader : MonoBehaviour
         _myPlayer = DatabaseManager.MyPlayer;
         if (_myPlayer.cosmetic_grass == 0)
         {
-            _myPlayer.coincount -= 40;
-            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
-            _myPlayer.cosmetic_grass = 1;
-            DatabaseManager.MyPlayer = _myPlayer;
+            if (_myPlayer.coincount >= 40)
+            {
+                _myPlayer.coincount -= 40;
+                coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
+                _myPlayer.cosmetic_grass = 1;
+                DatabaseManager.MyPlayer = _myPlayer;
+            }
+            else
+            {
+                return;
+            }
+            
         }
         else
         {
@@ -275,10 +322,18 @@ public class SkinLoader : MonoBehaviour
         _myPlayer = DatabaseManager.MyPlayer;
         if (_myPlayer.cosmetic_matrix == 0)
         {
-            _myPlayer.coincount -= 200;
-            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
-            _myPlayer.cosmetic_matrix = 1;
-            DatabaseManager.MyPlayer = _myPlayer;
+            if (_myPlayer.coincount >= 200)
+            {
+                _myPlayer.coincount -= 200;
+                coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
+                _myPlayer.cosmetic_matrix = 1;
+                DatabaseManager.MyPlayer = _myPlayer;
+            }
+            else
+            {
+                return;
+            }
+            
         }
         else
         {
@@ -308,10 +363,18 @@ public class SkinLoader : MonoBehaviour
         _myPlayer = DatabaseManager.MyPlayer;
         if (_myPlayer.cosmetic_sus == 0)
         {
-            _myPlayer.coincount -= 999;
-            coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
-            _myPlayer.cosmetic_sus = 1;
-            DatabaseManager.MyPlayer = _myPlayer;
+            if (_myPlayer.coincount >= 999)
+            {
+                _myPlayer.coincount -= 999;
+                coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
+                _myPlayer.cosmetic_sus = 1;
+                DatabaseManager.MyPlayer = _myPlayer;
+            }
+            else
+            {
+                return;
+            }
+            
         }
         else
         {

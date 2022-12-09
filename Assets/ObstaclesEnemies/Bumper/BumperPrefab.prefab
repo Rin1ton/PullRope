@@ -127,3 +127,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceMultiplier: 7
+  bumpSound: {fileID: 8300000, guid: d665123a5997b55459315123b43d5a08, type: 3}

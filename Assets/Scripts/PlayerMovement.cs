@@ -471,5 +471,10 @@ public class PlayerMovement : MonoBehaviour
 			boopDirection = new Vector3(boopDirection.x, boopDirection.y + verticalBoopSpeed, boopDirection.z);
 		}
 		References.thePlayer.GetComponent<Rigidbody>().velocity += boopDirection;
+
+		if (punchedSound != null)
+		{
+            AudioSource.PlayClipAtPoint(punchedSound, new Vector3(boopDirection.x, boopDirection.y, boopDirection.z), 1);
+        }
 	}
 }

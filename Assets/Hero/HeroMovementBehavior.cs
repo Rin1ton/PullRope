@@ -388,8 +388,9 @@ public class HeroMovementBehavior : MonoBehaviour
 			grapplePoint = Vector3.zero;
 			myRB.velocity = additionalVelocity;
 
-			//sfx
-			AudioSource.PlayClipAtPoint(ungrappleSound, transform.position, 1);
+            //sfx
+            if (ungrappleSound != null)
+                AudioSource.PlayClipAtPoint(ungrappleSound, transform.position, 1);
 
 			//grapple gameobject
 			Destroy(myGrappleHookObject);
