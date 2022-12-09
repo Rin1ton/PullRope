@@ -143,11 +143,7 @@ public class NetworkManager : MonoBehaviour
 
 	private void SetTick(ushort serverTick)
 	{
-		if (Mathf.Abs(ServerTick - serverTick) > tickDivergenceTolerance)
-		{
-			Debug.Log($"Client tick: {ServerTick} -> {serverTick}");
-			ServerTick = serverTick;
-		}
+		
 	}
 
 	[MessageHandler((ushort)ServerToClientId.sync)]

@@ -137,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
 			Boop();
 		}
 		CheckIfCanGrapple();
-		if (timeSinceBooped >= timeAfterBoopForCredit) Player.playerThatKilledMeID = -1;
+		if (timeSinceBooped >= timeAfterBoopForCredit && myGroundChecker.IsGrounded) Player.playerThatKilledMeID = -1;
 	}
 
 	private void FixedUpdate()
