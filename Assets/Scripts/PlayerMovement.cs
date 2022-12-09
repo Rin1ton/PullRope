@@ -66,9 +66,11 @@ public class PlayerMovement : MonoBehaviour
 
 	//boop
 	static readonly float timeBetweenBoops = 1;
+	static readonly float timeAfterBoopForCredit = 0.15f;
 	static float timeSinceLastBoop = 120;
 	static float verticalBoopSpeed = 10;
 	static float horizontalBoopSpeed = 30;
+	static float timeSinceBooped = 120;
 	[SerializeField] ParticleSystem myBoopPS;
 
 	//physics stuff
@@ -135,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
 			Boop();
 		}
 		CheckIfCanGrapple();
-		if (myGroundChecker.IsGrounded) Player.playerThatKilledMeID = -1;
+		if (timeSinceBooped >= timeAfterBoopForCredit) Player.playerThatKilledMeID = -1;
 	}
 
 	private void FixedUpdate()
@@ -167,6 +169,9 @@ public class PlayerMovement : MonoBehaviour
 
 		if (timeSinceLastBoop < timeBetweenBoops)
 			timeSinceLastBoop += Time.deltaTime;
+
+		if (timeSinceBooped <= timeAfterBoopForCredit)
+			timeSinceBooped += Time.deltaTime;
 	}
 
 	void MouseLook()
@@ -481,5 +486,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 		Player.playerThatKilledMeID = booperID;
+
+		timeSinceBooped = 0;
 	}
 }
