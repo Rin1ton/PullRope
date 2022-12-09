@@ -264,7 +264,7 @@ public class UIManager : MonoBehaviour
 
 		//now with sorted player list, print scoreboard
 		for (int i = players.Count - 1; i >= 0; i--)
-			scoreboardText += ($"{(players.Count - i) + 1}. {players[i].username} - {players[i].Score}\n");
+			scoreboardText += ($"{(players.Count - i)}. {players[i].username} - {players[i].Score}\n");
 
 		Singleton.scoreboardTextBox.text = scoreboardText;
 	}

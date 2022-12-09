@@ -114,8 +114,6 @@ public class Player : MonoBehaviour
 		transform.position = GameLogic.Singleton.SpawnPoints[UnityEngine.Random.Range(0, GameLogic.Singleton.SpawnPoints.Count - 1)].transform.position;
 		Message message = Message.Create(MessageSendMode.Reliable, ClientToServerId.playerRespawned);
 
-		Debug.Log(playerThatKilledMeID);
-
 		message.AddInt(playerThatKilledMeID);
 
 		NetworkManager.Singleton.Client.Send(message);

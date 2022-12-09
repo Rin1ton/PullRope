@@ -43,7 +43,7 @@ public class CrosshairBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         foreach(Image image in myPiecesImages)
 		{

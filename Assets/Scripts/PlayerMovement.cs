@@ -288,6 +288,11 @@ public class PlayerMovement : MonoBehaviour
 
 	void Grapple()
 	{
+		if (timeUntilGrappleAgain > 0)
+		{
+			Debug.Log("Time until can grapple: " + timeUntilGrappleAgain);
+		}
+
 		if (Input.GetKeyDown(grappleButton))
 		{
 			//create a layer mask that includes just the "player" physics layer
@@ -299,11 +304,13 @@ public class PlayerMovement : MonoBehaviour
 			RaycastHit hit;
 			// Does the ray intersect any objects excluding the player layer
 			//NOTE: this block runs once when the grapple starts
-			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, maxGrappleDistance, layerMask) &&
+			if (Physics.Raycast(myCamera.transform.position, 
+								myCamera.transform.TransformDirection(Vector3.forward), 
+								out hit, maxGrappleDistance, layerMask) &&
 			timeUntilGrappleAgain <= 0)
 			{
-
-				grappled = true;
+                Debug.Log("Grappled at time: " + timeUntilGrappleAgain);
+                grappled = true;
 				grapplePoint = hit.point;
 				grappleLength = (myCamera.transform.position - hit.point).magnitude;
 				myPositionLastFixedFrame = myRB.position;
@@ -490,12 +497,15 @@ public class PlayerMovement : MonoBehaviour
 
 		if (punchedSound != null)
 		{
-            AudioSource.PlayClipAtPoint(punchedSound, new Vector3(boopDirection.x, boopDirection.y, boopDirection.z), 1);
-        }
+			AudioSource.PlayClipAtPoint(punchedSound, new Vector3(boopDirection.x, boopDirection.y, boopDirection.z), 1);
+		}
 
 		Player.playerThatKilledMeID = booperID;
 
 		timeSinceBooped = 0;
 		References.localPlayerMovement.Ungrapple();
+		References.localPlayerMovement.timeUntilGrappleAgain = References.localPlayerMovement.grappleCooldown;
+
+		Debug.Log("Grapple cooldown: " + References.localPlayerMovement.timeUntilGrappleAgain);
 	}
 }
