@@ -16,10 +16,22 @@ public class SkinLoader : MonoBehaviour
     [SerializeField] public static Material skin7;
     [SerializeField] public static Material skin8;
     [SerializeField] public static Material defaultSkin;
+
     [SerializeField] public GameObject player;
     private References.localPlayerData _myPlayer;
+
     public Text coinCount;
     public Text equipUI;
+
+    public Text skin1Owned;
+    public Text skin2Owned;
+    public Text skin3Owned;
+    public Text skin4Owned;
+    public Text skin5Owned;
+    public Text skin6Owned;
+    public Text skin7Owned;
+    public Text skin8Owned;
+
     private void Awake()
     {
         /*defaultSkin = Resources.Load("skin_default") as Material;
@@ -59,6 +71,16 @@ public class SkinLoader : MonoBehaviour
 		}
 	}
 
+    public void DefaultSkinPress()//Default
+    {
+        _myPlayer = DatabaseManager.MyPlayer;
+        References.currentSkin = defaultSkin;
+        References.currentSkinName = "skin_default";
+        DatabaseManager.EquipSkin("skin_default");
+        _myPlayer.equipped = "skin_default";
+        DatabaseManager.MyPlayer = _myPlayer;
+        equipUI.text = "Equipped: default";
+    }
 	public void Skin1ButtonClicked()//Dirt
     {
         _myPlayer = DatabaseManager.MyPlayer;
@@ -71,6 +93,7 @@ public class SkinLoader : MonoBehaviour
             _myPlayer.equipped = "skin_dirt";
             DatabaseManager.MyPlayer = _myPlayer;
             equipUI.text = "Equipped: Dirt";
+
         }
         else
         {
@@ -88,6 +111,7 @@ public class SkinLoader : MonoBehaviour
                 coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
                 _myPlayer.cosmetic_dirt = 1;
                 DatabaseManager.MyPlayer = _myPlayer;
+                skin1Owned.text = "OWNED";
             }
             else
             {
@@ -123,12 +147,13 @@ public class SkinLoader : MonoBehaviour
         _myPlayer = DatabaseManager.MyPlayer;
         if (_myPlayer.cosmetic_copper == 0)
         {
-            if (_myPlayer.coincount >= 25)
+            if (_myPlayer.coincount >= 50)
             {
                 _myPlayer.coincount -= 50;
                 coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
                 _myPlayer.cosmetic_copper = 1;
                 DatabaseManager.MyPlayer = _myPlayer;
+                skin2Owned.text = "OWNED";
             }
             else
             {
@@ -169,6 +194,7 @@ public class SkinLoader : MonoBehaviour
                 coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
                 _myPlayer.cosmetic_gold = 1;
                 DatabaseManager.MyPlayer = _myPlayer;
+                skin3Owned.text = "OWNED";
             }
             else
             {
@@ -210,6 +236,7 @@ public class SkinLoader : MonoBehaviour
                 coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
                 _myPlayer.cosmetic_sapphire = 1;
                 DatabaseManager.MyPlayer = _myPlayer;
+                skin4Owned.text = "OWNED";
             }
             else
             {
@@ -252,6 +279,7 @@ public class SkinLoader : MonoBehaviour
                 coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
                 _myPlayer.cosmetic_purple = 1;
                 DatabaseManager.MyPlayer = _myPlayer;
+                skin5Owned.text = "OWNED";
             }
             else
             {
@@ -294,6 +322,7 @@ public class SkinLoader : MonoBehaviour
                 coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
                 _myPlayer.cosmetic_grass = 1;
                 DatabaseManager.MyPlayer = _myPlayer;
+                skin6Owned.text = "OWNED";
             }
             else
             {
@@ -336,6 +365,7 @@ public class SkinLoader : MonoBehaviour
                 coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
                 _myPlayer.cosmetic_matrix = 1;
                 DatabaseManager.MyPlayer = _myPlayer;
+                skin7Owned.text = "OWNED";
             }
             else
             {
@@ -378,6 +408,7 @@ public class SkinLoader : MonoBehaviour
                 coinCount.text = "Balance: " + _myPlayer.coincount.ToString();
                 _myPlayer.cosmetic_sus = 1;
                 DatabaseManager.MyPlayer = _myPlayer;
+                skin8Owned.text = "OWNED";
             }
             else
             {
