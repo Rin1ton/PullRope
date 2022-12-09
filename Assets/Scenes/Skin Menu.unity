@@ -3431,14 +3431,14 @@ MonoBehaviour:
   player: {fileID: 9059571477339505127, guid: 300e2d325a528094eb44fddbfdbc5988, type: 3}
   coinCount: {fileID: 1855685539}
   equipUI: {fileID: 1306257095}
-  skin1Owned: {fileID: 0}
-  skin2Owned: {fileID: 0}
-  skin3Owned: {fileID: 0}
-  skin4Owned: {fileID: 0}
-  skin5Owned: {fileID: 0}
-  skin6Owned: {fileID: 0}
-  skin7Owned: {fileID: 0}
-  skin8Owned: {fileID: 0}
+  skin1Owned: {fileID: 823035689}
+  skin2Owned: {fileID: 1242122377}
+  skin3Owned: {fileID: 57517452}
+  skin4Owned: {fileID: 480692578}
+  skin5Owned: {fileID: 550403340}
+  skin6Owned: {fileID: 950420630}
+  skin7Owned: {fileID: 992892835}
+  skin8Owned: {fileID: 650191251}
 --- !u!1 &1146819114
 GameObject:
   m_ObjectHideFlags: 0
