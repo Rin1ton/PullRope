@@ -74,7 +74,6 @@ public class LevelOneUIScript : MonoBehaviour
 		if (scene.name == "Main Menu")
 		{
 			Destroy(theCanvas);
-			Debug.Log("myball");
 			timertext.reset = true;
 			EndScreenMenu.SetActive(false);
 			grantOnce = true;

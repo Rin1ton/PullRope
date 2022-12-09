@@ -126,6 +126,8 @@ public class NetworkManager : MonoBehaviour
 		if (Player.list.TryGetValue(e.Id, out Player player))
 		{
 			Destroy(player.gameObject);
+			Player.list.Remove(e.Id);
+			UIManager.UpdateScoreboard();
 		}
 	}
 
