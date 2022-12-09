@@ -68,8 +68,8 @@ public class PlayerMovement : MonoBehaviour
 	static readonly float timeBetweenBoops = 1;
 	static readonly float timeAfterBoopForCredit = 0.15f;
 	static float timeSinceLastBoop = 120;
-	static float verticalBoopSpeed = 10;
-	static float horizontalBoopSpeed = 30;
+	static float verticalBoopSpeed = 20;
+	static float horizontalBoopSpeed = 60;
 	static float timeSinceBooped = 120;
 	[SerializeField] ParticleSystem myBoopPS;
 
