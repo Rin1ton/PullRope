@@ -11,6 +11,7 @@ public static class References
 	public static Color32 CrosshairColor;
 	public static Material currentSkin;
 	public static string currentSkinName;
+	public static PlayerMovement localPlayerMovement;
 	public struct localPlayerData
 	{
 		public string username;

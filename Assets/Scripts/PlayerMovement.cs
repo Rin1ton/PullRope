@@ -46,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
 
 	//grapple
 	readonly float maxGrappleDistance = 40;
+	readonly float grappleCooldown = 2;
+	float timeUntilGrappleAgain = 0;
 	Color32 grappleableColor;
 	Color32 ungrappleableColor;
 	Vector3 grapplePoint;
@@ -96,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		//tell everyone we're the player
 		References.thePlayer = gameObject;
+		References.localPlayerMovement = this;
 
 		//get a reference to my rigidbody before the first frame
 		myRB = GetComponent<Rigidbody>();
@@ -172,6 +175,9 @@ public class PlayerMovement : MonoBehaviour
 
 		if (timeSinceBooped <= timeAfterBoopForCredit)
 			timeSinceBooped += Time.deltaTime;
+
+		if (timeUntilGrappleAgain >= 0)
+			timeUntilGrappleAgain -= Time.deltaTime;
 	}
 
 	void MouseLook()
@@ -293,7 +299,8 @@ public class PlayerMovement : MonoBehaviour
 			RaycastHit hit;
 			// Does the ray intersect any objects excluding the player layer
 			//NOTE: this block runs once when the grapple starts
-			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, maxGrappleDistance, layerMask))
+			if (Physics.Raycast(myCamera.transform.position, myCamera.transform.TransformDirection(Vector3.forward), out hit, maxGrappleDistance, layerMask) &&
+			timeUntilGrappleAgain <= 0)
 			{
 
 				grappled = true;
@@ -384,7 +391,8 @@ public class PlayerMovement : MonoBehaviour
 		//IF this code is run, then we're able to grapple the object we're looking at
 		if (Physics.Raycast(myCamera.transform.position,
 							myCamera.transform.TransformDirection(Vector3.forward),
-							out hit, maxGrappleDistance, layerMask))
+							out hit, maxGrappleDistance, layerMask) &&
+		timeUntilGrappleAgain <= 0)
 		{
 			References.CrosshairColor = grappleableColor;
 		}
@@ -394,7 +402,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
-	void Ungrapple()
+	public void Ungrapple()
 	{
 		if (grappled)
 		{
@@ -488,5 +496,6 @@ public class PlayerMovement : MonoBehaviour
 		Player.playerThatKilledMeID = booperID;
 
 		timeSinceBooped = 0;
+		References.localPlayerMovement.Ungrapple();
 	}
 }

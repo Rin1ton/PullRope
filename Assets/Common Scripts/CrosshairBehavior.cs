@@ -21,10 +21,13 @@ public class CrosshairBehavior : MonoBehaviour
         myPiecesImages = new List<Image>();
 
         myPieces.Add(northPiece);
-        myPieces.Add(southPiece);
-        myPieces.Add(eastPiece);
-        myPieces.Add(westPiece);
-        myPieces.Add(centerPiece);
+        if (southPiece != null)
+        {
+            myPieces.Add(southPiece);
+            myPieces.Add(eastPiece);
+            myPieces.Add(westPiece);
+            myPieces.Add(centerPiece);
+        }
 
         foreach(GameObject piece in myPieces)
 		{
