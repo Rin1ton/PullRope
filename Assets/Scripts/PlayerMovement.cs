@@ -45,9 +45,9 @@ public class PlayerMovement : MonoBehaviour
 	bool wasGrounded = false;
 
 	//grapple
-	readonly float maxGrappleDistance = 40;
-	readonly float grappleCooldown = 2;
-	float timeUntilGrappleAgain = 0;
+	public readonly float maxGrappleDistance = 40;
+	public readonly float grappleCooldown = 2;
+	public float timeUntilGrappleAgain = 0;
 	Color32 grappleableColor;
 	Color32 ungrappleableColor;
 	Vector3 grapplePoint;
@@ -145,7 +145,8 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		ApplyGrapplePhysics();
+		if (timeUntilGrappleAgain <= 0)
+			ApplyGrapplePhysics();
 		SendPosition();
 	}
 
@@ -288,12 +289,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void Grapple()
 	{
-		if (timeUntilGrappleAgain > 0)
-		{
-			Debug.Log("Time until can grapple: " + timeUntilGrappleAgain);
-		}
-
-		if (Input.GetKeyDown(grappleButton))
+		if (Input.GetKeyDown(grappleButton) && References.localPlayerMovement.timeUntilGrappleAgain  <= 0)
 		{
 			//create a layer mask that includes just the "player" physics layer
 			int layerMask = 1 << playerPhysicsIndex;
@@ -306,10 +302,9 @@ public class PlayerMovement : MonoBehaviour
 			//NOTE: this block runs once when the grapple starts
 			if (Physics.Raycast(myCamera.transform.position, 
 								myCamera.transform.TransformDirection(Vector3.forward), 
-								out hit, maxGrappleDistance, layerMask) &&
-			timeUntilGrappleAgain <= 0)
+								out hit, maxGrappleDistance, layerMask))
 			{
-                Debug.Log("Grappled at time: " + timeUntilGrappleAgain);
+                //Debug.Log("Grappled at time: " + timeUntilGrappleAgain);
                 grappled = true;
 				grapplePoint = hit.point;
 				grappleLength = (myCamera.transform.position - hit.point).magnitude;
@@ -505,7 +500,5 @@ public class PlayerMovement : MonoBehaviour
 		timeSinceBooped = 0;
 		References.localPlayerMovement.Ungrapple();
 		References.localPlayerMovement.timeUntilGrappleAgain = References.localPlayerMovement.grappleCooldown;
-
-		Debug.Log("Grapple cooldown: " + References.localPlayerMovement.timeUntilGrappleAgain);
 	}
 }
