@@ -18,10 +18,20 @@ public class Player : MonoBehaviour
 	//is this the local player?
 	public bool IsLocal { get; private set; }
 
+	public static int playerThatKilledMeID;
+
 	public string username { get; private set; }
 	private string mySkin;
 
-	public int score { get; private set; } = 0;
+	private int _score = 0;
+	public int Score {
+		get => _score;
+		set
+		{
+			_score = value;
+			UIManager.UpdateScoreboard();
+		}
+	}
 
 	[SerializeField] private Interpolator interpolator;
 
@@ -38,11 +48,7 @@ public class Player : MonoBehaviour
 	private void Update()
 	{
 		//respawn player
-		if (Vector3.Distance(transform.position, Vector3.zero) >= 80 || transform.position.y <= -45)
-		{
-			myRB.velocity = Vector3.zero;
-			transform.position = GameLogic.Singleton.SpawnPoints[UnityEngine.Random.Range(0, GameLogic.Singleton.SpawnPoints.Count - 1)].transform.position;
-		}
+		if (Vector3.Distance(transform.position, Vector3.zero) >= 80 || transform.position.y <= -45) RespawnPlayer();
 	}
 
 	public static void Spawn(ushort id, string username, Vector3 position, string mySkinName)
@@ -100,6 +106,19 @@ public class Player : MonoBehaviour
 		//interpolator.NewUpdate(tick, position);
 		transform.rotation = rotation;
 		myRB.velocity = velocity;
+	}
+
+	private void RespawnPlayer()
+	{
+		myRB.velocity = Vector3.zero;
+		transform.position = GameLogic.Singleton.SpawnPoints[UnityEngine.Random.Range(0, GameLogic.Singleton.SpawnPoints.Count - 1)].transform.position;
+		Message message = Message.Create(MessageSendMode.Reliable, ClientToServerId.playerRespawned);
+
+		message.AddInt(playerThatKilledMeID);
+
+		NetworkManager.Singleton.Client.Send(message);
+
+		playerThatKilledMeID = -1;
 	}
 
 }

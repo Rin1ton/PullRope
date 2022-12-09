@@ -110,8 +110,8 @@ public class PlayerMovement : MonoBehaviour
 	void Start()
 	{
 		//lock the mouse and make it disappear
-		UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-		UnityEngine.Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 
 		//get my original rotation
 		myRBOriginalRotation = myRB.transform.rotation;
@@ -135,6 +135,7 @@ public class PlayerMovement : MonoBehaviour
 			Boop();
 		}
 		CheckIfCanGrapple();
+		if (myGroundChecker.IsGrounded) Player.playerThatKilledMeID = -1;
 	}
 
 	private void FixedUpdate()
@@ -463,6 +464,8 @@ public class PlayerMovement : MonoBehaviour
 	[MessageHandler((ushort)ServerToClientId.playerBooped)]
 	private static void GetBooped(Message message)
 	{
+		int booperID = message.GetUShort();
+
 		Vector3 boopDirection = message.GetVector3();
 		boopDirection *= horizontalBoopSpeed;
 		if (boopDirection.y < verticalBoopSpeed)
@@ -476,5 +479,7 @@ public class PlayerMovement : MonoBehaviour
 		{
             AudioSource.PlayClipAtPoint(punchedSound, new Vector3(boopDirection.x, boopDirection.y, boopDirection.z), 1);
         }
+
+		Player.playerThatKilledMeID = booperID;
 	}
 }
