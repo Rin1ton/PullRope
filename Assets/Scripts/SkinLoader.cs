@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class SkinLoader : MonoBehaviour
 {
@@ -19,6 +19,7 @@ public class SkinLoader : MonoBehaviour
     [SerializeField] public GameObject player;
     private References.localPlayerData _myPlayer;
     public Text coinCount;
+    public Text equipUI;
     private void Awake()
     {
         /*defaultSkin = Resources.Load("skin_default") as Material;
@@ -69,6 +70,7 @@ public class SkinLoader : MonoBehaviour
             DatabaseManager.EquipSkin("skin_dirt");
             _myPlayer.equipped = "skin_dirt";
             DatabaseManager.MyPlayer = _myPlayer;
+            equipUI.text = "Equipped: Dirt";
         }
         else
         {
@@ -109,6 +111,7 @@ public class SkinLoader : MonoBehaviour
             DatabaseManager.EquipSkin("skin_copper");
             _myPlayer.equipped = "skin_copper";
             DatabaseManager.MyPlayer = _myPlayer;
+            equipUI.text = "Equipped: Copper";
         }
         else
         {
@@ -148,6 +151,7 @@ public class SkinLoader : MonoBehaviour
             References.currentSkinName = "skin_gold";
             _myPlayer.equipped = "skin_gold";
             DatabaseManager.EquipSkin("skin_gold");
+            equipUI.text = "Equipped: Gold";
         }
         else
         {
@@ -188,6 +192,7 @@ public class SkinLoader : MonoBehaviour
             DatabaseManager.EquipSkin("skin_sapphire");
             _myPlayer.equipped = "skin_sapphire";
             DatabaseManager.MyPlayer = _myPlayer;
+            equipUI.text = "Equipped: Sapphire";
         }
         else
         {
@@ -229,6 +234,7 @@ public class SkinLoader : MonoBehaviour
             DatabaseManager.EquipSkin("skin_purple");
             _myPlayer.equipped = "skin_purple";
             DatabaseManager.MyPlayer = _myPlayer;
+            equipUI.text = "Equipped: Purple";
         }
         else
         {
@@ -270,6 +276,7 @@ public class SkinLoader : MonoBehaviour
             DatabaseManager.EquipSkin("skin_grass");
             _myPlayer.equipped = "skin_grass";
             DatabaseManager.MyPlayer = _myPlayer;
+            equipUI.text = "Equipped: Grass";
         }
         else
         {
@@ -311,6 +318,7 @@ public class SkinLoader : MonoBehaviour
             DatabaseManager.EquipSkin("skin_matrix");
             _myPlayer.equipped = "skin_matrix";
             DatabaseManager.MyPlayer = _myPlayer;
+            equipUI.text = "Equipped: Matrix";
         }
         else
         {
@@ -352,6 +360,7 @@ public class SkinLoader : MonoBehaviour
             DatabaseManager.EquipSkin("skin_sus");
             _myPlayer.equipped = "skin_sus";
             DatabaseManager.MyPlayer = _myPlayer;
+            equipUI.text = "Equipped: Sus";
         }
         else
         {
