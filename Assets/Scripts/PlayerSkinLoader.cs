@@ -16,6 +16,10 @@ public class PlayerSkinLoader : MonoBehaviour
         player = References.thePlayer;
         _myPlayer = DatabaseManager.MyPlayer;
         skin = References.currentSkin;
+        if (_myPlayer.equipped == "skin_default")
+        {
+            player.GetComponent<MeshRenderer>().material = SkinLoader.defaultSkin;
+        }
         if (_myPlayer.equipped == "skin_dirt")
         {
             player.GetComponent<MeshRenderer>().material = SkinLoader.skin1;
