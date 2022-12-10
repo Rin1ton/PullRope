@@ -60,6 +60,7 @@ public class GameLogic : MonoBehaviour
 			if (!gameCommenced)
 			{
 				gameCommenced = true;
+				References.thePlayer.GetComponent<Player>().Score = 0;
 				//PUT GAME START SOUND HERE
 				//PUT GAME START SOUND HERE
 				//PUT GAME START SOUND HERE

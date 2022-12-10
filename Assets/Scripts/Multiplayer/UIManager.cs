@@ -31,7 +31,8 @@ public class UIManager : MonoBehaviour
 		set
 		{
 			_gameStatusText = value;
-			gameStatusIndicator.text = value;
+			if (gameStatusIndicator != null)
+				gameStatusIndicator.text = value;
 		} 
 	}
 
