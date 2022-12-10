@@ -4,6 +4,7 @@ using Riptide;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 
@@ -19,6 +20,21 @@ public class Player : MonoBehaviour
 	public bool IsLocal { get; private set; }
 
 	public static int playerThatKilledMeID;
+
+	private bool _isReady = false;
+	public bool IsReady
+	{
+		get => _isReady;
+		set
+		{
+			if (value && !_isReady)
+			{
+				Message message = Message.Create(MessageSendMode.Reliable, ClientToServerId.playerReady);
+				NetworkManager.Singleton.Client.Send(message);
+			}
+			_isReady = value;
+		}
+	}
 
 	public string username { get; private set; }
 	private string mySkin;
@@ -112,11 +128,14 @@ public class Player : MonoBehaviour
 	{
 		myRB.velocity = Vector3.zero;
 		transform.position = GameLogic.Singleton.SpawnPoints[UnityEngine.Random.Range(0, GameLogic.Singleton.SpawnPoints.Count - 1)].transform.position;
-		Message message = Message.Create(MessageSendMode.Reliable, ClientToServerId.playerRespawned);
 
-		message.AddInt(playerThatKilledMeID);
-
-		NetworkManager.Singleton.Client.Send(message);
+		//keep score if game is going
+		if (GameLogic.gameCommenced)
+		{
+			Message message = Message.Create(MessageSendMode.Reliable, ClientToServerId.playerRespawned);
+			message.AddInt(playerThatKilledMeID);
+			NetworkManager.Singleton.Client.Send(message);
+		}
 
 		playerThatKilledMeID = -1;
 	}

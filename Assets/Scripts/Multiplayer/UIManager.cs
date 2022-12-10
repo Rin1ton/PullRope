@@ -24,9 +24,21 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
+	private string _gameStatusText = "";
+
+	public string GameStatusText {
+		get => _gameStatusText;
+		set
+		{
+			_gameStatusText = value;
+			gameStatusIndicator.text = value;
+		} 
+	}
+
 	public static bool isPaused { get; private set; } = false;
 	private KeyCode PauseButton = KeyCode.Escape;
 	private KeyCode ScoreBoardButton = KeyCode.Tab;
+	private KeyCode ReadyButton = KeyCode.F3;
 
 	[SerializeField] private TextMeshProUGUI messageBox;
 	[Space(2)]
@@ -47,6 +59,7 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private InputField ipAddressField;
 	[SerializeField] private InputField portField;
 	[SerializeField] private TextMeshProUGUI myUsernameHUD;
+	[SerializeField] private TextMeshProUGUI gameStatusIndicator;
 
 	//options
 	[Space(2)]
@@ -98,6 +111,8 @@ public class UIManager : MonoBehaviour
 			scoreboardObject.SetActive(true);
 		if (Input.GetKeyUp(ScoreBoardButton))
 			scoreboardObject.SetActive(false);
+
+		if (Input.GetKeyDown(ReadyButton)) GameLogic.Singleton.ReadyUp();
 	}
 
 	private void Pause()
@@ -235,6 +250,15 @@ public class UIManager : MonoBehaviour
 
 			SceneManager.LoadScene("Main Menu");
 		}
+	}
+
+	public static void UpdateTimer(float secondsLeft)
+	{
+		//secondsLeft -= Time.deltaTime;
+		int minutes = Mathf.FloorToInt(secondsLeft / 60F);
+		int seconds = Mathf.FloorToInt(secondsLeft % 60F);
+		int milliseconds = Mathf.FloorToInt((secondsLeft * 100F) % 100F);
+		Singleton.gameStatusIndicator.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + milliseconds.ToString("00");
 	}
 
 	public static void UpdateScoreboard()
