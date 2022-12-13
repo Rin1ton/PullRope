@@ -8,7 +8,10 @@ public class GameLogic : MonoBehaviour
 {
 	private static GameLogic _singleton;
 
-	public static bool gameCommenced { get; private set; } = false;
+    public static AudioClip startSound;
+    public AudioClip readySound;
+
+    public static bool gameCommenced { get; private set; } = false;
 	public static GameLogic Singleton
 	{
 		get => _singleton;
@@ -27,7 +30,10 @@ public class GameLogic : MonoBehaviour
 	{
 		References.thePlayer.GetComponent<Player>().IsReady = true;
 		UIManager.Singleton.GameStatusText = "Waiting for other players";
-	}
+
+        if (readySound != null)
+            AudioSource.PlayClipAtPoint(readySound, transform.position, 1);
+    }
 
 	public GameObject LocalPlayerPrefab => localPlayerPrefab;
 	public GameObject PlayerPrefab => playerPrefab;
@@ -61,14 +67,9 @@ public class GameLogic : MonoBehaviour
 			{
 				gameCommenced = true;
 				References.thePlayer.GetComponent<Player>().Score = 0;
-				//PUT GAME START SOUND HERE
-				//PUT GAME START SOUND HERE
-				//PUT GAME START SOUND HERE
-				//PUT GAME START SOUND HERE
-				//PUT GAME START SOUND HERE
-				//PUT GAME START SOUND HERE
-				//PUT GAME START SOUND HERE
-			}
+                if (startSound != null)
+                    AudioSource.PlayClipAtPoint(startSound, new Vector3(0, 0, 0), 1);
+            }
 			UIManager.UpdateTimer(gameState);
 		}
 

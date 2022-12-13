@@ -3,7 +3,10 @@ guid: cb60765b6b347824db464ad62a9c7b76
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - readySound: {fileID: 8300000, guid: 8593650bdd60bdc4a9e11f318fb924b0, type: 3}
+  - localPlayerPrefab: {instanceID: 0}
+  - playerPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
