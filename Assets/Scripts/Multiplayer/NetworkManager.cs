@@ -94,8 +94,6 @@ public class NetworkManager : MonoBehaviour
 	private void FixedUpdate()
 	{
 		Client.Update();
-
-		ServerTick++;
 	}
 
 	private void OnApplicationQuit()
